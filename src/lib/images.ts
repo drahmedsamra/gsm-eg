@@ -1,0 +1,72 @@
+/**
+ * GSM Academy unified media library.
+ * Cool-toned tech education photography + consistent Unsplash delivery params.
+ * Replace any entry with /public/images/{category}/{id}.jpg when ready.
+ */
+
+const UNSPLASH = "https://images.unsplash.com";
+
+/** Shared delivery — same dimensions, quality, and crop behavior sitewide */
+function photo(id: string, width: number): string {
+  return `${UNSPLASH}/${id}?auto=format&fit=crop&w=${width}&q=85`;
+}
+
+const W = {
+  card: 960,
+  gallery: 1080,
+  avatar: 256,
+} as const;
+
+/**
+ * Curated set: dark/blue tech labs, screens, engineering — grades uniformly in CSS.
+ * IDs chosen for similar moody lighting and cool color temperature.
+ */
+export const defaultImages = {
+  courses: {
+    programming: photo("photo-1517694712202-8f79c90dc58e", W.card),
+    electronics: photo("photo-1518770660439-4636190af475", W.card),
+    ai: photo("photo-1620712943543-bcc4688e7485", W.card),
+    robotics: photo("photo-1535378620166-273708b44e4c", W.card),
+    mobile: photo("photo-1580910051074-3eb694886505", W.card),
+    kids: photo("photo-1509062522246-3755977927d7", W.card),
+  },
+  projects: {
+    "smart-home": photo("photo-1558002038-1055907df827", W.card),
+    "ai-classifier": photo("photo-1555949963-aa79dcee981c", W.card),
+    "line-follower": photo("photo-1485827404703-89b55fcc595e", W.card),
+    "game-app": photo("photo-1516321318423-f06f85e504b3", W.card),
+  },
+  gallery: {
+    "lab-1": photo("photo-1581091226825-a6a2a5aee158", W.gallery),
+    "coding-1": photo("photo-1504639725590-34d6c12a8f2e", W.gallery),
+    "robotics-1": photo("photo-1532094349884-543bc11b234d", W.gallery),
+    "kids-1": photo("photo-1522202176988-66273c2fd55f", W.gallery),
+    "ai-1": photo("photo-1677442136019-21780ecad995", W.gallery),
+    "graduation-1": photo("photo-1524178232363-1fb2b075b655", W.gallery),
+  },
+  avatars: {
+    ahmed: photo("photo-1560250097-0b93528c311a", W.avatar),
+    sara: photo("photo-1573496359142-b8d87734a5a2", W.avatar),
+    karim: photo("photo-1472099645785-5658abf4ff4e", W.avatar),
+  },
+} as const;
+
+export type ImageCategory = keyof typeof defaultImages;
+
+export function getDefaultImageSrc(
+  category: ImageCategory,
+  id: string,
+): string | undefined {
+  const group = defaultImages[category] as Record<string, string>;
+  return group[id];
+}
+
+/** Monogram for fallback tiles — subtle, on-brand */
+export const mediaFallbackGlyphs: Partial<Record<string, string>> = {
+  programming: "dev",
+  electronics: "hw",
+  ai: "AI",
+  robotics: "bot",
+  mobile: "mob",
+  kids: "edu",
+};

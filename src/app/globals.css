@@ -1,0 +1,172 @@
+@import "tailwindcss";
+@import "../styles/animations.css";
+@import "../styles/media-grade.css";
+
+:root {
+  --background: #f5f7fb;
+  --foreground: #06004f;
+  --gsm-navy: #06004f;
+  --gsm-blue: #1a1aff;
+  --gsm-red: #d50000;
+  --gsm-light: #f5f7fb;
+  --gsm-muted: #4a4a6a;
+  --gsm-card: #ffffff;
+  --gsm-glass: rgba(255, 255, 255, 0.72);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-gsm-navy: var(--gsm-navy);
+  --color-gsm-blue: var(--gsm-blue);
+  --color-gsm-red: var(--gsm-red);
+  --color-gsm-light: var(--gsm-light);
+  --color-gsm-muted: var(--gsm-muted);
+  --color-gsm-card: var(--gsm-card);
+
+  --font-sans: var(--font-inter);
+  --font-arabic: var(--font-cairo);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-arabic), var(--font-sans), system-ui, sans-serif;
+}
+
+.font-en {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.glass-nav {
+  background: var(--gsm-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(6, 0, 79, 0.08);
+  box-shadow: 0 4px 24px rgba(6, 0, 79, 0.06);
+}
+
+.glow-blue {
+  box-shadow: 0 0 40px rgba(26, 26, 255, 0.15);
+}
+
+.glow-red {
+  box-shadow: 0 0 40px rgba(213, 0, 0, 0.12);
+}
+
+.text-gradient-brand {
+  background: linear-gradient(
+    135deg,
+    var(--gsm-navy) 0%,
+    var(--gsm-blue) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-dark {
+  background: linear-gradient(
+    160deg,
+    #06004f 0%,
+    #0a0860 45%,
+    #121280 100%
+  );
+  color: #f5f7fb;
+}@import "tailwindcss";
+@import "../styles/animations.css";
+@import "../styles/media-grade.css";
+
+:root {
+  --background: #f5f7fb;
+  --foreground: #06004f;
+  --gsm-navy: #06004f;
+  --gsm-blue: #1a1aff;
+  --gsm-red: #d50000;
+  --gsm-light: #f5f7fb;
+  --gsm-muted: #4a4a6a;
+  --gsm-card: #ffffff;
+  --gsm-glass: rgba(255, 255, 255, 0.72);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-gsm-navy: var(--gsm-navy);
+  --color-gsm-blue: var(--gsm-blue);
+  --color-gsm-red: var(--gsm-red);
+  --color-gsm-light: var(--gsm-light);
+  --color-gsm-muted: var(--gsm-muted);
+  --color-gsm-card: var(--gsm-card);
+
+  --font-sans: var(--font-inter);
+  --font-arabic: var(--font-cairo);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-arabic), var(--font-sans), system-ui, sans-serif;
+}
+
+.font-en {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.glass-nav {
+  background: var(--gsm-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(6, 0, 79, 0.08);
+  box-shadow: 0 4px 24px rgba(6, 0, 79, 0.06);
+}
+
+.glow-blue {
+  box-shadow: 0 0 40px rgba(26, 26, 255, 0.15);
+}
+
+.glow-red {
+  box-shadow: 0 0 40px rgba(213, 0, 0, 0.12);
+}
+
+.text-gradient-brand {
+  background: linear-gradient(
+    135deg,
+    var(--gsm-navy) 0%,
+    var(--gsm-blue) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-dark {
+  background: linear-gradient(
+    160deg,
+    #06004f 0%,
+    #0a0860 45%,
+    #121280 100%
+  );
+  color: #f5f7fb;
+}
+

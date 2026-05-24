@@ -1,0 +1,73 @@
+/**
+ * Unified GSM media grade — blue/purple cinematic, soft contrast, premium tech.
+ * Applied to all placeholder photography and fallback surfaces.
+ */
+
+.unified-media {
+  --media-grade-base: #06004f;
+  background-color: var(--media-grade-base);
+}
+
+.unified-media__photo {
+  transform: scale(1.04);
+  filter: saturate(0.82) contrast(1.06) brightness(0.88);
+}
+
+.unified-media__grade {
+  background: linear-gradient(
+    145deg,
+    rgba(6, 0, 79, 0.62) 0%,
+    rgba(26, 26, 255, 0.22) 42%,
+    rgba(76, 29, 149, 0.38) 100%
+  );
+  mix-blend-mode: multiply;
+}
+
+.unified-media__glow {
+  background: radial-gradient(
+    ellipse 80% 60% at 20% 10%,
+    rgba(26, 26, 255, 0.18) 0%,
+    transparent 55%
+  );
+  mix-blend-mode: screen;
+}
+
+.unified-media__vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 35%,
+    rgba(6, 0, 79, 0.45) 100%
+  );
+}
+
+.unified-media__edge {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* Fallback gradient surface (no photo) */
+.unified-media-fallback {
+  background: linear-gradient(
+    145deg,
+    #06004f 0%,
+    #1e1b7a 38%,
+    #312e81 62%,
+    #4c1d95 100%
+  );
+}
+
+.unified-media-fallback__mesh {
+  background-image:
+    radial-gradient(at 20% 30%, rgba(26, 26, 255, 0.35) 0%, transparent 50%),
+    radial-gradient(at 80% 70%, rgba(124, 58, 237, 0.25) 0%, transparent 45%),
+    radial-gradient(at 50% 50%, rgba(255, 255, 255, 0.04) 0%, transparent 40%);
+}
+
+.unified-media-fallback__grid {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
+}
