@@ -1,7 +1,5 @@
 "use client";
 
-import { useActionState } from "react";
-import { submitContact, type ContactState } from "@/app/actions/contact";
 import { FadeIn } from "@/components/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -11,11 +9,8 @@ import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { t as pick } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
 
-const initialState: ContactState = { ok: false };
-
 export function ContactForm() {
   const { locale, t } = useLocale();
-  const [state, formAction, pending] = useActionState(submitContact, initialState);
 
   return (
     <section
@@ -32,20 +27,27 @@ export function ContactForm() {
             >
               {t("formTitle")}
             </h2>
-            <p className="mt-4 text-gsm-muted">{t("formDesc")}</p>
+
+            <p className="mt-4 text-gsm-muted">
+              {t("formDesc")}
+            </p>
           </div>
 
           <form
-            action={formAction}
+            action="https://formspree.io/f/mdajdqnr"
+            method="POST"
             className="mx-auto mt-10 max-w-xl space-y-5"
-            noValidate
           >
             <input type="hidden" name="locale" value={locale} />
 
             <div>
-              <label htmlFor="name" className="mb-1.5 block text-sm font-semibold text-gsm-navy">
+              <label
+                htmlFor="name"
+                className="mb-1.5 block text-sm font-semibold text-gsm-navy"
+              >
                 {t("formName")}
               </label>
+
               <input
                 id="name"
                 name="name"
@@ -57,9 +59,13 @@ export function ContactForm() {
             </div>
 
             <div>
-              <label htmlFor="phone" className="mb-1.5 block text-sm font-semibold text-gsm-navy">
+              <label
+                htmlFor="phone"
+                className="mb-1.5 block text-sm font-semibold text-gsm-navy"
+              >
                 {t("formPhone")}
               </label>
+
               <input
                 id="phone"
                 name="phone"
@@ -72,13 +78,28 @@ export function ContactForm() {
             </div>
 
             <div>
-              <label htmlFor="course" className="mb-1.5 block text-sm font-semibold text-gsm-navy">
+              <label
+                htmlFor="course"
+                className="mb-1.5 block text-sm font-semibold text-gsm-navy"
+              >
                 {t("formCourse")}
               </label>
-              <select id="course" name="course" className={inputClass} defaultValue="">
-                <option value="">{t("formSelectCourse")}</option>
+
+              <select
+                id="course"
+                name="course"
+                className={inputClass}
+                defaultValue=""
+              >
+                <option value="">
+                  {t("formSelectCourse")}
+                </option>
+
                 {courses.map((course) => (
-                  <option key={course.id} value={course.id}>
+                  <option
+                    key={course.id}
+                    value={course.id}
+                  >
                     {pick(locale, course.title)}
                   </option>
                 ))}
@@ -86,9 +107,13 @@ export function ContactForm() {
             </div>
 
             <div>
-              <label htmlFor="message" className="mb-1.5 block text-sm font-semibold text-gsm-navy">
+              <label
+                htmlFor="message"
+                className="mb-1.5 block text-sm font-semibold text-gsm-navy"
+              >
                 {t("formMessage")}
               </label>
+
               <textarea
                 id="message"
                 name="message"
@@ -97,28 +122,15 @@ export function ContactForm() {
               />
             </div>
 
-            {state.message && (
-              <p
-                role="alert"
-                className={cn(
-                  "rounded-xl px-4 py-3 text-sm",
-                  state.ok ? "bg-emerald-50 text-emerald-800" : "bg-red-50 text-red-800",
-                )}
-              >
-                {state.message}
-              </p>
-            )}
-
-            {state.ok && !state.message && (
-              <p role="status" className="rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-800">
-                {t("formSuccess")}
-              </p>
-            )}
-
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Button type="submit" variant="primary" className="flex-1" disabled={pending}>
-                {pending ? t("formSending") : t("formSubmit")}
+              <Button
+                type="submit"
+                variant="primary"
+                className="flex-1"
+              >
+                {t("formSubmit")}
               </Button>
+
               <Button
                 href={siteConfig.whatsapp.href(locale)}
                 variant="secondary"
