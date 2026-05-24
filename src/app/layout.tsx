@@ -18,11 +18,14 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+
   title: {
     default: "GSM Academy | أكاديمية GSM للتعليم التقني",
     template: "%s | GSM Academy",
   },
+
   description: siteConfig.description.ar,
+
   keywords: [
     "أكاديمية GSM",
     "تعليم البرمجة",
@@ -32,6 +35,7 @@ export const metadata: Metadata = {
     "برمجة أطفال",
     "GSM Academy",
   ],
+
   openGraph: {
     title: "GSM Academy | أكاديمية GSM",
     description: siteConfig.description.ar,
@@ -39,10 +43,12 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "GSM Academy",
   },
+
   robots: {
     index: true,
     follow: true,
   },
+
   alternates: {
     canonical: "/",
   },
@@ -63,9 +69,9 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
-      className={`${cairo.variable} ${inter.variable} h-full scroll-smooth antialiased`}
+      className={`${cairo.variable} ${inter.variable} scroll-smooth antialiased`}
     >
-      <body className="min-h-full bg-gsm-light text-gsm-navy">
+      <body className="bg-gsm-light text-gsm-navy overflow-x-hidden">
         <Providers>{children}</Providers>
       </body>
     </html>

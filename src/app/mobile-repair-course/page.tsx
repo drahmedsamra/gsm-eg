@@ -13,10 +13,6 @@ import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { WhyGSM } from "@/components/WhyGSM";
 import { FloatingActions } from "@/components/FloatingActions";
 
-
-
-
-
 export default function Home() {
   return (
     <>
@@ -31,7 +27,7 @@ export default function Home() {
         <Gallery />
         <FAQ />
         <ContactForm />
-        <WhatsAppCTA /> 
+        <WhatsAppCTA />
       </main>
       <Footer />
       <FloatingActions />

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { PhoneCall, MessageCircle } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -46,13 +45,13 @@ function Action({
   className?: string;
 }) {
   return (
-    <Link
+    <a
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
       rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
       className={cn(
         "group inline-flex items-center gap-2 rounded-2xl px-3 py-2.5 text-white shadow-xl backdrop-blur-md transition hover:-translate-y-0.5 focus-visible:outline-none",
-        
+
         tone === "blue" &&
           "bg-blue-700 hover:bg-blue-800",
 
@@ -70,6 +69,6 @@ function Action({
       <span className="hidden sm:inline text-sm font-medium">
         {label}
       </span>
-    </Link>
+    </a>
   );
 }
