@@ -45,7 +45,12 @@ export function CourseCard({ course }: CourseCardProps) {
           {pick(locale, course.category)}
         </span>
 
-        <span className="absolute top-4 end-4 font-en text-xs font-semibold uppercase tracking-wider text-white/90">
+        <span
+          className={cn(
+            "absolute top-4 end-4 text-xs font-semibold text-white/90",
+            locale === "en" && "font-en uppercase tracking-wider",
+          )}
+        >
           {pick(locale, course.title)}
         </span>
 
