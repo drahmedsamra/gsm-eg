@@ -23,12 +23,13 @@ const W = {
  */
 export const defaultImages = {
   courses: {
-    programming: photo("photo-1517694712202-8f79c90dc58e", W.card),
-    electronics: photo("photo-1518770660439-4636190af475", W.card),
+    programming:
+    "/assets/images/mobile-repair/mobile-course-cover.webp",
+    electronics: "/assets/images/electronics/electronics-course-cover.webp",
     ai: photo("photo-1620712943543-bcc4688e7485", W.card),
-    robotics: photo("photo-1535378620166-273708b44e4c", W.card),
-    mobile: photo("photo-1580910051074-3eb694886505", W.card),
-    kids: photo("photo-1509062522246-3755977927d7", W.card),
+    robotics: "/assets/images/mobile-repair/mobile-course-cover.webp",
+    mobile:"/assets/images/mobile-repair/mobile-course-cover.webp",
+    kids: "/assets/images/kids-inventor/kids-inventor-course-cover.webp",
   },
   projects: {
     "smart-home": photo("photo-1558002038-1055907df827", W.card),

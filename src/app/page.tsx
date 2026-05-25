@@ -8,12 +8,13 @@ import { Navbar } from "@/components/Navbar";
 import { Stats } from "@/components/Stats";
 import { StudentProjects } from "@/components/StudentProjects";
 import { Testimonials } from "@/components/Testimonials";
+import { VideoCarousel } from "@/components/VideoCarousel";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { WhyGSM } from "@/components/WhyGSM";
 import { FloatingActions } from "@/components/FloatingActions";
-
-
+import { CertificateVerification } from "@/components/CertificateVerification";
+// import { AdminCertificateUpload } from "@/components/AdminCertificateUpload";
 
 
 
@@ -28,10 +29,13 @@ export default function Home() {
         <StudentProjects />
         <Stats />
         <Testimonials />
+        <VideoCarousel />
         <Gallery />
         <FAQ />
         <ContactForm />
         <WhatsAppCTA /> 
+        <CertificateVerification />
+        {/* <AdminCertificateUpload /> */}
       </main>
       <Footer />
       <FloatingActions />
