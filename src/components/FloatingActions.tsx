@@ -23,7 +23,7 @@ export function FloatingActions() {
           href={`https://wa.me/${whatsapp.replace("+", "")}`}
           label="WhatsApp"
           className="pointer-events-auto"
-          tone="green"
+          tone="red"
           icon={<MessageCircle className="h-5 w-5" />}
         />
       </div>
@@ -41,7 +41,7 @@ function Action({
   href: string;
   label: string;
   icon: React.ReactNode;
-  tone: "blue" | "green";
+  tone: "blue" | "red";
   className?: string;
 }) {
   return (
@@ -53,10 +53,10 @@ function Action({
         "group inline-flex items-center gap-2 rounded-2xl px-3 py-2.5 text-white shadow-xl backdrop-blur-md transition hover:-translate-y-0.5 focus-visible:outline-none",
 
         tone === "blue" &&
-          "bg-blue-700 hover:bg-blue-800",
+          "bg-blue-700 hover:bg-blue-800 shadow-blue-500/30",
 
-        tone === "green" &&
-          "bg-emerald-600 hover:bg-emerald-700",
+        tone === "red" &&
+          "bg-[linear-gradient(135deg,#ff1a1a_0%,#b30000_100%)] hover:opacity-90 shadow-red-500/30",
 
         className
       )}
@@ -66,7 +66,7 @@ function Action({
         {icon}
       </span>
 
-      <span className="hidden sm:inline text-sm font-medium">
+      <span className="hidden text-sm font-medium sm:inline">
         {label}
       </span>
     </a>
