@@ -2,25 +2,33 @@ import type { LocalizedString } from "@/lib/i18n/types";
 
 export const siteConfig = {
   name: "GSM Academy",
-  nameAr: "أكاديمية GSM",
+  nameAr: "أكاديمية جي إس إم",
+
   description: {
-    ar: "أكاديمية GSM — تعليم تقني حديث في البرمجة والإلكترونيات والذكاء الاصطناعي للأطفال والشباب. تعلم عملي بعقلية هندسية.",
-    en: "GSM Academy — modern tech education in programming, electronics, and AI for kids and youth. Hands-on learning with an engineering mindset.",
+    ar: "أكاديمية جي إس إم — رواد التعليم التقني في العالم العربي في مجالات الإلكترونيات والبرمجة وصيانة الموبايل.",
+    en: "GSM Academy — Leading technical education in the Arab world for electronics, programming, and mobile maintenance training.",
   } satisfies LocalizedString,
+
   url: "https://gsm-academy.com",
+
   whatsapp: {
-    number: "201000000000",
+    number: "201011822931",
+
     message: {
-      ar: "مرحباً، أود حجز مقعد في أكاديمية GSM",
-      en: "Hello, I'd like to book a seat at GSM Academy",
+      ar: "مرحبًا، أريد الحجز والاستفسار عن كورسات أكاديمية جي إس إم.",
+      en: "Hello, I would like to book and inquire about GSM Academy courses.",
     } satisfies LocalizedString,
+
     href(locale: "ar" | "en" = "ar") {
       const text = encodeURIComponent(this.message[locale]);
       return `https://wa.me/${this.number}?text=${text}`;
     },
   },
+
   email: "info@gsm-academy.com",
-  phone: "+20 100 000 0000",
+
+  phone: "+201011822931",
+
   address: {
     ar: "القاهرة، مصر",
     en: "Cairo, Egypt",
@@ -28,8 +36,27 @@ export const siteConfig = {
 } as const;
 
 export const socialLinks = [
-  { name: "Facebook", href: "https://facebook.com", icon: "facebook" },
-  { name: "Instagram", href: "https://instagram.com", icon: "instagram" },
-  { name: "YouTube", href: "https://youtube.com", icon: "youtube" },
-  { name: "LinkedIn", href: "https://linkedin.com", icon: "linkedin" },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/gsmacademy",
+    icon: "facebook",
+  },
+
+  {
+    name: "Instagram",
+    href: "https://instagram.com/gsmacademy",
+    icon: "instagram",
+  },
+
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com/@gsmacademy3495",
+    icon: "youtube",
+  },
+
+  {
+    name: "LinkedIn",
+    href: "https://linkedin.com",
+    icon: "linkedin",
+  },
 ] as const;

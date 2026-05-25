@@ -15,7 +15,7 @@ export function ContactForm() {
   return (
     <section
       id="inquiry"
-      className="border-y border-gsm-navy/8 bg-white py-20 sm:py-24"
+      className="bg-gsm-light py-12 sm:py-16"
       aria-labelledby="inquiry-heading"
     >
       <Container>
@@ -23,12 +23,12 @@ export function ContactForm() {
           <div className="mx-auto max-w-2xl text-center">
             <h2
               id="inquiry-heading"
-              className="text-3xl font-bold text-gsm-navy sm:text-4xl"
+              className="text-4xl font-extrabold tracking-tight text-gsm-navy sm:text-5xl"
             >
               {t("formTitle")}
             </h2>
 
-            <p className="mt-4 text-gsm-muted">
+            <p className="mt-3 text-sm leading-7 text-gsm-muted sm:text-base">
               {t("formDesc")}
             </p>
           </div>
@@ -36,14 +36,14 @@ export function ContactForm() {
           <form
             action="https://formspree.io/f/mdajdqnr"
             method="POST"
-            className="mx-auto mt-10 max-w-xl space-y-5"
+            className="mx-auto mt-8 max-w-xl space-y-6 rounded-[36px] bg-white p-6 shadow-xl shadow-gsm-navy/5 sm:p-10"
           >
             <input type="hidden" name="locale" value={locale} />
 
             <div>
               <label
                 htmlFor="name"
-                className="mb-1.5 block text-sm font-semibold text-gsm-navy"
+                className="mb-2 block text-base font-bold text-gsm-navy"
               >
                 {t("formName")}
               </label>
@@ -54,6 +54,11 @@ export function ContactForm() {
                 type="text"
                 required
                 autoComplete="name"
+                placeholder={
+                  locale === "ar"
+                    ? "اكتب اسمك الكامل"
+                    : "Enter your full name"
+                }
                 className={inputClass}
               />
             </div>
@@ -61,7 +66,7 @@ export function ContactForm() {
             <div>
               <label
                 htmlFor="phone"
-                className="mb-1.5 block text-sm font-semibold text-gsm-navy"
+                className="mb-2 block text-base font-bold text-gsm-navy"
               >
                 {t("formPhone")}
               </label>
@@ -73,6 +78,7 @@ export function ContactForm() {
                 required
                 autoComplete="tel"
                 dir="ltr"
+                placeholder="+20 101 182 2931"
                 className={cn(inputClass, "text-end")}
               />
             </div>
@@ -80,7 +86,7 @@ export function ContactForm() {
             <div>
               <label
                 htmlFor="course"
-                className="mb-1.5 block text-sm font-semibold text-gsm-navy"
+                className="mb-2 block text-base font-bold text-gsm-navy"
               >
                 {t("formCourse")}
               </label>
@@ -109,7 +115,7 @@ export function ContactForm() {
             <div>
               <label
                 htmlFor="message"
-                className="mb-1.5 block text-sm font-semibold text-gsm-navy"
+                className="mb-2 block text-base font-bold text-gsm-navy"
               >
                 {t("formMessage")}
               </label>
@@ -118,23 +124,27 @@ export function ContactForm() {
                 id="message"
                 name="message"
                 rows={4}
-                className={inputClass}
+                placeholder={
+                  locale === "ar"
+                    ? "اكتب استفسارك هنا..."
+                    : "Write your message here..."
+                }
+                className={cn(inputClass, "resize-none")}
               />
             </div>
 
-            <div className="flex flex-col gap-3 sm:flex-row">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <Button
                 type="submit"
                 variant="primary"
-                className="flex-1"
+                className="h-16 flex-1 rounded-full text-lg font-bold shadow-xl shadow-red-500/20"
               >
                 {t("formSubmit")}
               </Button>
 
               <Button
                 href={siteConfig.whatsapp.href(locale)}
-                variant="secondary"
-                className="flex-1"
+                className="h-16 flex-1 rounded-full !bg-blue-600 !text-white text-lg font-bold hover:!bg-blue-700"
               >
                 {t("whatsapp")}
               </Button>
@@ -147,4 +157,4 @@ export function ContactForm() {
 }
 
 const inputClass =
-  "w-full rounded-xl border border-gsm-navy/15 bg-gsm-light px-4 py-3 text-gsm-navy transition-colors placeholder:text-gsm-muted/60 focus:border-gsm-blue focus:outline-none focus:ring-2 focus:ring-gsm-blue/20";
+  "w-full rounded-[26px] border-2 border-gsm-navy/10 bg-white px-6 py-5 text-lg text-gsm-navy transition-all duration-300 placeholder:text-gsm-muted/60 focus:border-gsm-blue focus:outline-none focus:ring-4 focus:ring-gsm-blue/10";

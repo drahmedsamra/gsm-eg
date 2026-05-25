@@ -2,7 +2,6 @@
 
 import type { ReactNode } from "react";
 import { FadeIn } from "@/components/FadeIn";
-import { SectionTitle } from "@/components/SectionTitle";
 import { Container } from "@/components/ui/Container";
 import { whyGsmFeatures, type WhyFeature } from "@/data/why-gsm";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
@@ -63,7 +62,7 @@ function FeatureIcon({ icon }: { icon: WhyFeature["icon"] }) {
 
   return (
     <svg
-      className="h-7 w-7"
+      className="h-5 w-5"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -80,61 +79,65 @@ export function WhyGSM() {
   return (
     <section
       id="why-gsm"
-      className="bg-[linear-gradient(135deg,#312e81_0%,#1d4ed8_45%,#0f172a_100%)] py-20 sm:py-24"
+      className="bg-[linear-gradient(135deg,#312e81_0%,#1d4ed8_45%,#0f172a_100%)] py-12 sm:py-16"
       aria-labelledby="why-gsm-heading"
     >
       <Container>
         <FadeIn>
           <div className="text-center">
-            <div className="mb-8 inline-flex items-center gap-5">
-              <span className="h-[2px] w-16 rounded-full bg-blue-200/70" />
+            <div className="mb-4 inline-flex items-center gap-3">
+              <span className="h-[2px] w-8 rounded-full bg-blue-200/70 sm:w-12" />
 
               <p
                 className={cn(
-                  "text-2xl font-extrabold text-white sm:text-3xl",
+                  "text-lg font-extrabold text-white sm:text-2xl",
                   locale === "ar"
                     ? "tracking-normal"
-                    : "uppercase tracking-[0.3em]",
+                    : "uppercase tracking-[0.2em]",
                 )}
               >
                 {locale === "ar" ? "لماذا جي إس إم" : "WHY GSM"}
               </p>
 
-              <span className="h-[2px] w-16 rounded-full bg-blue-200/70" />
+              <span className="h-[2px] w-8 rounded-full bg-blue-200/70 sm:w-12" />
             </div>
 
-            <SectionTitle
-              light
-              title={t("whyTitle")}
-              description={t("whyDesc")}
-            />
+            <div className="mx-auto max-w-2xl">
+              <h2 className="text-3xl font-extrabold leading-tight text-white sm:text-5xl">
+                {t("whyTitle")}
+              </h2>
+
+              <p className="mt-3 text-sm leading-6 text-white/80 sm:text-base">
+                {t("whyDesc")}
+              </p>
+            </div>
           </div>
         </FadeIn>
 
-        <div className="mt-14 overflow-x-auto pb-4 scrollbar-hide">
-          <div className="flex snap-x snap-mandatory gap-6">
+        <div className="mt-7 overflow-x-auto pb-2 scrollbar-hide">
+          <div className="flex snap-x snap-mandatory gap-4">
             {whyGsmFeatures.map((feature, i) => (
-              <FadeIn key={feature.id} delay={i * 60}>
+              <FadeIn key={feature.id} delay={i * 40}>
                 <div
                   className={cn(
-                    "group min-w-[320px] max-w-[320px] snap-center rounded-[32px]",
-                    "border border-white/25 bg-white/[0.14] p-7 backdrop-blur-xl",
+                    "group min-w-[250px] max-w-[250px] snap-center rounded-[24px]",
+                    "border border-white/20 bg-white/[0.12] p-4 backdrop-blur-xl",
                     "transition-all duration-300",
                     "hover:-translate-y-1",
-                    "hover:border-white/40",
-                    "hover:bg-white/[0.18]",
-                    "hover:shadow-2xl hover:shadow-blue-500/20",
+                    "hover:border-white/35",
+                    "hover:bg-white/[0.16]",
+                    "hover:shadow-xl hover:shadow-blue-500/10",
                   )}
                 >
-                  <div className="mb-5 inline-flex rounded-2xl bg-white/15 p-4 text-white transition-all duration-300 group-hover:bg-gsm-red/20 group-hover:text-gsm-red">
+                  <div className="mb-3 inline-flex rounded-xl bg-white/15 p-2.5 text-white transition-all duration-300 group-hover:bg-gsm-red/20 group-hover:text-gsm-red">
                     <FeatureIcon icon={feature.icon} />
                   </div>
 
-                  <h3 className="text-xl font-bold leading-relaxed text-white">
+                  <h3 className="text-base font-bold leading-relaxed text-white">
                     {pick(locale, feature.title)}
                   </h3>
 
-                  <p className="mt-3 text-[15px] leading-8 text-white/90">
+                  <p className="mt-2 text-xs leading-6 text-white/85">
                     {pick(locale, feature.description)}
                   </p>
                 </div>
