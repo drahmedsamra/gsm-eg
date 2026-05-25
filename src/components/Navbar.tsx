@@ -53,19 +53,52 @@ export function Navbar() {
           className="flex min-h-11 items-center justify-between gap-6"
           aria-label={t("navLabel")}
         >
+          {/* Logo + Title */}
           <Link
             href="#hero"
             className={cn(
-              "group -ms-1 shrink-0 rounded-lg py-1 ps-1 pe-2",
+              "group flex items-center gap-2 sm:gap-3 -ms-1 shrink-0 rounded-lg py-1 ps-1 pe-2",
               "transition-opacity duration-200 hover:opacity-[0.88]",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gsm-blue/40 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
             )}
             onClick={() => setMenuOpen(false)}
             aria-label="GSM Academy — الرئيسية"
           >
-            <GsmLogo height={scrolled ? 36 : 42} priority />
+            <GsmLogo
+              height={scrolled ? 34 : 40}
+              priority
+            />
+
+            <div className="flex flex-col items-center text-center leading-none">
+              <p
+                className={cn(
+                  "font-bold text-gsm-navy transition-all duration-300",
+                  scrolled
+                    ? "text-sm sm:text-base"
+                    : "text-base sm:text-lg",
+                )}
+              >
+                {locale === "ar"
+                  ? "أكاديمية جي إس إم"
+                  : "GSM ACADEMY"}
+              </p>
+
+              <p
+                className={cn(
+                  "mt-1 w-full text-center text-gsm-muted transition-all duration-300",
+                  scrolled
+                    ? "text-[9px] sm:text-[11px]"
+                    : "text-[10px] sm:text-xs",
+                )}
+              >
+                {locale === "ar"
+                  ? "للإلكترونيات والبرمجيات"
+                  : "Electronics & Programming"}
+              </p>
+            </div>
           </Link>
 
+          {/* Desktop Nav */}
           <ul className="hidden items-center gap-6 lg:flex xl:gap-8">
             {navItems.map((link) => (
               <li key={link.href}>
@@ -84,6 +117,7 @@ export function Navbar() {
             ))}
           </ul>
 
+          {/* Desktop Actions */}
           <div className="hidden items-center gap-3 lg:flex">
             <LanguageToggle />
 
@@ -96,6 +130,7 @@ export function Navbar() {
             </Button>
           </div>
 
+          {/* Mobile Actions */}
           <div className="flex items-center gap-2 lg:hidden">
             <LanguageToggle />
 
@@ -139,6 +174,7 @@ export function Navbar() {
         </nav>
       </Container>
 
+      {/* Backdrop */}
       <div
         id="mobile-menu-backdrop"
         className={cn(
@@ -151,16 +187,17 @@ export function Navbar() {
         onClick={() => setMenuOpen(false)}
       />
 
-<div
-  id="mobile-menu"
-  className={cn(
-    "fixed top-0 left-0 z-40 h-screen w-[85vw] max-w-[20rem] bg-white shadow-2xl transition-transform duration-300 lg:hidden",
-    menuOpen
-      ? "translate-x-0"
-      : "-translate-x-[110%]",
-  )}
->
-  <div className="flex h-full flex-col gap-6 overflow-y-auto p-6 pt-24">
+      {/* Mobile Menu */}
+      <div
+        id="mobile-menu"
+        className={cn(
+          "fixed top-0 left-0 z-40 h-screen w-[85vw] max-w-[20rem] bg-white shadow-2xl transition-transform duration-300 lg:hidden",
+          menuOpen
+            ? "translate-x-0"
+            : "-translate-x-[110%]",
+        )}
+      >
+        <div className="flex h-full flex-col gap-6 overflow-y-auto p-6 pt-24">
           <ul className="flex flex-col gap-4">
             {navItems.map((link) => (
               <li key={link.href}>

@@ -2,44 +2,58 @@
   0%,
   100% {
     transform: translate3d(0, 0, 0);
+    opacity: 0.72;
   }
 
   25% {
     transform: translate3d(8px, -10px, 0);
+    opacity: 0.9;
   }
 
   50% {
     transform: translate3d(0, -18px, 0);
+    opacity: 0.78;
   }
 
   75% {
     transform: translate3d(-8px, -10px, 0);
+    opacity: 0.9;
   }
 }
 
 @keyframes float-slow {
   0%,
   100% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
+    transform: translate3d(0, 0, 0)
+      rotate(0deg);
+    opacity: 0.65;
   }
 
   25% {
-    transform: translate3d(6px, -7px, 0) rotate(0.7deg);
+    transform: translate3d(6px, -7px, 0)
+      rotate(0.7deg);
+    opacity: 0.82;
   }
 
   50% {
-    transform: translate3d(0, -12px, 0) rotate(1deg);
+    transform: translate3d(0, -12px, 0)
+      rotate(1deg);
+    opacity: 0.72;
   }
 
   75% {
-    transform: translate3d(-6px, -7px, 0) rotate(-0.7deg);
+    transform: translate3d(-6px, -7px, 0)
+      rotate(-0.7deg);
+    opacity: 0.82;
   }
 }
 
 .animate-float {
   animation: float 7s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 .animate-float-slow {
   animation: float-slow 10s ease-in-out infinite;
+  will-change: transform, opacity;
 }
