@@ -35,6 +35,7 @@ export function Hero() {
               {t("heroBadge")}
             </p>
 
+
             <h1 className="text-balance text-[3rem] font-bold leading-[1.15] tracking-tight text-gsm-navy sm:text-5xl lg:text-[3.25rem]">
               {t("heroTitle")}
             </h1>

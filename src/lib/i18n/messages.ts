@@ -18,25 +18,25 @@ const ui = {
     en: "Switch to Arabic",
   },
   heroBadge: {
-    ar: "أكاديمية تقنية دولية — تعليم عملي حديث",
-    en: "International tech academy — hands-on modern learning",
+    ar: " أكاديمية جي إس إم — لهندسة الإلكترونيات والبرمجيات والصيانه",
+    en: "GSM Academy — Electronics Engineering, Software & Mobile Maintenance Academy",
   },
   heroTitle: {
-    ar: "تعلم البرمجة والإلكترونيات والذكاء الاصطناعي",
-    en: "Learn programming, electronics & AI",
+    ar: " التدريب علي الإلكترونيات والصيانه والبرمجيات  ",
+    en: "Learn Electronics, Maintenance & Software Development",
   },
   heroSubtitle: {
-    ar: "مسارات تقنية حديثة تجمع بين التعليم العملي والعقلية الهندسية — للأطفال والشباب الذين يريدون بناء مستقبل في عالم التكنولوجيا.",
-    en: "Modern pathways blending practical training with an engineering mindset — for kids and youth building a future in technology.",
+    ar: "نقدم برامج تدريبية عملية ومتخصصة في الإلكترونيات والبرمجيات وصيانة الموبايل، بالإضافة إلى قسم مخصص للأطفال لتعلم البرمجة والروبوتات والذكاء الاصطناعي بأسلوب تفاعلي حديث يعتمد على التطبيق العملي والمشاريع الحقيقية   .",
+    en: "We provide practical and specialized training programs in electronics, software development, and mobile maintenance, in addition to a dedicated kids’ section for coding, robotics, and AI through an interactive hands-on learning experience focused on real projects and practical application.",
   },
-  coursesEyebrow: { ar: "مساراتنا التدريبية", en: "Our programs" },
+  coursesEyebrow: { ar: "دوراتنا التدريبية", en: "Our programs" },
   coursesTitle: {
-    ar: "دورات تقنية لبناء المستقبل",
-    en: "Tech courses that build the future",
+    ar: "أحدث البرامج التدريبيه   ",
+    en: "The Latest Training Programs",
   },
   coursesDesc: {
-    ar: "من البرمجة إلى الروبوتات — مسارات عملية مصممة للأطفال والشباب بمعايير أكاديمية عالمية.",
-    en: "From coding to robotics — practical tracks for kids and youth with international academy standards.",
+    ar: "كورسات عمليه تناسب مختلف الأعمار بشهادات معتمدة من أكثر من ٨ جهات دولية.",
+    en: "Practical courses for different age groups with accredited certificates from more than 8 international organizations.",
   },
   whyEyebrow: { ar: "لماذا نحن", en: "Why us" },
   whyTitle: {
@@ -53,8 +53,8 @@ const ui = {
     en: "Real projects from our labs",
   },
   projectsDesc: {
-    ar: "معرض لمشاريع الطلاب — استبدل الصور لاحقاً بأعمال حقيقية من الأكاديمية.",
-    en: "A showcase of student work — swap images anytime with real academy projects.",
+    ar: "معرض لمشاريع طلاب أكاديمية جي إس إم.",
+    en: "A showcase of GSM academy students work ",
   },
   testimonialsEyebrow: { ar: "آراء العائلات والطلاب", en: "Families & students" },
   testimonialsTitle: { ar: "ثقة تبنيها النتائج", en: "Trust built on results" },

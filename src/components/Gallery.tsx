@@ -1,180 +1,333 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  X,
+} from "lucide-react";
+
 import { FadeIn } from "@/components/FadeIn";
 import { SectionTitle } from "@/components/SectionTitle";
 import { Container } from "@/components/ui/Container";
 import { MediaImage } from "@/components/ui/MediaImage";
-import { galleryItems, type GalleryItem } from "@/data/gallery";
+
+import {
+  galleryItems,
+} from "@/data/gallery";
+
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { t as pick } from "@/lib/i18n/types";
-import { cn } from "@/lib/utils";
-
-function GalleryTile({
-  item,
-  alt,
-  onOpen,
-  className,
-}: {
-  item: GalleryItem;
-  alt: string;
-  onOpen: (id: string) => void;
-  className?: string;
-}) {
-  return (
-    <button
-      type="button"
-      className={cn(
-        "group relative min-h-[200px] overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gsm-blue focus-visible:ring-offset-2",
-        className,
-      )}
-      onClick={() => onOpen(item.id)}
-      aria-label={`${alt}`}
-    >
-      <MediaImage
-        id={item.imagePlaceholder}
-        alt={alt}
-        category="gallery"
-        variant="gallery"
-        className="h-full min-h-[200px] w-full transition-transform duration-500 group-hover:scale-105"
-        sizes="(max-width: 768px) 100vw, 25vw"
-      />
-      <div className="absolute inset-0 flex items-end bg-gradient-to-t from-gsm-navy/70 to-transparent p-4 opacity-0 transition-opacity group-hover:opacity-100">
-        <span className="text-sm font-medium text-white">{alt}</span>
-      </div>
-    </button>
-  );
-}
 
 export function Gallery() {
   const { locale, t } = useLocale();
-  const [lightboxId, setLightboxId] = useState<string | null>(null);
-  const [slideIndex, setSlideIndex] = useState(0);
 
-  const openLightbox = useCallback((id: string) => {
-    const idx = galleryItems.findIndex((g) => g.id === id);
-    setSlideIndex(idx >= 0 ? idx : 0);
-    setLightboxId(id);
-  }, []);
+  const scrollerRef =
+    useRef<HTMLDivElement | null>(null);
 
-  const closeLightbox = useCallback(() => setLightboxId(null), []);
+  const [activeIndex, setActiveIndex] =
+    useState<number | null>(null);
 
-  const activeItem = galleryItems[slideIndex];
-  const activeAlt = activeItem ? pick(locale, activeItem.alt) : "";
+  const activeItem =
+    activeIndex !== null
+      ? galleryItems[activeIndex]
+      : null;
+
+  const activeAlt = activeItem
+    ? pick(locale, activeItem.alt)
+    : "";
+
+  const scrollByCards = (
+    dir: "prev" | "next"
+  ) => {
+
+    const el = scrollerRef.current;
+
+    if (!el) return;
+
+    const width = Math.min(
+      420,
+      el.clientWidth * 0.85
+    );
+
+    el.scrollBy({
+      left: dir === "next"
+        ? width
+        : -width,
+      behavior: "smooth",
+    });
+  };
+
+  const openLightbox = useCallback(
+    (index: number) => {
+      setActiveIndex(index);
+    },
+    []
+  );
+
+  const closeLightbox = useCallback(
+    () => setActiveIndex(null),
+    []
+  );
 
   useEffect(() => {
-    if (!lightboxId) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeLightbox();
+
+    if (activeIndex === null) return;
+
+    const onKey = (
+      e: KeyboardEvent
+    ) => {
+
+      if (e.key === "Escape")
+        closeLightbox();
+
       if (e.key === "ArrowLeft")
-        setSlideIndex((i) => (i + 1) % galleryItems.length);
+        setActiveIndex(
+          (i) =>
+            i === null
+              ? 0
+              : (i + 1) %
+                galleryItems.length
+        );
+
       if (e.key === "ArrowRight")
-        setSlideIndex((i) => (i - 1 + galleryItems.length) % galleryItems.length);
+        setActiveIndex(
+          (i) =>
+            i === null
+              ? 0
+              : (i - 1 + galleryItems.length) %
+                galleryItems.length
+        );
     };
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKey);
+
+    document.body.style.overflow =
+      "hidden";
+
+    window.addEventListener(
+      "keydown",
+      onKey
+    );
+
     return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKey);
+
+      document.body.style.overflow =
+        "";
+
+      window.removeEventListener(
+        "keydown",
+        onKey
+      );
     };
-  }, [lightboxId, closeLightbox]);
+
+  }, [activeIndex, closeLightbox]);
 
   return (
-    <section id="gallery" className="py-20 sm:py-24">
+    <section
+      id="gallery"
+      className="relative overflow-hidden py-20 sm:py-24"
+    >
+
+      {/* Background Glow */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(26,26,255,0.06),transparent_40%)]"
+      />
+
       <Container>
+
         <FadeIn>
-          <SectionTitle
-            eyebrow={t("galleryEyebrow")}
-            eyebrowEn="Gallery"
-            title={t("galleryTitle")}
-            description={t("galleryDesc")}
-          />
+
+          <div className="relative text-center">
+
+            <div className="mx-auto max-w-3xl">
+
+              <SectionTitle
+                eyebrow={t("galleryEyebrow")}
+                eyebrowEn="Gallery"
+                title={t("galleryTitle")}
+                description={t("galleryDesc")}
+              />
+
+            </div>
+
+            {/* Navigation */}
+            <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 items-center gap-3 md:flex">
+
+              <NavButton
+                onClick={() =>
+                  scrollByCards("prev")
+                }
+              >
+                <ChevronRight className="h-5 w-5" />
+              </NavButton>
+
+              <NavButton
+                onClick={() =>
+                  scrollByCards("next")
+                }
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </NavButton>
+
+            </div>
+
+          </div>
+
         </FadeIn>
 
-        <div className="mt-14 hidden gap-4 md:grid md:grid-cols-4 md:grid-rows-2 md:auto-rows-[minmax(180px,1fr)]">
-          {galleryItems.map((item) => (
-            <GalleryTile
-              key={item.id}
-              item={item}
-              alt={pick(locale, item.alt)}
-              onOpen={openLightbox}
-              className={cn(
-                item.span === "wide" && "md:col-span-2",
-                item.span === "tall" && "md:row-span-2",
-              )}
-            />
-          ))}
+        {/* Horizontal Showcase */}
+        <div
+          ref={scrollerRef}
+          className="mt-14 flex gap-5 overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          style={{
+            scrollSnapType:
+              "x mandatory",
+          }}
+        >
+
+          {galleryItems.map(
+            (item, index) => (
+
+              <button
+                key={item.id}
+                type="button"
+                onClick={() =>
+                  openLightbox(index)
+                }
+                className="group relative min-w-[85%] overflow-hidden rounded-[32px] border border-white/40 bg-white/70 shadow-[0_20px_60px_-20px_rgba(2,6,23,0.12)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_-20px_rgba(2,6,23,0.18)] sm:min-w-[420px] md:min-w-[500px]"
+                style={{
+                  scrollSnapAlign:
+                    "start",
+                }}
+              >
+
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[32px]">
+
+                  <MediaImage
+                    id={
+                      item.imagePlaceholder
+                    }
+                    alt={pick(
+                      locale,
+                      item.alt
+                    )}
+                    category="gallery"
+                    variant="gallery"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 85vw, 500px"
+                  />
+
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent opacity-90" />
+
+                  {/* Content */}
+                  <div className="absolute bottom-0 inset-x-0 p-6 text-center">
+
+                    <div className="translate-y-2 transition duration-500 group-hover:translate-y-0">
+
+                      <p className="text-2xl font-bold tracking-tight text-white">
+
+                        {pick(
+                          locale,
+                          item.alt
+                        )}
+
+                      </p>
+
+                      <p className="mt-2 text-sm text-white/80">
+
+                        GSM Academy
+
+                      </p>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </button>
+
+            )
+          )}
+
         </div>
 
-        <div className="mt-14 md:hidden">
-          <GalleryTile
-            item={galleryItems[slideIndex]}
-            alt={pick(locale, galleryItems[slideIndex].alt)}
-            onOpen={openLightbox}
-            className="w-full"
-          />
-          <div className="mt-4 flex items-center justify-center gap-4">
-            <button
-              type="button"
-              className="rounded-full border border-gsm-navy/15 px-4 py-2 text-sm font-medium text-gsm-navy hover:bg-gsm-navy/5"
-              onClick={() =>
-                setSlideIndex((i) => (i - 1 + galleryItems.length) % galleryItems.length)
-              }
-            >
-              {t("galleryPrev")}
-            </button>
-            <span className="text-sm text-gsm-muted">
-              {slideIndex + 1} / {galleryItems.length}
-            </span>
-            <button
-              type="button"
-              className="rounded-full border border-gsm-navy/15 px-4 py-2 text-sm font-medium text-gsm-navy hover:bg-gsm-navy/5"
-              onClick={() => setSlideIndex((i) => (i + 1) % galleryItems.length)}
-            >
-              {t("galleryNext")}
-            </button>
-          </div>
-        </div>
       </Container>
 
-      {lightboxId && activeItem && (
+      {/* Lightbox */}
+      {activeItem && (
+
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-gsm-navy/90 p-4 backdrop-blur-sm"
-          role="dialog"
-          aria-modal="true"
-          aria-label={activeAlt}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-md"
           onClick={closeLightbox}
         >
+
           <button
             type="button"
-            className="absolute top-4 end-4 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
+            className="absolute top-5 end-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-xl transition hover:bg-white/15"
             onClick={closeLightbox}
-            aria-label={t("galleryClose")}
           >
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+
+            <X className="h-6 w-6" />
+
           </button>
+
           <div
-            className="relative max-h-[85vh] w-full max-w-4xl overflow-hidden rounded-2xl"
-            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-6xl overflow-hidden rounded-[32px] border border-white/10 bg-black/90 shadow-[0_50px_120px_-70px_rgba(2,6,23,0.9)]"
+            onClick={(e) =>
+              e.stopPropagation()
+            }
           >
-            <div className="relative min-h-[300px] w-full">
+
+            <div className="relative">
+
               <MediaImage
-                id={activeItem.imagePlaceholder}
+                id={
+                  activeItem.imagePlaceholder
+                }
                 alt={activeAlt}
                 category="gallery"
                 variant="gallery"
-                className="min-h-[300px] max-h-[85vh] w-full"
+                className="max-h-[85vh] w-full object-cover"
                 sizes="100vw"
               />
+
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-8 text-center">
+
+                <p className="text-2xl font-bold text-white">
+
+                  {activeAlt}
+
+                </p>
+
+              </div>
+
             </div>
-            <p className="absolute bottom-0 inset-x-0 bg-gsm-navy/80 p-4 text-center text-white">
-              {activeAlt}
-            </p>
+
           </div>
+
         </div>
+
       )}
+
     </section>
+  );
+}
+
+function NavButton({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-lg shadow-gsm-navy/5 ring-1 ring-gsm-navy/10 backdrop-blur-xl transition duration-300 hover:scale-105 hover:bg-white"
+    >
+      {children}
+    </button>
   );
 }

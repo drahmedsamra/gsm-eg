@@ -29,7 +29,7 @@ export function VideoCarousel() {
           : v.label.en,
 
         thumbnail:
-          `https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg`,
+          `https://i.ytimg.com/vi/${v.youtubeId}/mqdefault.jpg`,
       })),
     []
   );
@@ -40,8 +40,8 @@ export function VideoCarousel() {
     if (!el) return;
 
     const width = Math.min(
-      420,
-      el.clientWidth * 0.85
+      380,
+      el.clientWidth * 0.82
     );
 
     el.scrollBy({
@@ -59,29 +59,34 @@ export function VideoCarousel() {
     : <ChevronRight className="h-5 w-5" />;
 
   return (
-    <section className="py-20 sm:py-24">
+    <section className="relative overflow-hidden py-20 sm:py-24">
+
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(26,26,255,0.06),transparent_40%)]"
+      />
 
       <Container>
 
-        <div className="flex items-end justify-between gap-3">
+        <div className="relative text-center">
 
-          <div>
+          <div className="mx-auto max-w-3xl">
 
             <div className="mb-3 text-sm font-semibold text-gsm-blue">
               الفيديوهات
             </div>
 
-            <h2 className="text-3xl font-bold text-gsm-navy sm:text-4xl">
+            <h2 className="text-2xl font-extrabold tracking-tight text-gsm-navy sm:text-4xl">
               قصص النجاح والفيديوهات
             </h2>
 
-            <p className="mt-4 max-w-2xl text-lg text-gsm-muted">
+            <p className="mt-4 text-lg leading-relaxed text-gsm-muted">
               شاهد تجارب الطلاب والمشاريع داخل GSM Academy
             </p>
 
           </div>
 
-          <div className="hidden md:flex items-center gap-2">
+          <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 items-center gap-3 md:flex">
 
             <NavButton
               onClick={() => scrollByCards("prev")}
@@ -103,7 +108,7 @@ export function VideoCarousel() {
 
         <div
           ref={scrollerRef}
-          className="mt-8 flex gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mt-12 flex gap-5 overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           style={{ scrollSnapType: "x mandatory" }}
         >
 
@@ -112,12 +117,12 @@ export function VideoCarousel() {
             <button
               key={v.id}
               onClick={() => setActive(v)}
-              className="min-w-[85%] text-start sm:min-w-[420px] md:min-w-[460px]"
+              className="min-w-[82%] text-start sm:min-w-[360px] md:min-w-[390px]"
               style={{ scrollSnapAlign: "start" }}
               aria-label={v.title}
             >
 
-              <div className="group overflow-hidden rounded-3xl border border-gsm-navy/10 bg-white shadow-lg shadow-gsm-navy/5">
+              <div className="group overflow-hidden rounded-[28px] border border-white/50 bg-white/90 shadow-[0_20px_60px_-20px_rgba(2,6,23,0.12)] backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:shadow-[0_30px_80px_-20px_rgba(2,6,23,0.18)]">
 
                 <div className="relative aspect-video overflow-hidden">
 
@@ -125,24 +130,24 @@ export function VideoCarousel() {
                     src={v.thumbnail}
                     alt={v.title}
                     fill
-                    sizes="(max-width: 768px) 85vw, 460px"
-                    className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 82vw, 390px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     loading="lazy"
                   />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-slate-950/10 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/35 via-slate-950/5 to-transparent" />
 
                   <div className="absolute inset-0 grid place-items-center">
 
-                    <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white/15 ring-1 ring-white/25 backdrop-blur-md transition group-hover:bg-white/20">
+                    <div className="grid h-16 w-16 place-items-center rounded-2xl bg-white/20 ring-1 ring-white/30 backdrop-blur-xl transition duration-300 group-hover:scale-110 group-hover:bg-white/25">
 
-                      <Play className="h-6 w-6 text-white" />
+                      <Play className="h-7 w-7 fill-white text-white" />
 
                     </div>
 
                   </div>
 
-                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+                  <div className="absolute top-4 left-4">
 
                     <span className="inline-flex items-center rounded-full bg-white/15 px-3 py-1 text-sm font-semibold text-white ring-1 ring-white/15 backdrop-blur-md">
 
@@ -154,14 +159,14 @@ export function VideoCarousel() {
 
                 </div>
 
-                <div className="p-4">
+                <div className="p-5 text-center">
 
-                  <div className="text-xl font-semibold text-gsm-navy">
+                  <div className="text-xl font-bold tracking-tight text-gsm-navy">
                     {v.title}
                   </div>
 
                   {v.caption ? (
-                    <div className="mt-2 text-gsm-muted">
+                    <div className="mt-2 text-sm leading-relaxed text-gsm-muted">
                       {isAr
                         ? v.caption.ar
                         : v.caption.en}
@@ -209,7 +214,7 @@ function NavButton({
     <button
       onClick={onClick}
       aria-label={ariaLabel}
-      className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/60 ring-1 ring-slate-900/10 backdrop-blur-md transition hover:bg-white"
+      className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-lg shadow-gsm-navy/5 ring-1 ring-gsm-navy/10 backdrop-blur-xl transition duration-300 hover:scale-105 hover:bg-white"
     >
       {children}
     </button>
@@ -229,22 +234,22 @@ function VideoModal({
     <div className="fixed inset-0 z-[80]">
 
       <div
-        className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/70 backdrop-blur-md"
         onClick={onClose}
       />
 
-      <div className="absolute inset-x-4 top-20 mx-auto max-w-4xl">
+      <div className="absolute inset-x-4 top-20 mx-auto max-w-5xl">
 
-        <div className="overflow-hidden rounded-2xl border border-white/15 bg-slate-950 shadow-[0_50px_120px_-70px_rgba(2,6,23,0.9)]">
+        <div className="overflow-hidden rounded-[32px] border border-white/10 bg-black/95 backdrop-blur-xl shadow-[0_50px_120px_-70px_rgba(2,6,23,0.9)]">
 
-          <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3 text-white">
+          <div className="flex items-center justify-between gap-3 border-b border-white/10 px-5 py-4 text-white">
 
             <div className="text-sm font-semibold">
               {title}
             </div>
 
             <button
-              className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/15 hover:bg-white/15"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15 transition hover:bg-white/15"
               onClick={onClose}
               aria-label="Close"
             >
