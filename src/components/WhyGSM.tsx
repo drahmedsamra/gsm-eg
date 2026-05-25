@@ -62,7 +62,13 @@ function FeatureIcon({ icon }: { icon: WhyFeature["icon"] }) {
   };
 
   return (
-    <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+    <svg
+      className="h-7 w-7"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      aria-hidden
+    >
       {paths[icon]}
     </svg>
   );
@@ -74,39 +80,67 @@ export function WhyGSM() {
   return (
     <section
       id="why-gsm"
-      className="section-dark py-20 sm:py-24"
+      className="bg-[linear-gradient(135deg,#312e81_0%,#1d4ed8_45%,#0f172a_100%)] py-20 sm:py-24"
       aria-labelledby="why-gsm-heading"
     >
       <Container>
         <FadeIn>
-          <SectionTitle
-            light
-            eyebrow={t("whyEyebrow")}
-            eyebrowEn="Why GSM"
-            title={t("whyTitle")}
-            description={t("whyDesc")}
-          />
-        </FadeIn>
+          <div className="text-center">
+            <div className="mb-8 inline-flex items-center gap-5">
+              <span className="h-[2px] w-16 rounded-full bg-blue-200/70" />
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {whyGsmFeatures.map((feature, i) => (
-            <FadeIn key={feature.id} delay={i * 60}>
-              <div
+              <p
                 className={cn(
-                  "group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm",
-                  "transition-all duration-300 hover:border-gsm-blue/40 hover:bg-white/10 hover:shadow-lg hover:shadow-gsm-blue/10",
+                  "text-2xl font-extrabold text-white sm:text-3xl",
+                  locale === "ar"
+                    ? "tracking-normal"
+                    : "uppercase tracking-[0.3em]",
                 )}
               >
-                <div className="mb-4 inline-flex rounded-xl bg-gsm-blue/20 p-3 text-gsm-blue transition-colors group-hover:bg-gsm-red/20 group-hover:text-gsm-red">
-                  <FeatureIcon icon={feature.icon} />
+                {locale === "ar" ? "لماذا جي إس إم" : "WHY GSM"}
+              </p>
+
+              <span className="h-[2px] w-16 rounded-full bg-blue-200/70" />
+            </div>
+
+            <SectionTitle
+              light
+              title={t("whyTitle")}
+              description={t("whyDesc")}
+            />
+          </div>
+        </FadeIn>
+
+        <div className="mt-14 overflow-x-auto pb-4 scrollbar-hide">
+          <div className="flex snap-x snap-mandatory gap-6">
+            {whyGsmFeatures.map((feature, i) => (
+              <FadeIn key={feature.id} delay={i * 60}>
+                <div
+                  className={cn(
+                    "group min-w-[320px] max-w-[320px] snap-center rounded-[32px]",
+                    "border border-white/25 bg-white/[0.14] p-7 backdrop-blur-xl",
+                    "transition-all duration-300",
+                    "hover:-translate-y-1",
+                    "hover:border-white/40",
+                    "hover:bg-white/[0.18]",
+                    "hover:shadow-2xl hover:shadow-blue-500/20",
+                  )}
+                >
+                  <div className="mb-5 inline-flex rounded-2xl bg-white/15 p-4 text-white transition-all duration-300 group-hover:bg-gsm-red/20 group-hover:text-gsm-red">
+                    <FeatureIcon icon={feature.icon} />
+                  </div>
+
+                  <h3 className="text-xl font-bold leading-relaxed text-white">
+                    {pick(locale, feature.title)}
+                  </h3>
+
+                  <p className="mt-3 text-[15px] leading-8 text-white/90">
+                    {pick(locale, feature.description)}
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-white">{pick(locale, feature.title)}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/70">
-                  {pick(locale, feature.description)}
-                </p>
-              </div>
-            </FadeIn>
-          ))}
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </Container>
     </section>

@@ -25,46 +25,66 @@ export function FAQ() {
           />
         </FadeIn>
 
-        <div className="mx-auto mt-14 max-w-3xl">
+        <div className="mx-auto mt-14 max-w-4xl">
           {faqItems.map((item, i) => {
             const isOpen = openId === item.id;
+
             return (
               <FadeIn key={item.id} delay={i * 50}>
-                <div className="border-b border-gsm-navy/10 last:border-0">
+                <div
+                  className={cn(
+                    "mb-5 overflow-hidden rounded-[28px] border border-[#edf1ff] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300",
+                    isOpen && "border-gsm-blue/20",
+                  )}
+                >
                   <h3>
                     <button
                       type="button"
                       id={`faq-trigger-${item.id}`}
-                      className="flex w-full items-center justify-between gap-4 py-5 text-start text-lg font-semibold text-gsm-navy transition-colors hover:text-gsm-blue"
                       aria-expanded={isOpen}
                       aria-controls={`faq-panel-${item.id}`}
                       onClick={() => setOpenId(isOpen ? null : item.id)}
+                      className="flex w-full items-center justify-between gap-5 px-6 py-6 text-start text-xl font-semibold leading-relaxed text-gsm-navy transition-colors hover:text-gsm-blue sm:px-8"
                     >
-                      {pick(locale, item.question)}
+                      <span>{pick(locale, item.question)}</span>
+
                       <span
                         className={cn(
-                          "flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gsm-navy/5 text-gsm-blue transition-transform duration-300",
+                          "flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#f5f7ff] text-gsm-blue transition-all duration-300",
                           isOpen && "rotate-180 bg-gsm-blue/10",
                         )}
                         aria-hidden
                       >
-                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        <svg
+                          className="h-5 w-5"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
                         </svg>
                       </span>
                     </button>
                   </h3>
+
                   <div
                     id={`faq-panel-${item.id}`}
                     role="region"
                     aria-labelledby={`faq-trigger-${item.id}`}
                     className={cn(
                       "grid transition-all duration-300 ease-out",
-                      isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+                      isOpen
+                        ? "grid-rows-[1fr] opacity-100"
+                        : "grid-rows-[0fr] opacity-0",
                     )}
                   >
                     <div className="overflow-hidden">
-                      <p className="pb-5 text-sm leading-relaxed text-gsm-muted sm:text-base">
+                      <p className="px-6 pb-6 text-base leading-8 text-gsm-muted sm:px-8">
                         {pick(locale, item.answer)}
                       </p>
                     </div>
