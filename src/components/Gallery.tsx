@@ -46,8 +46,8 @@ export function Gallery() {
     if (!el) return;
 
     const width = Math.min(
-      420,
-      el.clientWidth * 0.85
+      360,
+      el.clientWidth * 0.8
     );
 
     el.scrollBy({
@@ -124,7 +124,7 @@ export function Gallery() {
   return (
     <section
       id="gallery"
-      className="relative overflow-hidden py-20 sm:py-24"
+      className="relative overflow-hidden py-12 sm:py-16 lg:py-24"
     >
 
       {/* Background Glow */}
@@ -178,7 +178,7 @@ export function Gallery() {
         {/* Horizontal Showcase */}
         <div
           ref={scrollerRef}
-          className="mt-14 flex gap-5 overflow-x-auto scroll-smooth pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mt-8 flex gap-4 overflow-x-auto scroll-smooth pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-12"
           style={{
             scrollSnapType:
               "x mandatory",
@@ -194,14 +194,14 @@ export function Gallery() {
                 onClick={() =>
                   openLightbox(index)
                 }
-                className="group relative min-w-[85%] overflow-hidden rounded-[32px] border border-white/40 bg-white/70 shadow-[0_20px_60px_-20px_rgba(2,6,23,0.12)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_-20px_rgba(2,6,23,0.18)] sm:min-w-[420px] md:min-w-[500px]"
+                className="group relative min-w-[78%] overflow-hidden rounded-[28px] border border-white/40 bg-white/70 shadow-[0_20px_60px_-20px_rgba(2,6,23,0.12)] backdrop-blur-xl transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_80px_-20px_rgba(2,6,23,0.18)] sm:min-w-[360px] md:min-w-[460px]"
                 style={{
                   scrollSnapAlign:
                     "start",
                 }}
               >
 
-                <div className="relative aspect-[16/10] overflow-hidden rounded-[32px]">
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[28px]">
 
                   <MediaImage
                     id={
@@ -214,18 +214,18 @@ export function Gallery() {
                     category="gallery"
                     variant="gallery"
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 85vw, 500px"
+                    sizes="(max-width: 768px) 78vw, 460px"
                   />
 
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent opacity-90" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
 
                   {/* Content */}
-                  <div className="absolute bottom-0 inset-x-0 p-6 text-center">
+                  <div className="absolute bottom-0 inset-x-0 p-5 text-center sm:p-6">
 
-                    <div className="translate-y-2 transition duration-500 group-hover:translate-y-0">
+                    <div className="translate-y-1 transition duration-500 group-hover:translate-y-0">
 
-                      <p className="text-2xl font-bold tracking-tight text-white">
+                      <p className="text-xl font-bold tracking-tight text-white sm:text-2xl">
 
                         {pick(
                           locale,
@@ -234,7 +234,7 @@ export function Gallery() {
 
                       </p>
 
-                      <p className="mt-2 text-sm text-white/80">
+                      <p className="mt-1 text-xs text-white/80 sm:text-sm">
 
                         GSM Academy
 
@@ -265,16 +265,16 @@ export function Gallery() {
 
           <button
             type="button"
-            className="absolute top-5 end-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-xl transition hover:bg-white/15"
+            className="absolute top-5 end-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-xl transition hover:bg-white/15"
             onClick={closeLightbox}
           >
 
-            <X className="h-6 w-6" />
+            <X className="h-5 w-5" />
 
           </button>
 
           <div
-            className="relative w-full max-w-6xl overflow-hidden rounded-[32px] border border-white/10 bg-black/90 shadow-[0_50px_120px_-70px_rgba(2,6,23,0.9)]"
+            className="relative w-full max-w-6xl overflow-hidden rounded-[28px] border border-white/10 bg-black/90 shadow-[0_50px_120px_-70px_rgba(2,6,23,0.9)]"
             onClick={(e) =>
               e.stopPropagation()
             }
@@ -293,9 +293,9 @@ export function Gallery() {
                 sizes="100vw"
               />
 
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-8 text-center">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-center sm:p-8">
 
-                <p className="text-2xl font-bold text-white">
+                <p className="text-xl font-bold text-white sm:text-2xl">
 
                   {activeAlt}
 
@@ -325,7 +325,7 @@ function NavButton({
   return (
     <button
       onClick={onClick}
-      className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-lg shadow-gsm-navy/5 ring-1 ring-gsm-navy/10 backdrop-blur-xl transition duration-300 hover:scale-105 hover:bg-white"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white shadow-lg shadow-gsm-navy/5 ring-1 ring-gsm-navy/10 backdrop-blur-xl transition duration-300 hover:scale-105 hover:bg-white"
     >
       {children}
     </button>
