@@ -125,151 +125,115 @@ export const courses: Course[] = [
     oldPrice: "7000 جنيه",
   },
 
-  {
-    id: "programming",
 
-    title: {
-      ar: "البرمجة",
-      en: "Programming",
-    },
+  // {
+  //   id: "ai",
 
-    description: {
-      ar: "من الأساسيات إلى المشاريع الحقيقية — تعلم بناء التطبيقات والمواقع بمنهج عملي.",
-      en: "From fundamentals to real projects — build apps and websites with a hands-on curriculum.",
-    },
+  //   title: {
+  //     ar: "الذكاء الاصطناعي",
+  //     en: "Artificial Intelligence",
+  //   },
 
-    category: {
-      ar: "تقنية",
-      en: "Technology",
-    },
+  //   description: {
+  //     ar: "تعلم الآلة، النماذج، والتطبيقات العملية للذكاء الاصطناعي في مشاريع حقيقية.",
+  //     en: "Machine learning, models, and practical AI applications in real-world projects.",
+  //   },
 
-    duration: {
-      ar: "12 أسبوع",
-      en: "12 weeks",
-    },
+  //   category: {
+  //     ar: "تقنية",
+  //     en: "Technology",
+  //   },
 
-    level: {
-      ar: "مبتدئ — متقدم",
-      en: "Beginner — Advanced",
-    },
+  //   duration: {
+  //     ar: "6 أسبوع",
+  //     en: "6 weeks",
+  //   },
 
-    imagePlaceholder: "programming",
+  //   level: {
+  //     ar: "متوسط — متقدم",
+  //     en: "Intermediate — Advanced",
+  //   },
 
-    accent: "blue",
+  //   imagePlaceholder: "ai",
 
-    price: "3500 جنيه",
+  //   accent: "red",
 
-    oldPrice: "5000 جنيه",
-  },
+  //   price: "4200 جنيه",
 
-  {
-    id: "ai",
+  //   oldPrice: "6000 جنيه",
+  // },
 
-    title: {
-      ar: "الذكاء الاصطناعي",
-      en: "Artificial Intelligence",
-    },
+  // {
+  //   id: "robotics",
 
-    description: {
-      ar: "تعلم الآلة، النماذج، والتطبيقات العملية للذكاء الاصطناعي في مشاريع حقيقية.",
-      en: "Machine learning, models, and practical AI applications in real-world projects.",
-    },
+  //   title: {
+  //     ar: "الروبوتات",
+  //     en: "Robotics",
+  //   },
 
-    category: {
-      ar: "تقنية",
-      en: "Technology",
-    },
+  //   description: {
+  //     ar: "برمجة وتحكم وبناء روبوتات — دمج البرمجة والإلكترونيات والهندسة.",
+  //     en: "Program, control, and build robots — merging code, electronics, and engineering.",
+  //   },
 
-    duration: {
-      ar: "14 أسبوع",
-      en: "14 weeks",
-    },
+  //   category: {
+  //     ar: "هندسة",
+  //     en: "Engineering",
+  //   },
 
-    level: {
-      ar: "متوسط — متقدم",
-      en: "Intermediate — Advanced",
-    },
+  //   duration: {
+  //     ar: "12 أسبوع",
+  //     en: "12 weeks",
+  //   },
 
-    imagePlaceholder: "ai",
+  //   level: {
+  //     ar: "متوسط",
+  //     en: "Intermediate",
+  //   },
 
-    accent: "red",
+  //   imagePlaceholder: "robotics",
 
-    price: "4200 جنيه",
+  //   accent: "blue",
 
-    oldPrice: "6000 جنيه",
-  },
+  //   price: "3700 جنيه",
 
-  {
-    id: "robotics",
+  //   oldPrice: "5200 جنيه",
+  // },
 
-    title: {
-      ar: "الروبوتات",
-      en: "Robotics",
-    },
+  // {
+  //   id: "kids-coding",
 
-    description: {
-      ar: "برمجة وتحكم وبناء روبوتات — دمج البرمجة والإلكترونيات والهندسة.",
-      en: "Program, control, and build robots — merging code, electronics, and engineering.",
-    },
+  //   title: {
+  //     ar: "برمجة الأطفال",
+  //     en: "Kids Coding",
+  //   },
 
-    category: {
-      ar: "هندسة",
-      en: "Engineering",
-    },
+  //   description: {
+  //     ar: "مغامرات برمجية ممتعة تبني التفكير المنطقي والإبداع للأطفال.",
+  //     en: "Fun coding adventures that build logical thinking and creativity for children.",
+  //   },
 
-    duration: {
-      ar: "12 أسبوع",
-      en: "12 weeks",
-    },
+  //   category: {
+  //     ar: "أطفال",
+  //     en: "Kids",
+  //   },
 
-    level: {
-      ar: "متوسط",
-      en: "Intermediate",
-    },
+  //   duration: {
+  //     ar: "5 أسابيع",
+  //     en: "5 weeks",
+  //   },
 
-    imagePlaceholder: "robotics",
+  //   level: {
+  //     ar: "6 — 14 سنة",
+  //     en: "Ages 6 — 14",
+  //   },
 
-    accent: "blue",
+  //   imagePlaceholder: "kids",
 
-    price: "3700 جنيه",
+  //   accent: "red",
 
-    oldPrice: "5200 جنيه",
-  },
+  //   price: "2200 جنيه",
 
-  {
-    id: "kids-coding",
-
-    title: {
-      ar: "برمجة الأطفال",
-      en: "Kids Coding",
-    },
-
-    description: {
-      ar: "مغامرات برمجية ممتعة تبني التفكير المنطقي والإبداع للأطفال.",
-      en: "Fun coding adventures that build logical thinking and creativity for children.",
-    },
-
-    category: {
-      ar: "أطفال",
-      en: "Kids",
-    },
-
-    duration: {
-      ar: "10 أسابيع",
-      en: "10 weeks",
-    },
-
-    level: {
-      ar: "6 — 14 سنة",
-      en: "Ages 6 — 14",
-    },
-
-    imagePlaceholder: "kids",
-
-    accent: "red",
-
-    price: "2200 جنيه",
-
-    oldPrice: "3200 جنيه",
-  },
+  //   oldPrice: "3200 جنيه",
+  // },
 ];

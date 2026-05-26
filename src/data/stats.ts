@@ -18,18 +18,18 @@ export const stats: StatItem[] = [
     id: "courses",
     value: 15,
     suffix: "+",
-    label: { ar: "مسار تدريبي", en: "Programs" },
+    label: { ar: "دورة تدريبيه", en: "Programs" },
   },
   {
     id: "projects",
     value: 500,
     suffix: "+",
-    label: { ar: "مشروع طلابي", en: "Student projects" },
+    label: { ar: "خريج يعمل الان", en: "Graduates Employed" },
   },
   {
     id: "satisfaction",
     value: 98,
     suffix: "%",
-    label: { ar: "رضا الأولياء", en: "Parent satisfaction" },
+    label: { ar: "رضا الطلبه والخريجين", en: "Students Satisfaction Rate" },
   },
 ];
