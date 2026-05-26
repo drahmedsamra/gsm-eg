@@ -20,28 +20,34 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
 
   title: {
-    default: "GSM Academy | أكاديمية GSM للتعليم التقني",
-    template: "%s | GSM Academy",
+    default: "جي اس ام مصر لهندسة الإلكترونيات والصيانة والبرمجة",
+    template: "%s | جي اس ام مصر",
   },
 
-  description: siteConfig.description.ar,
+  description:
+    "تعلم صيانة الموبايل والإلكترونيات والبرمجة والذكاء الاصطناعي مع متخصصين وخبراء في المجال.",
 
   keywords: [
-    "أكاديمية GSM",
-    "تعليم البرمجة",
-    "الإلكترونيات",
-    "الذكاء الاصطناعي",
-    "روبوتات",
-    "برمجة أطفال",
-    "GSM Academy",
+    "جي اس ام مصر",
+    "صيانة الموبايل",
+    "هندسة الإلكترونيات",
+    "تعلم البرمجة",
+    "كورسات برمجة",
+    "كورسات إلكترونيات",
+    "ذكاء اصطناعي",
+    "تعليم الأطفال البرمجة",
+    "GSM Egypt",
+    "Electronics Engineering",
+    "Mobile Maintenance",
   ],
 
   openGraph: {
-    title: "GSM Academy | أكاديمية GSM",
-    description: siteConfig.description.ar,
+    title: "جي اس ام مصر لهندسة الإلكترونيات والصيانة والبرمجة",
+    description:
+      "تعلم صيانة الموبايل والإلكترونيات والبرمجة والذكاء الاصطناعي مع متخصصين وخبراء في المجال.",
     locale: "ar_EG",
     type: "website",
-    siteName: "GSM Academy",
+    siteName: "جي اس ام مصر",
   },
 
   robots: {
@@ -77,3 +83,4 @@ export default function RootLayout({
     </html>
   );
 }
+

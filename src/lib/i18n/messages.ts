@@ -49,14 +49,14 @@ const ui = {
   },
   projectsEyebrow: { ar: "إنجازات الطلاب", en: "Student achievements" },
   projectsTitle: {
-    ar: "مشاريع حقيقية من مختبراتنا",
+    ar: "مشاريع طلبة الأكاديميه",
     en: "Real projects from our labs",
   },
   projectsDesc: {
     ar: "معرض لمشاريع طلاب أكاديمية جي إس إم.",
     en: "A showcase of GSM academy students work ",
   },
-  testimonialsEyebrow: { ar: "آراء العائلات والطلاب", en: "Families & students" },
+  testimonialsEyebrow: { ar: "آراء الطلبة والخريجين", en: "Students & Graduates Reviews" },
   testimonialsTitle: { ar: "ثقة تبنيها النتائج", en: "Trust built on results" },
   testimonialsDesc: {
     ar: "مساحة جاهزة لإضافة فيديوهات شهادات لاحقاً — حالياً آراء نصية من مجتمعنا.",
@@ -68,7 +68,7 @@ const ui = {
     en: "Moments from our learning journey",
   },
   galleryDesc: {
-    ar: "مختبرات، ورش، وإنجازات — استبدل الصور بصور حقيقية من الأكاديمية.",
+    ar: "مختبرات، ورش، وإنجازات وتخرجات.",
     en: "Labs, workshops, and milestones — replace with your own academy photos anytime.",
   },
   galleryPrev: { ar: "السابق", en: "Previous" },
@@ -82,7 +82,7 @@ const ui = {
     en: "Quick answers — reach us on WhatsApp for anything else.",
   },
   contactEyebrow: { ar: "احجز مقعدك", en: "Book your seat" },
-  contactTitle: { ar: "ابدأ رحلتك التقنية اليوم", en: "Start your tech journey today" },
+  contactTitle: { ar: "ابدأ اليوم", en: "Start your tech journey today" },
   contactDesc: {
     ar: "احجز مقعدك الآن عبر واتساب — فريقنا يساعدك في اختيار المسار المناسب لعمرك ومستواك خلال دقائق.",
     en: "Book via WhatsApp — our team helps you pick the right track for your age and level in minutes.",
@@ -120,8 +120,8 @@ const ui = {
 } as const;
 
 const heroTags = {
-  ar: ["تعليم عملي", "مختبرات حديثة", "مشاريع حقيقية", "للأطفال والشباب"],
-  en: ["Hands-on learning", "Modern labs", "Real projects", "Kids & youth"],
+  ar: ["التدريب عملي", "مختبرات حديثة", "شهاده معتمدة", "لجميع الأعمار "],
+  en: ["Hands-on learning", "Modern labs", "Certified", "Kids & youth"],
 } as const;
 
 export type MessageKey = keyof typeof ui;
