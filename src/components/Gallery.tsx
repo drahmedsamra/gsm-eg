@@ -236,7 +236,7 @@ export function Gallery() {
 
                       <p className="mt-1 text-xs text-white/80 sm:text-sm">
 
-                        GSM Academy
+                        GSM Egypt Academy
 
                       </p>
 

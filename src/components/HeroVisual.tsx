@@ -13,7 +13,7 @@ export function HeroVisual() {
       <div className="relative overflow-hidden rounded-[32px] border border-white/40 bg-white shadow-2xl shadow-gsm-navy/10">
         <Image
           src="/assets/images/hero/gsm-hero.webp"
-          alt="GSM Academy"
+          alt="GSM Egypt Academy"
           width={1400}
           height={1000}
           priority

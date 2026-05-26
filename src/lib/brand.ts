@@ -1,4 +1,4 @@
-/** Official GSM Academy logo — intrinsic dimensions from source asset */
+/** Official GSM Egypt Academy logo — intrinsic dimensions from source asset */
 export const GSM_LOGO = {
   src: "/gsmlogo.webp",
   width: 1024,

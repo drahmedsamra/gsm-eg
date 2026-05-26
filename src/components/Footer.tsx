@@ -45,7 +45,7 @@ export function Footer() {
             <Link
               href="#hero"
               className="inline-block rounded-lg py-1 transition-opacity hover:opacity-90"
-              aria-label="GSM Academy"
+              aria-label="GSM Egypt Academy"
             >
               <GsmLogo height={48} />
             </Link>
@@ -130,7 +130,7 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-gsm-navy/10 pt-8 sm:flex-row">
           <p className="text-sm text-gsm-muted">
-            © {year} GSM Academy. {t("rights")}
+            © {year} GSM Egypt Academy. {t("rights")}
           </p>
           <p className="font-en text-xs text-gsm-muted">
             GSM International Academy — Engineering & Technology Education

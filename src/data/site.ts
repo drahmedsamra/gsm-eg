@@ -1,22 +1,22 @@
 import type { LocalizedString } from "@/lib/i18n/types";
 
 export const siteConfig = {
-  name: "GSM Academy",
-  nameAr: "أكاديمية جي إس إم",
+  name: "جي اس ام مصر",
+  nameAr: "جي اس ام مصر",
 
   description: {
-    ar: "أكاديمية جي إس إم — رواد التعليم التقني في العالم العربي في مجالات الإلكترونيات والبرمجة وصيانة الموبايل.",
-    en: "GSM Academy — Leading technical education in the Arab world for electronics, programming, and mobile maintenance training.",
+    ar: "جي اس ام مصر لهندسة الإلكترونيات والصيانة والبرمجة — كورسات احترافية في صيانة الموبايل والإلكترونيات والبرمجة والذكاء الاصطناعي.",
+    en: "GSM Egypt for Electronics Engineering, Maintenance & Programming.",
   } satisfies LocalizedString,
 
-  url: "https://gsm-academy.com",
+  url: "https://gsm-eg.com",
 
   whatsapp: {
     number: "201011822931",
 
     message: {
-      ar: "مرحبًا، أريد الحجز والاستفسار عن كورسات أكاديمية جي إس إم.",
-      en: "Hello, I would like to book and inquire about GSM Academy courses.",
+      ar: "مرحبًا، أريد الحجز والاستفسار عن كورسات جي اس ام مصر.",
+      en: "Hello, I would like to inquire about GSM Egypt courses.",
     } satisfies LocalizedString,
 
     href(locale: "ar" | "en" = "ar") {
@@ -25,7 +25,7 @@ export const siteConfig = {
     },
   },
 
-  email: "info@gsm-academy.com",
+  email: "info@gsm-eg.com",
 
   phone: "+201011822931",
 

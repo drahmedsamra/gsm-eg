@@ -38,7 +38,7 @@ export default function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "EducationalOrganization",
-            name: "GSM Academy",
+            name: "GSM Egypt Academy",
             alternateName: "أكاديمية GSM",
             description:
               "أكاديمية تقنية للبرمجة والإلكترونيات والذكاء الاصطناعي للأطفال والشباب",

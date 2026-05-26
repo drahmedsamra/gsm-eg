@@ -62,7 +62,7 @@ export function Navbar() {
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gsm-blue/40 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent",
             )}
             onClick={() => setMenuOpen(false)}
-            aria-label="GSM Academy — الرئيسية"
+            aria-label="GSM Egypt Academy — الرئيسية"
           >
             <GsmLogo
               height={scrolled ? 34 : 40}
@@ -79,8 +79,8 @@ export function Navbar() {
                 )}
               >
                 {locale === "ar"
-                  ? "أكاديمية جي إس إم"
-                  : "GSM ACADEMY"}
+                  ? "أكاديمية جي إس إم مصر"
+                  : "GSM Egypt Academy"}
               </p>
 
               <p

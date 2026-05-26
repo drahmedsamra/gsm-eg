@@ -48,7 +48,7 @@ export const faqItems: FaqItem[] = [
     },
     answer: {
       ar: "نعم. تحصل على شهادة إتمام من أكاديمية GSM مع توثيق المشاريع التي أنجزتها.",
-      en: "Yes. You receive a GSM Academy completion certificate with documentation of your projects.",
+      en: "Yes. You receive a GSM Egypt Academy completion certificate with documentation of your projects.",
     },
   },
   {

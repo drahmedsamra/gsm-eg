@@ -1,5 +1,3 @@
-
-
 import type { Metadata, Viewport } from "next";
 import { Cairo, Inter } from "next/font/google";
 import { Providers } from "@/components/Providers";

@@ -12,7 +12,7 @@ export const galleryItems: GalleryItem[] = [
     id: "lab-1",
     alt: {
       ar: "مختبر الإلكترونيات في أكاديمية GSM",
-      en: "Electronics lab at GSM Academy",
+      en: "Electronics lab at GSM Egypt Academy",
     },
     imagePlaceholder: "lab-1",
     span: "wide",

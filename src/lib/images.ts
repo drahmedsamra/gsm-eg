@@ -1,5 +1,5 @@
 /**
- * GSM Academy unified media library.
+ * GSM Egypt Academy unified media library.
  * Cool-toned tech education photography + consistent Unsplash delivery params.
  * Replace any entry with /public/images/{category}/{id}.jpg when ready.
  */

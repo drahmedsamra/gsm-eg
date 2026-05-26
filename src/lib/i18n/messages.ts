@@ -18,8 +18,8 @@ const ui = {
     en: "Switch to Arabic",
   },
   heroBadge: {
-    ar: " أكاديمية جي إس إم — لهندسة الإلكترونيات والبرمجيات والصيانه",
-    en: "GSM Academy — Electronics Engineering, Software & Mobile Maintenance Academy",
+    ar: " اكاديمية جي اس ام مصر — لهندسة الإلكترونيات والبرمجيات والصيانه",
+    en: "GSM Egypt Academy — Electronics Engineering, Software & Mobile Maintenance Academy",
   },
   heroTitle: {
     ar: " التدريب علي الإلكترونيات والصيانه والبرمجيات  ",
@@ -53,8 +53,8 @@ const ui = {
     en: "Real projects from our labs",
   },
   projectsDesc: {
-    ar: "معرض لمشاريع طلاب أكاديمية جي إس إم.",
-    en: "A showcase of GSM academy students work ",
+    ar: "معرض لمشاريع طلاب اكاديمية جي اس ام مصر.",
+    en: "A showcase of GSM Egypt Academy students work ",
   },
   testimonialsEyebrow: { ar: "آراء الطلبة والخريجين", en: "Students & Graduates Reviews" },
   testimonialsTitle: { ar: "ثقة تبنيها النتائج", en: "Trust built on results" },
@@ -115,7 +115,7 @@ const ui = {
   whatsappAria: { ar: "تواصل عبر واتساب", en: "Contact on WhatsApp" },
   footerDesc: {
     ar: "أكاديمية GSM — تعليم تقني حديث في البرمجة والإلكترونيات والذكاء الاصطناعي للأطفال والشباب.",
-    en: "GSM Academy — modern tech education in programming, electronics, and AI for kids and youth.",
+    en: "GSM Egypt Academy — modern tech education in programming, electronics, and AI for kids and youth.",
   },
 } as const;
 
