@@ -49,9 +49,20 @@ export const defaultImages = {
     "graduation-1": photo("photo-1524178232363-1fb2b075b655", W.gallery),
   },
   avatars: {
-    ahmed: photo("photo-1560250097-0b93528c311a", W.avatar),
-    sara: photo("photo-1573496359142-b8d87734a5a2", W.avatar),
-    karim: photo("photo-1472099645785-5658abf4ff4e", W.avatar),
+
+    ahmed:  "/assets/images/avatar/ahmed.webp",
+    yousef: "/assets/images/avatar/yousef.webp",
+    mostafa: "/assets/images/avatar/mostafa.webp",
+    nasr: "/assets/images/avatar/nasr.webp",
+    mohsen: "/assets/images/avatar/mohsen.webp",
+    karim: "/assets/images/avatar/karim.webp",
+    magdy: "/assets/images/avatar/magdy.webp",
+    saad: "/assets/images/avatar/saad.webp",
+    osama: "/assets/images/avatar/osama.webp",
+    mamdouh: "/assets/images/avatar/mamdouh.webp",
+    sayed: "/assets/images/avatar/sayed.webp",
+    islam: "/assets/images/avatar/islam.webp",
+
   },
 } as const;
 
