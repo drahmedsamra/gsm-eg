@@ -41,12 +41,15 @@ export const defaultImages = {
     "game-app": photo("photo-1516321318423-f06f85e504b3", W.card),
   },
   gallery: {
-    "lab-1": photo("photo-1581091226825-a6a2a5aee158", W.gallery),
-    "coding-1": photo("photo-1504639725590-34d6c12a8f2e", W.gallery),
-    "robotics-1": photo("photo-1532094349884-543bc11b234d", W.gallery),
-    "kids-1": photo("photo-1522202176988-66273c2fd55f", W.gallery),
-    "ai-1": photo("photo-1677442136019-21780ecad995", W.gallery),
-    "graduation-1": photo("photo-1524178232363-1fb2b075b655", W.gallery),
+    "graduation-1": "/assets/images/gallery/graduation1.webp",
+    "graduation-2": "/assets/images/gallery/graduation2.webp",
+    "graduation-3": "/assets/images/gallery/graduation3.webp",
+    "graduation-4": "/assets/images/gallery/graduation4.webp",
+    "graduation-5": "/assets/images/gallery/graduation5.webp",
+    "graduation-6": "/assets/images/gallery/graduation6.webp",
+    "graduation-7": "/assets/images/gallery/graduation7.webp",
+    "graduation-8": "/assets/images/gallery/graduation8.webp",
+    
   },
   avatars: {
 

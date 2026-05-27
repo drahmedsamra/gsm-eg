@@ -9,39 +9,54 @@ export type GalleryItem = {
 
 export const galleryItems: GalleryItem[] = [
   {
-    id: "lab-1",
-    alt: {
-      ar: "مختبر الإلكترونيات في أكاديمية GSM",
-      en: "Electronics lab at GSM Egypt Academy",
-    },
-    imagePlaceholder: "lab-1",
-    span: "wide",
-  },
-  {
-    id: "coding-1",
-    alt: { ar: "جلسة برمجة عملية", en: "Hands-on coding session" },
-    imagePlaceholder: "coding-1",
-  },
-  {
-    id: "robotics-1",
-    alt: { ar: "ورشة الروبوتات", en: "Robotics workshop" },
-    imagePlaceholder: "robotics-1",
-    span: "tall",
-  },
-  {
-    id: "kids-1",
-    alt: { ar: "فصل برمجة الأطفال", en: "Kids coding class" },
-    imagePlaceholder: "kids-1",
-  },
-  {
-    id: "ai-1",
-    alt: { ar: "مختبر الذكاء الاصطناعي", en: "AI lab session" },
-    imagePlaceholder: "ai-1",
-  },
-  {
     id: "graduation-1",
     alt: { ar: "حفل تخرج الطلاب", en: "Student graduation ceremony" },
     imagePlaceholder: "graduation-1",
     span: "wide",
   },
+  {
+    id: "graduation-2",
+    alt: { ar: "حفل تخرج الطلاب", en: "Student graduation ceremony" },
+    imagePlaceholder: "graduation-2",
+  },
+  {
+    id: "graduation-3",
+    alt: { ar: "حفل تخرج الطلاب", en: "Student graduation ceremony" },
+    imagePlaceholder: "graduation-3",
+    span: "tall",
+  },
+  {
+    id: "graduation-4",
+    alt: { ar: "حفل تخرج الطلاب", en: "Student graduation ceremony" },
+    imagePlaceholder: "graduation-4",
+  },
+  {
+    id: "graduation-5",
+    alt: { ar: "حفل تخرج الطلاب", en: "Student graduation ceremony" },
+    imagePlaceholder: "graduation-5",
+  },
+  {
+    id: "graduation-6",
+    alt: { ar: "حفل تخرج الطلاب", en: "Student graduation ceremony" },
+    imagePlaceholder: "graduation-6",
+    span: "wide",
+  },
+
+  {
+    id: "graduation-7",
+    alt: { ar: "حفل تخرج الطلاب", en: "Student graduation ceremony" },
+    imagePlaceholder: "graduation-7",
+    span: "wide",
+  },
+
+  {
+    id: "graduation-8",
+    alt: { ar: "حفل تخرج الطلاب", en: "Student graduation ceremony" },
+    imagePlaceholder: "graduation-8",
+    span: "wide",
+  },
+
+
+
+
 ];
