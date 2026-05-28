@@ -11,8 +11,12 @@ import {
   type VideoTestimonial,
 } from "@/data/videos";
 
+import { useLocale } from "@/lib/i18n/LocaleProvider";
+
 export function VideoCarousel() {
-  const isAr = true;
+  const { locale } = useLocale();
+
+  const isAr = locale === "ar";
 
   const scrollerRef = useRef<HTMLDivElement | null>(null);
 
@@ -31,7 +35,7 @@ export function VideoCarousel() {
         thumbnail:
           `https://i.ytimg.com/vi/${v.youtubeId}/mqdefault.jpg`,
       })),
-    []
+    [isAr]
   );
 
   function scrollByCards(dir: "prev" | "next") {
@@ -73,15 +77,19 @@ export function VideoCarousel() {
           <div className="mx-auto max-w-3xl">
 
             <div className="mb-2 text-sm font-semibold text-gsm-blue">
-              الفيديوهات
+              {isAr ? "الفيديوهات" : "Videos"}
             </div>
 
             <h2 className="text-2xl font-extrabold tracking-tight text-gsm-navy sm:text-4xl">
-              قصص النجاح والفيديوهات
+              {isAr
+                ? "قصص النجاح والفيديوهات"
+                : "Success Stories & Videos"}
             </h2>
 
             <p className="mt-3 text-base leading-relaxed text-gsm-muted sm:text-lg">
-              شاهد تجارب الطلاب والمشاريع داخل أكاديمية جي إس إم  
+              {isAr
+                ? "شاهد تجارب الطلاب والمشاريع داخل أكاديمية جي إس إم"
+                : "Watch student experiences and projects inside GSM Egypt Academy"}
             </p>
 
           </div>
@@ -90,14 +98,14 @@ export function VideoCarousel() {
 
             <NavButton
               onClick={() => scrollByCards("prev")}
-              ariaLabel="Previous"
+              ariaLabel={isAr ? "السابق" : "Previous"}
             >
               {prevIcon}
             </NavButton>
 
             <NavButton
               onClick={() => scrollByCards("next")}
-              ariaLabel="Next"
+              ariaLabel={isAr ? "التالي" : "Next"}
             >
               {nextIcon}
             </NavButton>
@@ -151,7 +159,7 @@ export function VideoCarousel() {
 
                     <span className="inline-flex items-center rounded-full bg-white/15 px-3 py-1 text-xs font-semibold text-white ring-1 ring-white/15 backdrop-blur-md sm:text-sm">
 
-                      قصة نجاح
+                      {isAr ? "قصة نجاح" : "Success Story"}
 
                     </span>
 
@@ -194,6 +202,7 @@ export function VideoCarousel() {
           }
           youtubeId={active.youtubeId}
           onClose={() => setActive(null)}
+          isAr={isAr}
         />
       ) : null}
 
@@ -225,10 +234,12 @@ function VideoModal({
   youtubeId,
   title,
   onClose,
+  isAr,
 }: {
   youtubeId: string;
   title: string;
   onClose: () => void;
+  isAr: boolean;
 }) {
   return (
     <div className="fixed inset-0 z-[80]">
@@ -251,7 +262,7 @@ function VideoModal({
             <button
               className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/15 transition hover:bg-white/15"
               onClick={onClose}
-              aria-label="Close"
+              aria-label={isAr ? "إغلاق" : "Close"}
             >
               ✕
             </button>

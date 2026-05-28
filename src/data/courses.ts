@@ -9,8 +9,10 @@ export type Course = {
   level: LocalizedString;
   imagePlaceholder: string;
   accent: "blue" | "red" | "navy";
-  price: string;
-  oldPrice?: string;
+
+  price: LocalizedString;
+
+  oldPrice?: LocalizedString;
 };
 
 export const courses: Course[] = [
@@ -46,9 +48,15 @@ export const courses: Course[] = [
 
     accent: "navy",
 
-    price: "4950 جنيه",
+    price: {
+      ar: "4950 جنيه",
+      en: "EGP 4950",
+    },
 
-    oldPrice: "7950 جنيه",
+    oldPrice: {
+      ar: "7950 جنيه",
+      en: "EGP 7950",
+    },
   },
 
   {
@@ -83,9 +91,10 @@ export const courses: Course[] = [
 
     accent: "navy",
 
-    price: "6950 جنيه",
-
-  
+    price: {
+      ar: "6950 جنيه",
+      en: "EGP 6950",
+    },
   },
 
   {
@@ -120,120 +129,16 @@ export const courses: Course[] = [
 
     accent: "blue",
 
-    price: "4950 جنيه",
+    price: {
+      ar: "4950 جنيه",
+      en: "EGP 4950",
+    },
 
-    oldPrice: "7000 جنيه",
+    oldPrice: {
+      ar: "7000 جنيه",
+      en: "EGP 7000",
+    },
   },
-
-
-  // {
-  //   id: "ai",
-
-  //   title: {
-  //     ar: "الذكاء الاصطناعي",
-  //     en: "Artificial Intelligence",
-  //   },
-
-  //   description: {
-  //     ar: "تعلم الآلة، النماذج، والتطبيقات العملية للذكاء الاصطناعي في مشاريع حقيقية.",
-  //     en: "Machine learning, models, and practical AI applications in real-world projects.",
-  //   },
-
-  //   category: {
-  //     ar: "تقنية",
-  //     en: "Technology",
-  //   },
-
-  //   duration: {
-  //     ar: "6 أسبوع",
-  //     en: "6 weeks",
-  //   },
-
-  //   level: {
-  //     ar: "متوسط — متقدم",
-  //     en: "Intermediate — Advanced",
-  //   },
-
-  //   imagePlaceholder: "ai",
-
-  //   accent: "red",
-
-  //   price: "4200 جنيه",
-
-  //   oldPrice: "6000 جنيه",
-  // },
-
-  // {
-  //   id: "robotics",
-
-  //   title: {
-  //     ar: "الروبوتات",
-  //     en: "Robotics",
-  //   },
-
-  //   description: {
-  //     ar: "برمجة وتحكم وبناء روبوتات — دمج البرمجة والإلكترونيات والهندسة.",
-  //     en: "Program, control, and build robots — merging code, electronics, and engineering.",
-  //   },
-
-  //   category: {
-  //     ar: "هندسة",
-  //     en: "Engineering",
-  //   },
-
-  //   duration: {
-  //     ar: "12 أسبوع",
-  //     en: "12 weeks",
-  //   },
-
-  //   level: {
-  //     ar: "متوسط",
-  //     en: "Intermediate",
-  //   },
-
-  //   imagePlaceholder: "robotics",
-
-  //   accent: "blue",
-
-  //   price: "3700 جنيه",
-
-  //   oldPrice: "5200 جنيه",
-  // },
-
-  // {
-  //   id: "kids-coding",
-
-  //   title: {
-  //     ar: "برمجة الأطفال",
-  //     en: "Kids Coding",
-  //   },
-
-  //   description: {
-  //     ar: "مغامرات برمجية ممتعة تبني التفكير المنطقي والإبداع للأطفال.",
-  //     en: "Fun coding adventures that build logical thinking and creativity for children.",
-  //   },
-
-  //   category: {
-  //     ar: "أطفال",
-  //     en: "Kids",
-  //   },
-
-  //   duration: {
-  //     ar: "5 أسابيع",
-  //     en: "5 weeks",
-  //   },
-
-  //   level: {
-  //     ar: "6 — 14 سنة",
-  //     en: "Ages 6 — 14",
-  //   },
-
-  //   imagePlaceholder: "kids",
-
-  //   accent: "red",
-
-  //   price: "2200 جنيه",
-
-  //   oldPrice: "3200 جنيه",
-  // },
 ];
+
+  

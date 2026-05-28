@@ -72,12 +72,12 @@ export function CourseCard({ course }: CourseCardProps) {
 
         <div className="mt-4 flex items-center gap-2">
           <span className="text-2xl font-extrabold text-gsm-red">
-            {course.price}
+            {pick(locale, course.price)}
           </span>
 
           {course.oldPrice && (
             <span className="text-sm text-gsm-muted line-through">
-              {course.oldPrice}
+              {pick(locale, course.oldPrice)}
             </span>
           )}
         </div>

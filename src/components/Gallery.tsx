@@ -218,7 +218,7 @@ export function Gallery() {
                   />
 
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-black/0 to-transparent" />
 
                   {/* Content */}
                   <div className="absolute bottom-0 inset-x-0 p-5 text-center sm:p-6">
@@ -234,7 +234,7 @@ export function Gallery() {
 
                       </p>
 
-                      <p className="mt-1 text-xs text-white/80 sm:text-sm">
+                      <p className="mt-1 text-xs text-white/85 sm:text-sm">
 
                         GSM Egypt Academy
 
@@ -259,7 +259,7 @@ export function Gallery() {
       {activeItem && (
 
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 backdrop-blur-md"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 p-4 backdrop-blur-md"
           onClick={closeLightbox}
         >
 
@@ -293,7 +293,7 @@ export function Gallery() {
                 sizes="100vw"
               />
 
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-center sm:p-8">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent p-6 text-center sm:p-8">
 
                 <p className="text-xl font-bold text-white sm:text-2xl">
 
@@ -314,7 +314,6 @@ export function Gallery() {
     </section>
   );
 }
-
 function NavButton({
   children,
   onClick,

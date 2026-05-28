@@ -4,17 +4,40 @@ import { FadeIn } from "@/components/FadeIn";
 import { SectionTitle } from "@/components/SectionTitle";
 import { Container } from "@/components/ui/Container";
 import { MediaImage } from "@/components/ui/MediaImage";
+
 import { testimonials } from "@/data/testimonials";
+
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { t as pick } from "@/lib/i18n/types";
 
-function StarRating({ rating, label }: { rating: number; label: string }) {
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import { Autoplay, Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
+
+function StarRating({
+  rating,
+  label,
+}: {
+  rating: number;
+  label: string;
+}) {
   return (
-    <div className="flex gap-0.5" role="img" aria-label={`${label} ${rating}/5`}>
+    <div
+      className="flex gap-0.5"
+      role="img"
+      aria-label={`${label} ${rating}/5`}
+    >
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}
-          className={`h-4 w-4 ${i < rating ? "text-amber-400" : "text-gsm-navy/15"}`}
+          className={`h-4 w-4 ${
+            i < rating
+              ? "text-amber-400"
+              : "text-gsm-navy/15"
+          }`}
           fill="currentColor"
           viewBox="0 0 20 20"
           aria-hidden
@@ -30,47 +53,117 @@ export function Testimonials() {
   const { locale, t } = useLocale();
 
   return (
-    <section id="testimonials" className="bg-white py-20 sm:py-24">
+    <section
+      id="testimonials"
+      className="bg-white py-20 sm:py-24"
+    >
       <Container>
+
         <FadeIn>
+
           <SectionTitle
             eyebrow={t("testimonialsEyebrow")}
             eyebrowEn="Testimonials"
             title={t("testimonialsTitle")}
             description={t("testimonialsDesc")}
           />
+
         </FadeIn>
 
-        <div className="mt-14 grid gap-8 md:grid-cols-3">
-          {testimonials.map((item, i) => (
-            <FadeIn key={item.id} delay={i * 100}>
-              <blockquote className="flex h-full flex-col rounded-2xl border border-gsm-navy/8 bg-gsm-light p-6 shadow-sm transition-shadow hover:shadow-lg">
-                <StarRating rating={item.rating} label={t("rating")} />
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-gsm-muted">
-                  &ldquo;{pick(locale, item.content)}&rdquo;
-                </p>
-                <footer className="mt-6 flex items-center gap-3 border-t border-gsm-navy/8 pt-6">
-                  <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full">
-                    <MediaImage
-                      id={item.avatarPlaceholder}
-                      alt={pick(locale, item.name)}
-                      category="avatars"
-                      variant="avatar"
-                      className="h-full w-full"
-                      sizes="48px"
+        <div className="mt-14">
+
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            spaceBetween={24}
+            loop
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            breakpoints={{
+              0: {
+                slidesPerView: 1.1,
+              },
+
+              640: {
+                slidesPerView: 2,
+              },
+
+              1024: {
+                slidesPerView: 3,
+              },
+            }}
+          >
+
+            {testimonials.map((item, i) => (
+
+              <SwiperSlide key={item.id}>
+
+                <FadeIn delay={i * 100}>
+
+                  <blockquote className="flex h-full min-h-[340px] flex-col rounded-3xl border border-gsm-navy/8 bg-gsm-light p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+
+                    <StarRating
+                      rating={item.rating}
+                      label={t("rating")}
                     />
-                  </div>
-                  <div>
-                    <cite className="not-italic font-semibold text-gsm-navy">
-                      {pick(locale, item.name)}
-                    </cite>
-                    <p className="text-xs text-gsm-muted">{pick(locale, item.role)}</p>
-                  </div>
-                </footer>
-              </blockquote>
-            </FadeIn>
-          ))}
+
+                    <p className="mt-5 flex-1 text-sm leading-8 text-gsm-muted sm:text-base">
+
+                      &ldquo;
+                      {pick(locale, item.content)}
+                      &rdquo;
+
+                    </p>
+
+                    <footer className="mt-6 flex items-center gap-3 border-t border-gsm-navy/8 pt-6">
+
+                      <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full">
+
+                        <MediaImage
+                          id={item.avatarPlaceholder}
+                          alt={pick(locale, item.name)}
+                          category="avatars"
+                          variant="avatar"
+                          className="h-full w-full"
+                          sizes="56px"
+                        />
+
+                      </div>
+
+                      <div>
+
+                        <cite className="not-italic text-lg font-bold text-gsm-navy">
+
+                          {pick(locale, item.name)}
+
+                        </cite>
+
+                        <p className="mt-1 text-sm text-gsm-muted">
+
+                          {pick(locale, item.role)}
+
+                        </p>
+
+                      </div>
+
+                    </footer>
+
+                  </blockquote>
+
+                </FadeIn>
+
+              </SwiperSlide>
+
+            ))}
+
+          </Swiper>
+
         </div>
+
       </Container>
     </section>
   );

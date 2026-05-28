@@ -69,7 +69,7 @@ const ui = {
   },
   galleryDesc: {
     ar: "مختبرات، ورش، وإنجازات وتخرجات.",
-    en: "Labs, workshops, and milestones — replace with your own academy photos anytime.",
+    en: "Labs, workshops, achievements, and graduations.",
   },
   galleryPrev: { ar: "السابق", en: "Previous" },
   galleryNext: { ar: "التالي", en: "Next" },

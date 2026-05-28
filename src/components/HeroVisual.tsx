@@ -1,6 +1,12 @@
+"use client";
+
 import Image from "next/image";
 
+import { useLocale } from "@/lib/i18n/LocaleProvider";
+
 export function HeroVisual() {
+  const { locale } = useLocale();
+
   return (
     <div
       className="relative mx-auto w-full max-w-2xl"
@@ -30,11 +36,13 @@ export function HeroVisual() {
       >
         <div className="rounded-2xl bg-white/95 px-5 py-4 text-center shadow-xl backdrop-blur-md">
           <p className="text-lg font-extrabold text-gsm-blue">
-            صيانة الموبايل
+            {locale === "ar" ? "صيانة الموبايل" : "Mobile Maintenance"}
           </p>
 
           <p className="mt-1 text-sm leading-6 text-gsm-muted">
-            تعلم صيانة الهواتف
+            {locale === "ar"
+              ? "تعلم صيانة الهواتف"
+              : "Learn smartphone repair"}
           </p>
         </div>
       </div>
@@ -46,11 +54,13 @@ export function HeroVisual() {
       >
         <div className="rounded-2xl bg-gsm-navy px-5 py-4 text-center shadow-xl">
           <p className="text-lg font-extrabold text-white">
-            الإلكترونيات
+            {locale === "ar" ? "الإلكترونيات" : "Electronics"}
           </p>
 
           <p className="mt-1 text-sm leading-6 text-white/80">
-            دوائر ومشاريع
+            {locale === "ar"
+              ? "دوائر ومشاريع"
+              : "Circuits & Projects"}
           </p>
         </div>
       </div>
@@ -62,11 +72,15 @@ export function HeroVisual() {
       >
         <div className="rounded-2xl bg-gsm-red px-5 py-4 text-center shadow-xl">
           <p className="text-lg font-extrabold text-white">
-            برمجة للأطفال
+            {locale === "ar"
+              ? "برمجة للأطفال"
+              : "Kids Programming"}
           </p>
 
           <p className="mt-1 text-sm leading-6 text-white/85">
-            روبوت وذكاء اصطناعي
+            {locale === "ar"
+              ? "روبوت وذكاء اصطناعي"
+              : "Robotics & AI"}
           </p>
         </div>
       </div>
