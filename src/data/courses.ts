@@ -35,8 +35,8 @@ export const courses: Course[] = [
     },
 
     duration: {
-      ar: "3 أسابيع",
-      en: "3 weeks",
+      ar: "32 ساعه ",
+        en: "32 HOUR",
     },
 
     level: {
@@ -77,9 +77,10 @@ export const courses: Course[] = [
       en: "Engineering",
     },
 
-    duration: {
-      ar: "10 أسابيع",
-      en: "10 weeks",
+    
+      duration: {
+        ar: "28 ساعه ",
+        en: "28 HOUR",
     },
 
     level: {
@@ -114,10 +115,10 @@ export const courses: Course[] = [
       ar: "هندسة",
       en: "Engineering",
     },
-
+  
     duration: {
-      ar: "8 أسابيع",
-      en: "8 weeks",
+      ar: "16 ساعه ",
+        en: "16 HOUR",
     },
 
     level: {
