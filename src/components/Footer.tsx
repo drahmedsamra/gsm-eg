@@ -1,17 +1,28 @@
 "use client";
-
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { GsmLogo } from "@/components/ui/GsmLogo";
-import { siteConfig, socialLinks } from "@/data/site";
-import { navItems, navLabels } from "@/lib/i18n/messages";
+import {
+  siteConfig,
+  socialLinks,
+} from "@/data/site";
+import {
+  navItems,
+  navLabels,
+} from "@/lib/i18n/messages";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { t as pick } from "@/lib/i18n/types";
-
-function SocialIcon({ icon }: { icon: string }) {
-  const icons: Record<string, ReactNode> = {
+function SocialIcon({
+  icon,
+}: {
+  icon: string;
+}) {
+  const icons: Record<
+    string,
+    ReactNode
+  > = {
     facebook: (
       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
     ),
@@ -25,65 +36,91 @@ function SocialIcon({ icon }: { icon: string }) {
       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.062 2.062 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
     ),
   };
-
   return (
-    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+    <svg
+      className="h-5 w-5"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden
+    >
       {icons[icon]}
     </svg>
   );
 }
-
 export function Footer() {
-  const { locale, t } = useLocale();
-  const year = new Date().getFullYear();
-
+  const { locale, t } =
+    useLocale();
+  const year =
+    new Date().getFullYear();
   return (
-    <footer className="border-t border-gsm-navy/10 bg-white pt-16 pb-8">
+    <footer className="relative overflow-hidden border-t border-white/10 bg-gsm-navy pt-14 pb-6 text-white">
+      {/* Glow */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.18),transparent_45%)]"
+      />
       <Container>
-        <div className="grid gap-12 lg:grid-cols-12">
+        <div className="grid gap-10 text-center md:grid-cols-2 md:text-start lg:grid-cols-12">
+          {/* Logo */}
           <div className="lg:col-span-4">
             <Link
               href="#hero"
               className="inline-block rounded-lg py-1 transition-opacity hover:opacity-90"
               aria-label="GSM Egypt Academy"
             >
-              <GsmLogo height={48} />
+              <div className="drop-shadow-[0_0_18px_rgba(255,255,255,0.35)]">
+  <GsmLogo height={62} />
+</div>
             </Link>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-gsm-muted">
+            <p className="mt-4 max-w-sm text-sm leading-7 text-white/70 md:max-w-md">
               {t("footerDesc")}
             </p>
-            <Button href={siteConfig.whatsapp.href(locale)} variant="primary" className="mt-6">
+            <Button
+              href={siteConfig.whatsapp.href(locale)}
+              variant="primary"
+              className="mt-6"
+            >
               {t("bookNow")}
             </Button>
           </div>
-
-          <nav className="lg:col-span-3" aria-label={t("quickLinks")}>
-            <h3 className="text-sm font-bold text-gsm-navy">{t("quickLinks")}</h3>
-            <ul className="mt-4 space-y-2">
+          {/* Links */}
+          <nav
+            className="lg:col-span-3"
+            aria-label={t("quickLinks")}
+          >
+            <h3 className="text-sm font-bold text-white">
+              {t("quickLinks")}
+            </h3>
+            <ul className="mt-4 space-y-3">
               {navItems.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gsm-muted transition-colors hover:text-gsm-blue"
+                    className="text-sm text-white/70 transition-colors hover:text-white"
                   >
-                    {pick(locale, navLabels[link.key])}
+                    {pick(
+                      locale,
+                      navLabels[link.key]
+                    )}
                   </Link>
                 </li>
               ))}
               <li>
                 <Link
                   href="#inquiry"
-                  className="text-sm text-gsm-muted transition-colors hover:text-gsm-blue"
+                  className="text-sm text-white/70 transition-colors hover:text-white"
                 >
                   {t("formTitle")}
                 </Link>
               </li>
             </ul>
           </nav>
-
+          {/* Contact */}
           <div className="lg:col-span-3">
-            <h3 className="text-sm font-bold text-gsm-navy">{t("contactUs")}</h3>
-            <ul className="mt-4 space-y-2 text-sm text-gsm-muted">
+            <h3 className="text-sm font-bold text-white">
+              {t("contactUs")}
+            </h3>
+            <ul className="mt-4 space-y-3 text-sm leading-7 text-white/70">
               <li>
                 <a
                   href={siteConfig.whatsapp.href(locale)}
@@ -95,44 +132,60 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href={`mailto:${siteConfig.email}`} className="hover:text-gsm-blue">
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="hover:text-white"
+                >
                   {siteConfig.email}
                 </a>
               </li>
               <li>
-                <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="hover:text-gsm-blue">
+                <a
+                  href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                  className="hover:text-white"
+                >
                   {siteConfig.phone}
                 </a>
               </li>
-              <li>{pick(locale, siteConfig.address)}</li>
+              <li>
+                {pick(
+                  locale,
+                  siteConfig.address
+                )}
+              </li>
             </ul>
           </div>
-
+          {/* Social */}
           <div className="lg:col-span-2">
-            <h3 className="text-sm font-bold text-gsm-navy">{t("followUs")}</h3>
-            <ul className="mt-4 flex gap-3">
+            <h3 className="text-sm font-bold text-white">
+              {t("followUs")}
+            </h3>
+            <ul className="mt-4 flex justify-center gap-3 md:justify-start">
               {socialLinks.map((social) => (
                 <li key={social.name}>
                   <a
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full bg-gsm-navy/5 text-gsm-navy transition-colors hover:bg-gsm-blue hover:text-white"
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:text-gsm-navy hover:shadow-lg"
                     aria-label={social.name}
                   >
-                    <SocialIcon icon={social.icon} />
+                    <SocialIcon
+                      icon={social.icon}
+                    />
                   </a>
                 </li>
               ))}
             </ul>
           </div>
         </div>
-
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-gsm-navy/10 pt-8 sm:flex-row">
-          <p className="text-sm text-gsm-muted">
-            © {year} GSM Egypt Academy. {t("rights")}
+        {/* Bottom */}
+        <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-center sm:flex-row">
+          <p className="text-sm text-white/60">
+            © {year} GSM Egypt Academy.{" "}
+            {t("rights")}
           </p>
-          <p className="font-en text-xs text-gsm-muted">
+          <p className="font-en text-xs text-white/50">
             GSM International Academy — Engineering & Technology Education
           </p>
         </div>

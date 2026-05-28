@@ -114,7 +114,7 @@ const ui = {
   statsAria: { ar: "إحصائيات الأكاديمية", en: "Academy statistics" },
   whatsappAria: { ar: "تواصل عبر واتساب", en: "Contact on WhatsApp" },
   footerDesc: {
-    ar: "أكاديمية جي إس إم مصر — تدريب عملي حديث والإلكترونيات وصيانة الموبايل والبرمجه للأطفال والشباب.",
+    ar: "أكاديمية جي إس إم مصر — تدريب عملي حديث في الإلكترونيات وصيانة الموبايل والبرمجه للأطفال والشباب.",
     en: "GSM Egypt Academy — Modern Hands-on Training in Electronics, Mobile Maintenance, and Programming for Kids & Youth.",
   },
 } as const;
