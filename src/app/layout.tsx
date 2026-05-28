@@ -18,29 +18,25 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-
   title: {
     default: "جي اس ام مصر لهندسة الإلكترونيات والصيانة والبرمجة",
     template: "%s | جي اس ام مصر",
   },
-
   description:
     "تعلم صيانة الموبايل والإلكترونيات والبرمجة والذكاء الاصطناعي مع متخصصين وخبراء في المجال.",
-
   keywords: [
     "جي اس ام مصر",
-    "صيانة الموبايل",
-    "هندسة الإلكترونيات",
+    "كورس صيانة الموبايل",
+    "كورس الإلكترونيات",
     "تعلم البرمجة",
     "كورسات برمجة",
     "كورسات إلكترونيات",
-    "ذكاء اصطناعي",
+    "المخترع الصغير للأطفال",
     "تعليم الأطفال البرمجة",
     "GSM Egypt",
     "Electronics Engineering",
     "Mobile Maintenance",
   ],
-
   openGraph: {
     title: "جي اس ام مصر لهندسة الإلكترونيات والصيانة والبرمجة",
     description:
@@ -48,24 +44,35 @@ export const metadata: Metadata = {
     locale: "ar_EG",
     type: "website",
     siteName: "جي اس ام مصر",
+    images: [
+      {
+        url: "/og-image.webp",
+        width: 1200,
+        height: 630,
+        alt: "GSM Egypt Academy",
+      },
+    ],
   },
-
+  twitter: {
+    card: "summary_large_image",
+    title: "جي اس ام مصر",
+    description:
+      "تعلم صيانة الموبايل والإلكترونيات والبرمجة والذكاء الاصطناعي مع متخصصين وخبراء في المجال.",
+    images: ["/og-image.webp"],
+  },
   robots: {
     index: true,
     follow: true,
   },
-
   alternates: {
     canonical: "/",
   },
 };
-
 export const viewport: Viewport = {
   themeColor: "#06004f",
   width: "device-width",
   initialScale: 1,
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
