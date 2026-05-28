@@ -117,8 +117,8 @@ export const courses: Course[] = [
     },
   
     duration: {
-      ar: "16 ساعه ",
-        en: "16 HOUR",
+      ar: "8 اسابيع ",
+        en: "8 Weeks",
     },
 
     level: {
