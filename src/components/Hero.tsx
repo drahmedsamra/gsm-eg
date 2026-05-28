@@ -34,10 +34,12 @@ export function Hero() {
 
           <div className="text-center lg:text-start">
 
-            {/*}   <p className="mb-4 inline-flex items-center rounded-full border border-gsm-navy/10 bg-white px-4 py-1.5 text-xs font-semibold text-gsm-blue shadow-sm sm:text-sm">
+            {/* 
+            <p className="mb-4 inline-flex items-center rounded-full border border-gsm-navy/10 bg-white px-4 py-1.5 text-xs font-semibold text-gsm-blue shadow-sm sm:text-sm">
               <span className="me-2 h-2 w-2 rounded-full bg-gsm-red animate-pulse" />
               {t("heroBadge")}
-            </p> */}
+            </p> 
+            */}
 
             <h1 className="text-balance text-[2.2rem] font-bold leading-[1.1] tracking-tight text-gsm-navy sm:text-5xl lg:text-[3.25rem]">
               {t("heroTitle")}
@@ -79,7 +81,7 @@ export function Hero() {
           </div>
 
           <div className="order-first lg:order-last">
-            <HeroVisual />
+            <HeroVisual locale={locale} />
           </div>
 
         </div>
