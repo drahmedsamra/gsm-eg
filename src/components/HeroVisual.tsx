@@ -1,19 +1,29 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 export function HeroVisual() {
   const { locale } = useLocale();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMounted(true);
+    }, 1200);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div
       className="relative mx-auto w-full max-w-2xl"
       aria-hidden
     >
-      {/* Glow */}
-      <div className="absolute inset-0 rounded-[32px] bg-gradient-to-br from-gsm-blue/15 to-gsm-red/10 blur-3xl" />
+      {/* Soft Glow */}
+      <div className="absolute inset-0 rounded-[32px] bg-gradient-to-br from-gsm-blue/10 to-gsm-red/5 blur-xl" />
 
       {/* Main Image */}
       <div className="relative overflow-hidden rounded-[28px] border border-white/40 bg-white shadow-2xl shadow-gsm-navy/10 sm:rounded-[32px]">
@@ -23,6 +33,8 @@ export function HeroVisual() {
           width={1400}
           height={1000}
           priority
+          fetchPriority="high"
+          sizes="(max-width: 768px) 100vw, 50vw"
           className="h-full w-full object-cover"
         />
 
@@ -31,10 +43,12 @@ export function HeroVisual() {
 
       {/* Mobile Maintenance */}
       <div
-        className="absolute top-3 start-3 sm:top-6 sm:start-6 animate-float"
+        className={`absolute top-3 start-3 sm:top-6 sm:start-6 will-change-transform ${
+          mounted ? "animate-float" : ""
+        }`}
         style={{ animationDelay: "0.2s" }}
       >
-        <div className="w-[150px] rounded-xl bg-white/92 px-3 py-2 text-center shadow-lg backdrop-blur-md sm:w-[230px] sm:rounded-2xl sm:px-5 sm:py-4 sm:shadow-xl">
+        <div className="w-[150px] rounded-xl bg-white/92 px-3 py-2 text-center shadow-lg backdrop-blur-sm sm:w-[230px] sm:rounded-2xl sm:px-5 sm:py-4 sm:shadow-xl">
           <p className="text-sm font-extrabold text-gsm-blue sm:text-lg">
             {locale === "ar"
               ? "صيانة الموبايل"
@@ -51,7 +65,9 @@ export function HeroVisual() {
 
       {/* Electronics */}
       <div
-        className="absolute top-1/2 end-2 -translate-y-1/2 sm:end-4 animate-float-slow"
+        className={`absolute top-1/2 end-2 -translate-y-1/2 will-change-transform sm:end-4 ${
+          mounted ? "animate-float-slow" : ""
+        }`}
         style={{ animationDelay: "0.7s" }}
       >
         <div className="w-[145px] rounded-xl bg-gsm-navy/95 px-3 py-2 text-center shadow-lg sm:w-[220px] sm:rounded-2xl sm:px-5 sm:py-4 sm:shadow-xl">
@@ -71,7 +87,9 @@ export function HeroVisual() {
 
       {/* Kids Programming */}
       <div
-        className="absolute bottom-3 start-5 sm:bottom-6 sm:start-10 animate-float"
+        className={`absolute bottom-3 start-5 will-change-transform sm:bottom-6 sm:start-10 ${
+          mounted ? "animate-float" : ""
+        }`}
         style={{ animationDelay: "1s" }}
       >
         <div className="w-[165px] rounded-xl bg-gsm-red/95 px-3 py-2 text-center shadow-lg sm:w-[250px] sm:rounded-2xl sm:px-5 sm:py-4 sm:shadow-xl">
