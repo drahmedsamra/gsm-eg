@@ -55,7 +55,7 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="bg-white py-20 sm:py-24"
+      className="bg-white py-20 sm:py-24 overflow-hidden"
     >
       <Container>
 
@@ -76,6 +76,7 @@ export function Testimonials() {
             modules={[Autoplay, Pagination]}
             spaceBetween={24}
             loop
+            autoHeight={false}
             autoplay={{
               delay: 5000,
               disableOnInteraction: false,
@@ -85,7 +86,7 @@ export function Testimonials() {
             }}
             breakpoints={{
               0: {
-                slidesPerView: 1.1,
+                slidesPerView: 1,
               },
 
               640: {
@@ -96,15 +97,22 @@ export function Testimonials() {
                 slidesPerView: 3,
               },
             }}
+            className="pb-14"
           >
 
             {testimonials.map((item, i) => (
 
-              <SwiperSlide key={item.id}>
+              <SwiperSlide
+                key={item.id}
+                className="h-auto"
+              >
 
-                <FadeIn delay={i * 100}>
+                <FadeIn
+                  delay={i * 100}
+                  className="h-full"
+                >
 
-                  <blockquote className="flex h-full min-h-[340px] flex-col rounded-3xl border border-gsm-navy/8 bg-gsm-light p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                  <blockquote className="flex h-full min-h-[420px] flex-col rounded-3xl border border-gsm-navy/8 bg-gsm-light p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
 
                     <StarRating
                       rating={item.rating}
