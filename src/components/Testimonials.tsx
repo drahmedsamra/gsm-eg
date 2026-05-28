@@ -102,10 +102,10 @@ export function Testimonials() {
 
               <SwiperSlide
                 key={item.id}
-                className="h-auto"
+                className="flex h-auto"
               >
 
-                <blockquote className="flex h-full flex-col rounded-3xl border border-gsm-navy/8 bg-gsm-light p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <blockquote className="flex h-full min-h-[320px] w-full flex-col rounded-3xl border border-gsm-navy/8 bg-gsm-light p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
 
                   <StarRating
                     rating={item.rating}
