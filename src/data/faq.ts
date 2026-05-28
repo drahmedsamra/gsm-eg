@@ -8,69 +8,110 @@ export type FaqItem = {
 
 export const faqItems: FaqItem[] = [
   {
+    id: "courses",
+    question: {
+      ar: "ما الكورسات المتوفرة داخل أكاديمية جي إس إم مصر؟",
+      en: "What courses are available at GSM Egypt Academy?",
+    },
+    answer: {
+      ar: "نوفر كورسات صيانة الموبايل والإلكترونيات والبرمجة والروبوتات والذكاء الاصطناعي، بالإضافة إلى برامج الأطفال مثل المخترع الصغير والبرمجة للأطفال.",
+      en: "We offer courses in mobile repair, electronics, programming, robotics, and AI, in addition to kids programs such as Little Inventor and programming for children.",
+    },
+  },
+
+  {
+    id: "beginners",
+    question: {
+      ar: "هل الكورسات مناسبة للمبتدئين؟",
+      en: "Are the courses suitable for beginners?",
+    },
+    answer: {
+      ar: "نعم، لدينا مسارات تبدأ من الصفر تمامًا للمبتدئين، مع شرح عملي خطوة بخطوة حتى يتمكن الطالب من التطبيق بنفسه بثقة.",
+      en: "Yes. We offer beginner-friendly tracks that start from zero with practical step-by-step training to help students gain real confidence.",
+    },
+  },
+
+  {
+    id: "practical",
+    question: {
+      ar: "هل التدريب عملي أم نظري فقط؟",
+      en: "Is the training practical or only theoretical?",
+    },
+    answer: {
+      ar: "نعتمد بشكل أساسي على التدريب العملي داخل المعامل، حيث يعمل كل طالب بنفسه على الأجهزة والمشاريع والتطبيقات الحقيقية.",
+      en: "Our training is mainly hands-on inside the labs, where every student works on real devices, projects, and practical applications.",
+    },
+  },
+
+  {
     id: "age",
     question: {
-      ar: "ما الفئات العمرية المناسبة للدورات؟",
-      en: "What age groups are the courses for?",
+      ar: "ما الأعمار المناسبة للكورسات؟",
+      en: "What age groups are suitable for the courses?",
     },
     answer: {
-      ar: "نوفر مسارات للأطفال من 6 سنوات وبرامج للشباب والمراهقين. كل دورة لها متطلبات عمرية ومستوى واضح عند التسجيل.",
-      en: "We offer tracks for children from age 6 and programs for teens and youth. Each course lists clear age and level requirements.",
+      ar: "لدينا كورسات الإلكترونيات وصيانة الموبايل مناسبه لجميع الأعمار . وأيضا لدينا كورسات المخترع الصغير للأطفال بداية من ٦ سنوات",
+      en: "We offer electronics and mobile maintenance courses suitable for all age groups. We also provide Little Inventor programs for children starting from the age of 6.",
     },
   },
-  {
-    id: "experience",
-    question: {
-      ar: "هل أحتاج خبرة سابقة في البرمجة؟",
-      en: "Do I need prior programming experience?",
-    },
-    answer: {
-      ar: "لا. لدينا مسارات للمبتدئين تبدأ من الصفر، ومسارات متقدمة لمن لديه أساسيات. نحدد المستوى المناسب لك عند الحجز.",
-      en: "No. We have beginner tracks from zero and advanced paths for those with basics. We place you at the right level when you book.",
-    },
-  },
-  {
-    id: "duration",
-    question: {
-      ar: "كم مدة الدورة؟",
-      en: "How long is each course?",
-    },
-    answer: {
-      ar: "تتراوح بين 8 و14 أسبوعاً حسب المسار، مع جلسات أسبوعية عملية في المختبر والمشاريع.",
-      en: "Between 8 and 14 weeks depending on the track, with weekly hands-on lab sessions and projects.",
-    },
-  },
+
   {
     id: "certificate",
     question: {
-      ar: "هل أحصل على شهادة بعد إتمام الدورة؟",
-      en: "Do I receive a certificate after completing a course?",
+      ar: "هل يحصل الطالب على شهادة بعد انتهاء الكورس؟",
+      en: "Do students receive a certificate after completing the course?",
     },
     answer: {
-      ar: "نعم. تحصل على شهادة إتمام من أكاديمية GSM مع توثيق المشاريع التي أنجزتها.",
-      en: "Yes. You receive a GSM Egypt Academy completion certificate with documentation of your projects.",
+      ar: "    يحصل المتدرب على شهادة معتمدة من أكاديمية جي إس إم مصر بالتعاون مع AQS Agency",
+      en: "    Professional certificate certified by AQS Agency upon course completion.",
     },
   },
+
+  {
+    id: "tools",
+    question: {
+      ar: "هل الأدوات والأجهزة متوفرة داخل الأكاديمية؟",
+      en: "Are tools and equipment available inside the academy?",
+    },
+    answer: {
+      ar: "نعم، نوفر الأدوات والأجهزة اللازمة للتدريب العملي داخل المعامل، بحيث يستطيع الطالب التطبيق بشكل مباشر أثناء الكورس.",
+      en: "Yes. We provide the necessary tools and equipment for practical training inside the labs so students can practice directly during the course.",
+    },
+  },
+
+  {
+    id: "duration",
+    question: {
+      ar: "كم مدة الكورسات؟",
+      en: "How long are the courses?",
+    },
+    answer: {
+      ar: "مدة الكورس تختلف حسب التخصص والمستوى، ويتم توضيح جميع التفاصيل الخاصة بالمواعيد وعدد المحاضرات قبل الحجز.",
+      en: "Course duration depends on the specialization and level. All schedule details and lecture counts are explained before booking.",
+    },
+  },
+
   {
     id: "booking",
     question: {
-      ar: "كيف أحجز مقعداً؟",
-      en: "How do I book a seat?",
+      ar: "كيف يمكنني حجز الكورس؟",
+      en: "How can I book a course?",
     },
     answer: {
-      ar: "اضغط على «احجز الآن» أو تواصل معنا عبر واتساب أو نموذج التواصل. فريقنا يساعدك في اختيار المسار والمواعيد.",
-      en: "Click Book Now, contact us on WhatsApp, or use the contact form. Our team helps you choose the right track and schedule.",
+      ar: "يمكنك الحجز بسهولة من خلال زر «احجز الآن» أو التواصل معنا عبر واتساب، وسيقوم فريق أكاديمية جي إس إم مصر بمساعدتك في اختيار الكورس المناسب.",
+      en: "You can easily book through the Book Now button or contact us via WhatsApp, and our team will help you choose the right course.",
     },
   },
+
   {
-    id: "equipment",
+    id: "career",
     question: {
-      ar: "هل أحتاج أدوات أو لابتوب خاص؟",
-      en: "Do I need my own tools or laptop?",
+      ar: "هل تساعد الكورسات في دخول سوق العمل؟",
+      en: "Can these courses help students enter the job market?",
     },
     answer: {
-      ar: "نوفر المعدات في المختبر. للمسارات التي تتطلب لابتوب، نرشدك للمواصفات المناسبة قبل البدء.",
-      en: "We provide equipment in the lab. For tracks that need a laptop, we guide you on suitable specs before you start.",
+      ar: "تم تصميم الكورسات لتوفير خبرة عملية حقيقية تساعد الطلاب على تطوير مهاراتهم والاستعداد للعمل أو بدء مشاريعهم الخاصة.",
+      en: "The courses are designed to provide real practical experience that helps students develop their skills and prepare for jobs or their own projects.",
     },
   },
 ];
