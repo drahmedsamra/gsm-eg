@@ -59,8 +59,8 @@ const ui = {
   testimonialsEyebrow: { ar: "آراء الطلبة والخريجين", en: "Students & Graduates Reviews" },
   testimonialsTitle: { ar: "ثقة تبنيها النتائج", en: "Trust built on results" },
   testimonialsDesc: {
-    ar: "مساحة جاهزة لإضافة فيديوهات شهادات لاحقاً — حالياً آراء نصية من مجتمعنا.",
-    en: "Ready for video testimonials later — text reviews from our community today.",
+    ar: "اراء خريجي وطلبة أكاديمية جي اس ام مصر.",
+    en: "Reviews from GSM Egypt Academy students and graduates.",
   },
   galleryEyebrow: { ar: "معرض الصور", en: "Gallery" },
   galleryTitle: {
