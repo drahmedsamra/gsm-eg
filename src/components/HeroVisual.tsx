@@ -16,7 +16,7 @@ export function HeroVisual() {
       <div className="absolute inset-0 rounded-[32px] bg-gradient-to-br from-gsm-blue/15 to-gsm-red/10 blur-3xl" />
 
       {/* Main Image */}
-      <div className="relative overflow-hidden rounded-[32px] border border-white/40 bg-white shadow-2xl shadow-gsm-navy/10">
+      <div className="relative overflow-hidden rounded-[28px] border border-white/40 bg-white shadow-2xl shadow-gsm-navy/10 sm:rounded-[32px]">
         <Image
           src="/assets/images/hero/gsm-hero.webp"
           alt="GSM Egypt Academy"
@@ -31,15 +31,17 @@ export function HeroVisual() {
 
       {/* Mobile Maintenance */}
       <div
-        className="absolute top-6 start-6 animate-float"
+        className="absolute top-3 start-3 sm:top-6 sm:start-6 animate-float"
         style={{ animationDelay: "0.2s" }}
       >
-        <div className="rounded-2xl bg-white/95 px-5 py-4 text-center shadow-xl backdrop-blur-md">
-          <p className="text-lg font-extrabold text-gsm-blue">
-            {locale === "ar" ? "صيانة الموبايل" : "Mobile Maintenance"}
+        <div className="w-[150px] rounded-xl bg-white/92 px-3 py-2 text-center shadow-lg backdrop-blur-md sm:w-[230px] sm:rounded-2xl sm:px-5 sm:py-4 sm:shadow-xl">
+          <p className="text-sm font-extrabold text-gsm-blue sm:text-lg">
+            {locale === "ar"
+              ? "صيانة الموبايل"
+              : "Mobile Maintenance"}
           </p>
 
-          <p className="mt-1 text-sm leading-6 text-gsm-muted">
+          <p className="mt-1 text-[11px] leading-5 text-gsm-muted sm:text-sm sm:leading-6">
             {locale === "ar"
               ? "تعلم صيانة الهواتف"
               : "Learn smartphone repair"}
@@ -49,15 +51,17 @@ export function HeroVisual() {
 
       {/* Electronics */}
       <div
-        className="absolute top-1/2 end-4 -translate-y-1/2 animate-float-slow"
+        className="absolute top-1/2 end-2 -translate-y-1/2 sm:end-4 animate-float-slow"
         style={{ animationDelay: "0.7s" }}
       >
-        <div className="rounded-2xl bg-gsm-navy px-5 py-4 text-center shadow-xl">
-          <p className="text-lg font-extrabold text-white">
-            {locale === "ar" ? "الإلكترونيات" : "Electronics"}
+        <div className="w-[145px] rounded-xl bg-gsm-navy/95 px-3 py-2 text-center shadow-lg sm:w-[220px] sm:rounded-2xl sm:px-5 sm:py-4 sm:shadow-xl">
+          <p className="text-sm font-extrabold text-white sm:text-lg">
+            {locale === "ar"
+              ? "الإلكترونيات"
+              : "Electronics"}
           </p>
 
-          <p className="mt-1 text-sm leading-6 text-white/80">
+          <p className="mt-1 text-[11px] leading-5 text-white/80 sm:text-sm sm:leading-6">
             {locale === "ar"
               ? "دوائر ومشاريع"
               : "Circuits & Projects"}
@@ -67,17 +71,17 @@ export function HeroVisual() {
 
       {/* Kids Programming */}
       <div
-        className="absolute bottom-6 start-10 animate-float"
+        className="absolute bottom-3 start-5 sm:bottom-6 sm:start-10 animate-float"
         style={{ animationDelay: "1s" }}
       >
-        <div className="rounded-2xl bg-gsm-red px-5 py-4 text-center shadow-xl">
-          <p className="text-lg font-extrabold text-white">
+        <div className="w-[165px] rounded-xl bg-gsm-red/95 px-3 py-2 text-center shadow-lg sm:w-[250px] sm:rounded-2xl sm:px-5 sm:py-4 sm:shadow-xl">
+          <p className="text-sm font-extrabold text-white sm:text-lg">
             {locale === "ar"
               ? "برمجة للأطفال"
               : "Kids Programming"}
           </p>
 
-          <p className="mt-1 text-sm leading-6 text-white/85">
+          <p className="mt-1 text-[11px] leading-5 text-white/85 sm:text-sm sm:leading-6">
             {locale === "ar"
               ? "روبوت وذكاء اصطناعي"
               : "Robotics & AI"}
