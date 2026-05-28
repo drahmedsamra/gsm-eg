@@ -26,7 +26,7 @@ export default function Home() {
         <Hero />
         <Courses />
         <WhyGSM />
-        <StudentProjects />
+        {/* <StudentProjects /> */}
         <Stats />
         <Testimonials />
         <VideoCarousel />
