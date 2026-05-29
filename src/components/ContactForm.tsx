@@ -1,4 +1,8 @@
+
+
 "use client";
+
+import { useState } from "react";
 
 import { FadeIn } from "@/components/FadeIn";
 import { Button } from "@/components/ui/Button";
@@ -9,8 +13,16 @@ import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { t as pick } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
 
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+  }
+}
+
 export function ContactForm() {
   const { locale, t } = useLocale();
+
+  const [loading, setLoading] = useState(false);
 
   return (
     <section
@@ -34,8 +46,65 @@ export function ContactForm() {
           </div>
 
           <form
-            action="https://formspree.io/f/mdajdqnr"
-            method="POST"
+            onSubmit={async (e) => {
+              e.preventDefault();
+
+              setLoading(true);
+
+              const formData = new FormData(e.currentTarget);
+
+              const data = {
+                name: formData.get("name"),
+                phone: formData.get("phone"),
+                course: formData.get("course"),
+                message: formData.get("message"),
+                locale,
+              };
+
+              try {
+                const response = await fetch("/api/contact", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                  alert(
+                    locale === "ar"
+                      ? "تم إرسال طلبك بنجاح 🎉"
+                      : "Message sent successfully 🎉"
+                  );
+
+                  (e.target as HTMLFormElement).reset();
+
+                  // Meta Pixel Lead Event
+                  if (
+                    typeof window !== "undefined" &&
+                    window.fbq
+                  ) {
+                    window.fbq("track", "Lead");
+                  }
+                } else {
+                  alert(
+                    locale === "ar"
+                      ? "حدث خطأ أثناء الإرسال"
+                      : "Something went wrong"
+                  );
+                }
+              } catch (error) {
+                console.error(error);
+
+                alert(
+                  locale === "ar"
+                    ? "حدث خطأ أثناء الإرسال"
+                    : "Something went wrong"
+                );
+              }
+
+              setLoading(false);
+            }}
             className="mx-auto mt-8 max-w-xl space-y-6 rounded-[36px] bg-white p-6 shadow-xl shadow-gsm-navy/5 sm:p-10"
           >
             <input type="hidden" name="locale" value={locale} />
@@ -139,7 +208,11 @@ export function ContactForm() {
                 variant="primary"
                 className="h-16 flex-1 rounded-full text-lg font-bold shadow-xl shadow-red-500/20"
               >
-                {t("formSubmit")}
+                {loading
+                  ? locale === "ar"
+                    ? "جارٍ الإرسال..."
+                    : "Sending..."
+                  : t("formSubmit")}
               </Button>
 
               <Button
