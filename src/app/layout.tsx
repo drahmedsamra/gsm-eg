@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Cairo, Inter } from "next/font/google";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import {
+  GoogleAnalytics,
+  GoogleTagManager,
+} from "@next/third-parties/google";
 
 import { Providers } from "@/components/Providers";
 import "./globals.css";
@@ -117,6 +120,7 @@ export default function RootLayout({
         <Providers>{children}</Providers>
 
         <GoogleAnalytics gaId="G-1PMX146HX4" />
+        <GoogleTagManager gtmId="GTM-W8RC98QR" />
       </body>
     </html>
   );
