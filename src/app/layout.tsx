@@ -119,7 +119,7 @@ export default function RootLayout({
       className={`${cairo.variable} ${inter.variable} scroll-smooth antialiased`}
     >
       <body className="overflow-x-hidden bg-gsm-light text-gsm-navy">
-        
+
         {/* Meta Pixel */}
         <Script id="facebook-pixel" strategy="afterInteractive">
           {`
@@ -141,9 +141,37 @@ export default function RootLayout({
 
             fbq('init', '105757756600816');
             fbq('track', 'PageView');
+
+            // Track buttons
+            document.addEventListener('click', function(e) {
+              const target = e.target;
+
+              if (target.closest('a, button')) {
+                const text = target.innerText?.toLowerCase() || '';
+
+                // Lead
+                if (
+                  text.includes('احجز') ||
+                  text.includes('سجل') ||
+                  text.includes('ابدأ')
+                ) {
+                  fbq('track', 'Lead');
+                }
+
+                // Contact
+                if (
+                  text.includes('واتساب') ||
+                  text.includes('اتصال') ||
+                  text.includes('تواصل')
+                ) {
+                  fbq('track', 'Contact');
+                }
+              }
+            });
           `}
         </Script>
 
+        {/* NoScript Fallback */}
         <noscript>
           <img
             height="1"
@@ -161,4 +189,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-} 
+}
