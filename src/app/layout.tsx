@@ -23,6 +23,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
 
+  icons: {
+    icon: "/favicon.webp",
+    shortcut: "/favicon.webp",
+    apple: "/favicon.webp",
+  },
+
   title: {
     default: "جي اس ام مصر لهندسة الإلكترونيات والصيانة والبرمجة",
     template: "%s | جي اس ام مصر",
