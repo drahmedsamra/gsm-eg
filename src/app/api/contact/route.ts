@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
     await resend.emails.send({
       from: "GSM Academy <onboarding@resend.dev>",
-      to: ["drahmedsamra@gmail.com","nabilamostafa12@gmail.com"],
+      to: ["drahmedsamra@gmail.com","nabilamostafa112@gmail.com"],
 
       subject:
         locale === "ar"
