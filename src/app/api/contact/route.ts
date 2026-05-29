@@ -13,10 +13,11 @@ export async function POST(req: Request) {
       course || (locale === "ar" ? "غير محدد" : "Not selected");
 
     const result = await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: "GSM Academy <send@gsm-eg.com>",
+
       to: [
         "drahmedsamra@gmail.com",
-       
+        "nabilamostafa112@gmail.com",
       ],
 
       subject:
@@ -25,7 +26,7 @@ export async function POST(req: Request) {
           : `New inquiry from website - ${name}`,
 
       html: `
-        <div style="font-family: Arial; padding:20px;">
+        <div style="font-family: Arial; direction: rtl; padding: 20px;">
           <h2>طلب جديد من موقع GSM Academy</h2>
 
           <p><strong>الاسم:</strong> ${name}</p>
