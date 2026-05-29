@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cairo, Inter } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
+
 import { Providers } from "@/components/Providers";
 import "./globals.css";
 import { siteConfig } from "@/data/site";
@@ -113,6 +115,8 @@ export default function RootLayout({
     >
       <body className="overflow-x-hidden bg-gsm-light text-gsm-navy">
         <Providers>{children}</Providers>
+
+        <GoogleAnalytics gaId="G-1PMX146HX4" />
       </body>
     </html>
   );
