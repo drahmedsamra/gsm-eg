@@ -119,7 +119,7 @@ export default function RootLayout({
       className={`${cairo.variable} ${inter.variable} scroll-smooth antialiased`}
     >
       <body className="overflow-x-hidden bg-gsm-light text-gsm-navy">
-
+        
         {/* Meta Pixel */}
         <Script id="facebook-pixel" strategy="afterInteractive">
           {`
@@ -144,6 +144,16 @@ export default function RootLayout({
           `}
         </Script>
 
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=105757756600816&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
+
         <Providers>{children}</Providers>
 
         <GoogleAnalytics gaId="G-1PMX146HX4" />
@@ -151,4 +161,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+} 
