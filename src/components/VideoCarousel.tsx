@@ -249,9 +249,9 @@ function VideoModal({
         onClick={onClose}
       />
 
-      <div className="absolute inset-x-4 top-10 sm:top-20 mx-auto max-w-5xl">
+      <div className="absolute inset-x-4 top-10 mx-auto max-w-5xl sm:top-20">
 
-        <div className="overflow-hidden rounded-[28px] border border-white/10 bg-black/95 backdrop-blur-xl shadow-[0_50px_120px_-70px_rgba(2,6,23,0.9)]">
+        <div className="overflow-hidden rounded-[28px] border border-white/10 bg-black/95 shadow-[0_50px_120px_-70px_rgba(2,6,23,0.9)]">
 
           <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3 text-white sm:px-5 sm:py-4">
 
@@ -273,11 +273,11 @@ function VideoModal({
 
             <iframe
               className="absolute inset-0 h-full w-full"
-              src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1`}
+              src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&playsinline=1`}
               title={title}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
             />
 
           </div>
