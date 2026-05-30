@@ -88,10 +88,10 @@ const ui = {
     en: "Book via WhatsApp — our team helps you pick the right track for your age and level in minutes.",
   },
   contactWhatsapp: { ar: "احجز الآن عبر واتساب", en: "Book now on WhatsApp" },
-  formTitle: { ar: "أرسل استفسارك", en: "Send an inquiry" },
+  formTitle: { ar: "احجز مكانك الآن في أكاديمية جي إس إم ", en: "Reserve Your Seat Now at GSM Academy" },
   formDesc: {
-    ar: "املأ النموذج وسنتواصل معك خلال 24 ساعة — أو احجز فوراً عبر واتساب.",
-    en: "Fill the form and we'll reply within 24 hours — or book instantly on WhatsApp.",
+    ar: "املأ نموذج الحجز الآن وسيقوم فريق أكاديمية جي إس إم بالتواصل معك مباشرة، كما سيتم تحويلك تلقائيًا إلى واتساب بعد إرسال بياناتك .",
+    en: "Complete the registration form now and the GSM Academy team will contact you مباشرة. You will also be automatically redirected to WhatsApp after submitting your details..",
   },
   formName: { ar: "الاسم الكامل", en: "Full name" },
   formPhone: { ar: "رقم الهاتف", en: "Phone number" },
