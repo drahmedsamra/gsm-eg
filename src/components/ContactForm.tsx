@@ -22,21 +22,25 @@ const branches = [
     ar: "مدينة نصر",
     en: "Nasr City",
   },
+
   {
     value: "dokki",
     ar: "الدقي",
     en: "Dokki",
   },
+
   {
     value: "mansoura",
-    ar: "المنصوره",
+    ar: "المنصورة",
     en: "Mansoura",
   },
+
   {
     value: "october",
     ar: "أكتوبر",
     en: "October",
   },
+
   {
     value: "online",
     ar: "أونلاين",
@@ -48,6 +52,7 @@ export function ContactForm() {
   const { locale, t } = useLocale();
 
   const [loading, setLoading] = useState(false);
+
   const [success, setSuccess] = useState(false);
 
   return (
@@ -76,13 +81,17 @@ export function ContactForm() {
               e.preventDefault();
 
               setLoading(true);
+
               setSuccess(false);
 
-              const formData = new FormData(e.currentTarget);
+              const formData = new FormData(
+                e.currentTarget
+              );
 
               const selectedBranch = branches.find(
                 (branch) =>
-                  branch.value === formData.get("branch")
+                  branch.value ===
+                  formData.get("branch")
               );
 
               const branchName =
@@ -92,30 +101,45 @@ export function ContactForm() {
 
               const data = {
                 name: formData.get("name"),
+
                 phone: formData.get("phone"),
+
                 course: formData.get("course"),
+
                 branch: branchName,
+
                 message: formData.get("message"),
+
                 locale,
               };
 
               try {
-                const response = await fetch("/api/contact", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(data),
-                });
+                const response = await fetch(
+                  "/api/contact",
+                  {
+                    method: "POST",
+
+                    headers: {
+                      "Content-Type":
+                        "application/json",
+                    },
+
+                    body: JSON.stringify(data),
+                  }
+                );
 
                 if (response.ok) {
                   setSuccess(true);
 
                   if (
-                    typeof window !== "undefined" &&
+                    typeof window !==
+                      "undefined" &&
                     window.fbq
                   ) {
-                    window.fbq("track", "Lead");
+                    window.fbq(
+                      "track",
+                      "Lead"
+                    );
                   }
 
                   const whatsappMessage =
@@ -141,7 +165,9 @@ Course: ${String(data.course || "")}
 Branch: ${String(data.branch || "")}
 `;
 
-                  (e.target as HTMLFormElement).reset();
+                  (
+                    e.target as HTMLFormElement
+                  ).reset();
 
                   setTimeout(() => {
                     window.location.href = `https://wa.me/201011822931?text=${encodeURIComponent(
@@ -149,27 +175,23 @@ Branch: ${String(data.branch || "")}
                     )}`;
                   }, 1200);
                 } else {
-                  alert(
-                    locale === "ar"
-                      ? "حدث خطأ أثناء الإرسال"
-                      : "Something went wrong"
-                  );
+                  alert(t("formError"));
                 }
               } catch (error) {
                 console.error(error);
 
-                alert(
-                  locale === "ar"
-                    ? "حدث خطأ أثناء الإرسال"
-                    : "Something went wrong"
-                );
+                alert(t("formError"));
               }
 
               setLoading(false);
             }}
             className="mx-auto mt-8 max-w-xl space-y-6 rounded-[36px] bg-white p-6 shadow-xl shadow-gsm-navy/5 sm:p-10"
           >
-            <input type="hidden" name="locale" value={locale} />
+            <input
+              type="hidden"
+              name="locale"
+              value={locale}
+            />
 
             <div>
               <label
@@ -185,11 +207,9 @@ Branch: ${String(data.branch || "")}
                 type="text"
                 required
                 autoComplete="name"
-                placeholder={
-                  locale === "ar"
-                    ? "اكتب اسمك الكامل"
-                    : "Enter your full name"
-                }
+                placeholder={t(
+                  "formNamePlaceholder"
+                )}
                 className={inputClass}
               />
             </div>
@@ -210,7 +230,10 @@ Branch: ${String(data.branch || "")}
                 autoComplete="tel"
                 dir="ltr"
                 placeholder="+20 101 182 2931"
-                className={cn(inputClass, "text-end")}
+                className={cn(
+                  inputClass,
+                  "text-end"
+                )}
               />
             </div>
 
@@ -236,9 +259,15 @@ Branch: ${String(data.branch || "")}
                 {courses.map((course) => (
                   <option
                     key={course.id}
-                    value={pick(locale, course.title)}
+                    value={pick(
+                      locale,
+                      course.title
+                    )}
                   >
-                    {pick(locale, course.title)}
+                    {pick(
+                      locale,
+                      course.title
+                    )}
                   </option>
                 ))}
               </select>
@@ -249,7 +278,7 @@ Branch: ${String(data.branch || "")}
                 htmlFor="branch"
                 className="mb-2 block text-base font-bold text-gsm-navy"
               >
-                {locale === "ar" ? "الفرع" : "Branch"}
+                {t("formBranch")}
               </label>
 
               <select
@@ -260,9 +289,7 @@ Branch: ${String(data.branch || "")}
                 defaultValue=""
               >
                 <option value="">
-                  {locale === "ar"
-                    ? "اختر الفرع"
-                    : "Select branch"}
+                  {t("formSelectBranch")}
                 </option>
 
                 {branches.map((branch) => (
@@ -290,11 +317,9 @@ Branch: ${String(data.branch || "")}
                 id="message"
                 name="message"
                 rows={4}
-                placeholder={
-                  locale === "ar"
-                    ? "اكتب استفسارك هنا..."
-                    : "Write your message here..."
-                }
+                placeholder={t(
+                  "formMessagePlaceholder"
+                )}
                 className={cn(
                   inputClass,
                   "resize-none"
@@ -310,22 +335,14 @@ Branch: ${String(data.branch || "")}
                 className="h-16 w-full rounded-full text-lg font-bold shadow-xl shadow-red-500/20 disabled:opacity-70"
               >
                 {loading
-                  ? locale === "ar"
-                    ? "جارٍ إرسال البيانات..."
-                    : "Sending..."
+                  ? t("formSending")
                   : success
-                    ? locale === "ar"
-                      ? "تم إرسال طلبك بنجاح"
-                      : "Your request has been sent successfully"
-                    : locale === "ar"
-                      ? "احجز مكانك الآن"
-                      : "Book Your Seat Now"}
+                    ? t("formSuccess")
+                    : t("bookNow")}
               </Button>
 
               <p className="text-center text-sm text-gsm-muted">
-                {locale === "ar"
-                  ? "بعد التسجيل سيقوم فريقنا بالتواصل معك"
-                  : "Our team will contact you after registration"}
+                {t("formFooterText")}
               </p>
             </div>
           </form>
@@ -337,4 +354,3 @@ Branch: ${String(data.branch || "")}
 
 const inputClass =
   "font-cairo w-full rounded-[26px] border-2 border-gsm-navy/10 bg-white px-6 py-5 text-lg text-gsm-navy transition-all duration-300 placeholder:text-gsm-muted/60 focus:border-gsm-blue focus:outline-none focus:ring-4 focus:ring-gsm-blue/10";
-``

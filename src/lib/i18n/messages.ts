@@ -2,21 +2,61 @@ import type { Locale, LocalizedString } from "./types";
 
 const ui = {
   bookNow: { ar: "احجز الآن", en: "Book Now" },
-  bookSeat: { ar: "احجز مقعدك", en: "Book your seat" },
-  exploreCourses: { ar: "استكشف الدورات", en: "Explore courses" },
-  openMenu: { ar: "فتح القائمة", en: "Open menu" },
-  closeMenu: { ar: "إغلاق القائمة", en: "Close menu" },
-  navLabel: { ar: "التنقل الرئيسي", en: "Main navigation" },
-  quickLinks: { ar: "روابط سريعة", en: "Quick links" },
-  contactUs: { ar: "تواصل معنا", en: "Contact us" },
-  followUs: { ar: "تابعنا", en: "Follow us" },
-  whatsapp: { ar: "واتساب", en: "WhatsApp" },
+
+  bookSeat: {
+    ar: "احجز مقعدك",
+    en: "Book your seat",
+  },
+
+  exploreCourses: {
+    ar: "استكشف الدورات",
+    en: "Explore courses",
+  },
+
+  openMenu: {
+    ar: "فتح القائمة",
+    en: "Open menu",
+  },
+
+  closeMenu: {
+    ar: "إغلاق القائمة",
+    en: "Close menu",
+  },
+
+  navLabel: {
+    ar: "التنقل الرئيسي",
+    en: "Main navigation",
+  },
+
+  quickLinks: {
+    ar: "روابط سريعة",
+    en: "Quick links",
+  },
+
+  contactUs: {
+    ar: "تواصل معنا",
+    en: "Contact us",
+  },
+
+  followUs: {
+    ar: "تابعنا",
+    en: "Follow us",
+  },
+
+  whatsapp: {
+    ar: "واتساب",
+    en: "WhatsApp",
+  },
+
   rights: {
     ar: "جميع الحقوق محفوظة.",
     en: "All rights reserved.",
   },
 
-  langSwitch: { ar: "English", en: "عربي" },
+  langSwitch: {
+    ar: "English",
+    en: "عربي",
+  },
 
   langSwitchAria: {
     ar: "التبديل إلى الإنجليزية",
@@ -24,12 +64,12 @@ const ui = {
   },
 
   heroBadge: {
-    ar: "اكاديمية جي اس ام مصر — لهندسة الإلكترونيات والصيانه والبرمجيات ",
-    en: "GSM Egypt Academy — Electronics Engineering, Mobile Maintenance Academy &Software",
+    ar: "اكاديمية جي اس ام مصر — لهندسة الإلكترونيات والصيانة والبرمجيات",
+    en: "GSM Egypt Academy — Electronics Engineering, Mobile Maintenance & Software Academy",
   },
 
   heroTitle: {
-    ar: "التدريب علي الإلكترونيات والصيانه والبرمجيات",
+    ar: "التدريب علي الإلكترونيات والصيانة والبرمجيات",
     en: "Learn Electronics, Maintenance & Software Development",
   },
 
@@ -44,16 +84,19 @@ const ui = {
   },
 
   coursesTitle: {
-    ar: "أحدث البرامج التدريبيه",
-    en: "The Latest Training Programs",
+    ar: "أحدث البرامج التدريبية",
+    en: "Our Latest Training Programs",
   },
 
   coursesDesc: {
-    ar: "كورسات عمليه تناسب مختلف الأعمار بأقوي شهاده مصريه علي الإطلاق معتمدة من AQS Agency الدوليه.",
+    ar: "كورسات عملية تناسب مختلف الأعمار بأقوى شهادة مصرية على الإطلاق معتمدة من AQS Agency الدولية.",
     en: "Practical courses for all age groups with one of the strongest Egyptian certifications accredited by AQS International Agency.",
   },
 
-  whyEyebrow: { ar: "لماذا نحن", en: "Why us" },
+  whyEyebrow: {
+    ar: "لماذا نحن",
+    en: "Why us",
+  },
 
   whyTitle: {
     ar: "أكاديمية هندسية بتعليم عالمي",
@@ -71,18 +114,18 @@ const ui = {
   },
 
   projectsTitle: {
-    ar: "مشاريع طلبة الأكاديميه",
+    ar: "مشاريع طلبة الأكاديمية",
     en: "Real projects from our labs",
   },
 
   projectsDesc: {
-    ar: "معرض لمشاريع طلاب اكاديمية جي اس ام مصر.",
-    en: "A showcase of GSM Egypt Academy students work",
+    ar: "معرض لمشاريع طلاب أكاديمية جي اس ام مصر.",
+    en: "A showcase of GSM Egypt Academy students' work",
   },
 
   testimonialsEyebrow: {
     ar: "آراء الطلبة والخريجين",
-    en: "Students & Graduates Reviews",
+    en: "Student & Graduate Testimonials",
   },
 
   testimonialsTitle: {
@@ -91,7 +134,7 @@ const ui = {
   },
 
   testimonialsDesc: {
-    ar: "اراء خريجي وطلبة أكاديمية جي اس ام مصر.",
+    ar: "آراء خريجي وطلبة أكاديمية جي اس ام مصر.",
     en: "Reviews from GSM Egypt Academy students and graduates.",
   },
 
@@ -110,10 +153,25 @@ const ui = {
     en: "Labs, workshops, achievements, and graduations.",
   },
 
-  galleryPrev: { ar: "السابق", en: "Previous" },
-  galleryNext: { ar: "التالي", en: "Next" },
-  galleryClose: { ar: "إغلاق", en: "Close" },
-  galleryView: { ar: "عرض صورة:", en: "View image:" },
+  galleryPrev: {
+    ar: "السابق",
+    en: "Previous",
+  },
+
+  galleryNext: {
+    ar: "التالي",
+    en: "Next",
+  },
+
+  galleryClose: {
+    ar: "إغلاق",
+    en: "Close",
+  },
+
+  galleryView: {
+    ar: "عرض صورة:",
+    en: "View image:",
+  },
 
   faqEyebrow: {
     ar: "الأسئلة الشائعة",
@@ -165,6 +223,11 @@ const ui = {
     en: "Full name",
   },
 
+  formNamePlaceholder: {
+    ar: "اكتب اسمك الكامل",
+    en: "Enter your full name",
+  },
+
   formPhone: {
     ar: "رقم الهاتف",
     en: "Phone number",
@@ -175,9 +238,24 @@ const ui = {
     en: "Course of interest",
   },
 
+  formBranch: {
+    ar: "الفرع",
+    en: "Branch",
+  },
+
   formMessage: {
     ar: "رسالتك",
     en: "Your message",
+  },
+
+  formMessagePlaceholder: {
+    ar: "اكتب استفسارك هنا...",
+    en: "Write your message here...",
+  },
+
+  formFooterText: {
+    ar: "بعد التسجيل سيقوم فريقنا بالتواصل معك",
+    en: "Our team will contact you after registration",
   },
 
   formSubmit: {
@@ -205,9 +283,25 @@ const ui = {
     en: "Select a course",
   },
 
-  duration: { ar: "المدة", en: "Duration" },
-  level: { ar: "المستوى", en: "Level" },
-  rating: { ar: "تقييم", en: "Rating" },
+  formSelectBranch: {
+    ar: "اختر الفرع",
+    en: "Select branch",
+  },
+
+  duration: {
+    ar: "المدة",
+    en: "Duration",
+  },
+
+  level: {
+    ar: "المستوى",
+    en: "Level",
+  },
+
+  rating: {
+    ar: "تقييم",
+    en: "Rating",
+  },
 
   statsAria: {
     ar: "إحصائيات الأكاديمية",
@@ -220,7 +314,7 @@ const ui = {
   },
 
   footerDesc: {
-    ar: "أكاديمية جي إس إم مصر — تدريب عملي حديث في الإلكترونيات وصيانة الموبايل والبرمجه للأطفال والشباب.",
+    ar: "أكاديمية جي إس إم مصر — تدريب عملي حديث في الإلكترونيات وصيانة الموبايل والبرمجة للأطفال والشباب.",
     en: "GSM Egypt Academy — Modern Hands-on Training in Electronics, Mobile Maintenance, and Programming for Kids & Youth.",
   },
 } as const;
@@ -229,7 +323,7 @@ const heroTags = {
   ar: [
     "التدريب عملي",
     "مختبرات حديثة",
-    "شهاده معتمدة",
+    "شهادة معتمدة",
     "لجميع الأعمار",
   ],
 
