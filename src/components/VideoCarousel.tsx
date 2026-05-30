@@ -88,8 +88,8 @@ export function VideoCarousel() {
 
             <p className="mt-3 text-base leading-relaxed text-gsm-muted sm:text-lg">
               {isAr
-                ? "شاهد تجارب الطلاب والمشاريع داخل أكاديمية جي إس إم"
-                : "Watch student experiences and projects inside GSM Egypt Academy"}
+                ? "شاهد تجارب وآراء خريجي أكاديمية جي إس إم بعد انتهاء آخر محاضرة"
+                : "Watch Real Reviews and Experiences from GSM Academy Graduates After Their Final Lecture"}
             </p>
 
           </div>
