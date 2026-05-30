@@ -1,29 +1,48 @@
-
-
 "use client";
-
 import { useState } from "react";
-
 import { FadeIn } from "@/components/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { courses } from "@/data/courses";
-import { siteConfig } from "@/data/site";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { t as pick } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
-
 declare global {
   interface Window {
     fbq?: (...args: any[]) => void;
   }
 }
-
+const branches = [
+  {
+    value: "nasr-city",
+    ar: "مدينة نصر",
+    en: "Nasr City",
+  },
+  {
+    value: "dokki",
+    ar: "الدقي",
+    en: "Dokki",
+  },
+  {
+    value: "mansoura",
+    ar: "المنصوره",
+    en: "Mansoura",
+  },
+  {
+    value: "october",
+    ar: "أكتوبر",
+    en: "October",
+  },
+  {
+    value: "online",
+    ar: "أونلاين",
+    en: "Online",
+  },
+];
 export function ContactForm() {
   const { locale, t } = useLocale();
-
   const [loading, setLoading] = useState(false);
-
+  const [success, setSuccess] = useState(false);
   return (
     <section
       id="inquiry"
@@ -39,28 +58,32 @@ export function ContactForm() {
             >
               {t("formTitle")}
             </h2>
-
             <p className="mt-3 text-sm leading-7 text-gsm-muted sm:text-base">
               {t("formDesc")}
             </p>
           </div>
-
           <form
             onSubmit={async (e) => {
               e.preventDefault();
-
               setLoading(true);
-
+              setSuccess(false);
               const formData = new FormData(e.currentTarget);
-
+              const selectedBranch = branches.find(
+                (branch) =>
+                  branch.value === formData.get("branch")
+              );
+              const branchName =
+                locale === "ar"
+                  ? selectedBranch?.ar
+                  : selectedBranch?.en;
               const data = {
                 name: formData.get("name"),
                 phone: formData.get("phone"),
                 course: formData.get("course"),
+                branch: branchName,
                 message: formData.get("message"),
                 locale,
               };
-
               try {
                 const response = await fetch("/api/contact", {
                   method: "POST",
@@ -69,23 +92,15 @@ export function ContactForm() {
                   },
                   body: JSON.stringify(data),
                 });
-
                 if (response.ok) {
-                  alert(
-                    locale === "ar"
-                      ? "تم إرسال طلبك بنجاح 🎉"
-                      : "Message sent successfully 🎉"
-                  );
-
-                  (e.target as HTMLFormElement).reset();
-
-                  // Meta Pixel Lead Event
+                  setSuccess(true);
                   if (
                     typeof window !== "undefined" &&
                     window.fbq
                   ) {
                     window.fbq("track", "Lead");
                   }
+                  (e.target as HTMLFormElement).reset();
                 } else {
                   alert(
                     locale === "ar"
@@ -95,20 +110,17 @@ export function ContactForm() {
                 }
               } catch (error) {
                 console.error(error);
-
                 alert(
                   locale === "ar"
                     ? "حدث خطأ أثناء الإرسال"
                     : "Something went wrong"
                 );
               }
-
               setLoading(false);
             }}
             className="mx-auto mt-8 max-w-xl space-y-6 rounded-[36px] bg-white p-6 shadow-xl shadow-gsm-navy/5 sm:p-10"
           >
             <input type="hidden" name="locale" value={locale} />
-
             <div>
               <label
                 htmlFor="name"
@@ -116,7 +128,6 @@ export function ContactForm() {
               >
                 {t("formName")}
               </label>
-
               <input
                 id="name"
                 name="name"
@@ -131,7 +142,6 @@ export function ContactForm() {
                 className={inputClass}
               />
             </div>
-
             <div>
               <label
                 htmlFor="phone"
@@ -139,7 +149,6 @@ export function ContactForm() {
               >
                 {t("formPhone")}
               </label>
-
               <input
                 id="phone"
                 name="phone"
@@ -151,7 +160,6 @@ export function ContactForm() {
                 className={cn(inputClass, "text-end")}
               />
             </div>
-
             <div>
               <label
                 htmlFor="course"
@@ -159,28 +167,57 @@ export function ContactForm() {
               >
                 {t("formCourse")}
               </label>
-
               <select
                 id="course"
                 name="course"
+                required
                 className={inputClass}
                 defaultValue=""
               >
                 <option value="">
                   {t("formSelectCourse")}
                 </option>
-
                 {courses.map((course) => (
                   <option
                     key={course.id}
-                    value={course.id}
+                    value={pick(locale, course.title)}
                   >
                     {pick(locale, course.title)}
                   </option>
                 ))}
               </select>
             </div>
-
+            <div>
+              <label
+                htmlFor="branch"
+                className="mb-2 block text-base font-bold text-gsm-navy"
+              >
+                {locale === "ar" ? "الفرع" : "Branch"}
+              </label>
+              <select
+                id="branch"
+                name="branch"
+                required
+                className={inputClass}
+                defaultValue=""
+              >
+                <option value="">
+                  {locale === "ar"
+                    ? "اختر الفرع"
+                    : "Select branch"}
+                </option>
+                {branches.map((branch) => (
+                  <option
+                    key={branch.value}
+                    value={branch.value}
+                  >
+                    {locale === "ar"
+                      ? branch.ar
+                      : branch.en}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div>
               <label
                 htmlFor="message"
@@ -188,7 +225,6 @@ export function ContactForm() {
               >
                 {t("formMessage")}
               </label>
-
               <textarea
                 id="message"
                 name="message"
@@ -198,29 +234,36 @@ export function ContactForm() {
                     ? "اكتب استفسارك هنا..."
                     : "Write your message here..."
                 }
-                className={cn(inputClass, "resize-none")}
+                className={cn(
+                  inputClass,
+                  "resize-none"
+                )}
               />
             </div>
-
-            <div className="flex flex-col gap-4 sm:flex-row">
+            <div className="space-y-3">
               <Button
                 type="submit"
+                disabled={loading}
                 variant="primary"
-                className="h-16 flex-1 rounded-full text-lg font-bold shadow-xl shadow-red-500/20"
+                className="h-16 w-full rounded-full text-lg font-bold shadow-xl shadow-red-500/20 disabled:opacity-70"
               >
                 {loading
                   ? locale === "ar"
-                    ? "جارٍ الإرسال..."
+                    ? "جارٍ إرسال البيانات..."
                     : "Sending..."
-                  : t("formSubmit")}
+                  : success
+                    ? locale === "ar"
+                      ? "تم إرسال طلبك بنجاح"
+                      : "Your request has been sent successfully"
+                    : locale === "ar"
+                      ? "احجز مكانك الآن"
+                      : "Book Your Seat Now"}
               </Button>
-
-              <Button
-                href={siteConfig.whatsapp.href(locale)}
-                className="h-16 flex-1 rounded-full !bg-blue-600 !text-white text-lg font-bold hover:!bg-blue-700"
-              >
-                {t("whatsapp")}
-              </Button>
+              <p className="text-center text-sm text-gsm-muted">
+                {locale === "ar"
+                  ? "بعد التسجيل سيقوم فريقنا بالتواصل معك"
+                  : "Our team will contact you after registration"}
+              </p>
             </div>
           </form>
         </FadeIn>
@@ -228,6 +271,5 @@ export function ContactForm() {
     </section>
   );
 }
-
 const inputClass =
-  "w-full rounded-[26px] border-2 border-gsm-navy/10 bg-white px-6 py-5 text-lg text-gsm-navy transition-all duration-300 placeholder:text-gsm-muted/60 focus:border-gsm-blue focus:outline-none focus:ring-4 focus:ring-gsm-blue/10";
+  "font-cairo w-full rounded-[26px] border-2 border-gsm-navy/10 bg-white px-6 py-5 text-lg text-gsm-navy transition-all duration-300 placeholder:text-gsm-muted/60 focus:border-gsm-blue focus:outline-none focus:ring-4 focus:ring-gsm-blue/10";
