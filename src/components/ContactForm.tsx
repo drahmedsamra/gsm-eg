@@ -1,5 +1,7 @@
 "use client";
+
 import { useState } from "react";
+
 import { FadeIn } from "@/components/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -7,11 +9,13 @@ import { courses } from "@/data/courses";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { t as pick } from "@/lib/i18n/types";
 import { cn } from "@/lib/utils";
+
 declare global {
   interface Window {
     fbq?: (...args: any[]) => void;
   }
 }
+
 const branches = [
   {
     value: "nasr-city",
@@ -39,10 +43,13 @@ const branches = [
     en: "Online",
   },
 ];
+
 export function ContactForm() {
   const { locale, t } = useLocale();
+
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
   return (
     <section
       id="inquiry"
@@ -58,24 +65,31 @@ export function ContactForm() {
             >
               {t("formTitle")}
             </h2>
+
             <p className="mt-3 text-sm leading-7 text-gsm-muted sm:text-base">
               {t("formDesc")}
             </p>
           </div>
+
           <form
             onSubmit={async (e) => {
               e.preventDefault();
+
               setLoading(true);
               setSuccess(false);
+
               const formData = new FormData(e.currentTarget);
+
               const selectedBranch = branches.find(
                 (branch) =>
                   branch.value === formData.get("branch")
               );
+
               const branchName =
                 locale === "ar"
                   ? selectedBranch?.ar
                   : selectedBranch?.en;
+
               const data = {
                 name: formData.get("name"),
                 phone: formData.get("phone"),
@@ -84,6 +98,7 @@ export function ContactForm() {
                 message: formData.get("message"),
                 locale,
               };
+
               try {
                 const response = await fetch("/api/contact", {
                   method: "POST",
@@ -92,15 +107,47 @@ export function ContactForm() {
                   },
                   body: JSON.stringify(data),
                 });
+
                 if (response.ok) {
                   setSuccess(true);
+
                   if (
                     typeof window !== "undefined" &&
                     window.fbq
                   ) {
                     window.fbq("track", "Lead");
                   }
+
+                  const whatsappMessage =
+                    locale === "ar"
+                      ? `مرحباً، أريد الحجز والاستفسار عن كورسات جي اس ام مصر
+
+الاسم: ${String(data.name || "")}
+
+رقم الهاتف: ${String(data.phone || "")}
+
+الكورس: ${String(data.course || "")}
+
+الفرع: ${String(data.branch || "")}
+`
+                      : `Hello, I would like to inquire about GSM Egypt courses
+
+Name: ${String(data.name || "")}
+
+Phone Number: ${String(data.phone || "")}
+
+Course: ${String(data.course || "")}
+
+Branch: ${String(data.branch || "")}
+`;
+
                   (e.target as HTMLFormElement).reset();
+
+                  setTimeout(() => {
+                    window.location.href = `https://wa.me/201011822931?text=${encodeURIComponent(
+                      whatsappMessage
+                    )}`;
+                  }, 1200);
                 } else {
                   alert(
                     locale === "ar"
@@ -110,17 +157,20 @@ export function ContactForm() {
                 }
               } catch (error) {
                 console.error(error);
+
                 alert(
                   locale === "ar"
                     ? "حدث خطأ أثناء الإرسال"
                     : "Something went wrong"
                 );
               }
+
               setLoading(false);
             }}
             className="mx-auto mt-8 max-w-xl space-y-6 rounded-[36px] bg-white p-6 shadow-xl shadow-gsm-navy/5 sm:p-10"
           >
             <input type="hidden" name="locale" value={locale} />
+
             <div>
               <label
                 htmlFor="name"
@@ -128,6 +178,7 @@ export function ContactForm() {
               >
                 {t("formName")}
               </label>
+
               <input
                 id="name"
                 name="name"
@@ -142,6 +193,7 @@ export function ContactForm() {
                 className={inputClass}
               />
             </div>
+
             <div>
               <label
                 htmlFor="phone"
@@ -149,6 +201,7 @@ export function ContactForm() {
               >
                 {t("formPhone")}
               </label>
+
               <input
                 id="phone"
                 name="phone"
@@ -160,6 +213,7 @@ export function ContactForm() {
                 className={cn(inputClass, "text-end")}
               />
             </div>
+
             <div>
               <label
                 htmlFor="course"
@@ -167,6 +221,7 @@ export function ContactForm() {
               >
                 {t("formCourse")}
               </label>
+
               <select
                 id="course"
                 name="course"
@@ -177,6 +232,7 @@ export function ContactForm() {
                 <option value="">
                   {t("formSelectCourse")}
                 </option>
+
                 {courses.map((course) => (
                   <option
                     key={course.id}
@@ -187,6 +243,7 @@ export function ContactForm() {
                 ))}
               </select>
             </div>
+
             <div>
               <label
                 htmlFor="branch"
@@ -194,6 +251,7 @@ export function ContactForm() {
               >
                 {locale === "ar" ? "الفرع" : "Branch"}
               </label>
+
               <select
                 id="branch"
                 name="branch"
@@ -206,6 +264,7 @@ export function ContactForm() {
                     ? "اختر الفرع"
                     : "Select branch"}
                 </option>
+
                 {branches.map((branch) => (
                   <option
                     key={branch.value}
@@ -218,6 +277,7 @@ export function ContactForm() {
                 ))}
               </select>
             </div>
+
             <div>
               <label
                 htmlFor="message"
@@ -225,6 +285,7 @@ export function ContactForm() {
               >
                 {t("formMessage")}
               </label>
+
               <textarea
                 id="message"
                 name="message"
@@ -240,6 +301,7 @@ export function ContactForm() {
                 )}
               />
             </div>
+
             <div className="space-y-3">
               <Button
                 type="submit"
@@ -259,6 +321,7 @@ export function ContactForm() {
                       ? "احجز مكانك الآن"
                       : "Book Your Seat Now"}
               </Button>
+
               <p className="text-center text-sm text-gsm-muted">
                 {locale === "ar"
                   ? "بعد التسجيل سيقوم فريقنا بالتواصل معك"
@@ -271,5 +334,7 @@ export function ContactForm() {
     </section>
   );
 }
+
 const inputClass =
   "font-cairo w-full rounded-[26px] border-2 border-gsm-navy/10 bg-white px-6 py-5 text-lg text-gsm-navy transition-all duration-300 placeholder:text-gsm-muted/60 focus:border-gsm-blue focus:outline-none focus:ring-4 focus:ring-gsm-blue/10";
+``
