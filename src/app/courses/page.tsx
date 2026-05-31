@@ -9,15 +9,15 @@ export default async function CoursesPage() {
     .eq("published", true);
 
   return (
-    <main className="mx-auto max-w-7xl px-4 pt-52 pb-16">
+    <main className="mx-auto max-w-7xl px-4 pb-16 pt-32">
 
       <div className="mb-14 text-center">
 
-        <h1 className="text-5xl font-black text-[var(--gsm-navy)]">
+        <h1 className="text-4xl font-black text-[var(--gsm-navy)] sm:text-5xl lg:text-6xl">
           Our Courses
         </h1>
 
-        <p className="mt-4 text-xl text-gray-500">
+        <p className="mt-4 text-lg text-gray-500 sm:text-xl">
           Explore GSM International Academy Courses
         </p>
 
@@ -47,17 +47,21 @@ export default async function CoursesPage() {
 
               <div className="space-y-3">
 
-                <h2 className="text-3xl font-black text-[var(--gsm-navy)]">
+                <h2 className="text-2xl font-black leading-tight text-[var(--gsm-navy)] sm:text-3xl">
                   {course.title}
                 </h2>
 
-                <p className="line-clamp-3 text-lg leading-8 text-gray-600">
+                <p className="line-clamp-3 text-base leading-7 text-gray-600 sm:text-lg sm:leading-8">
                   {course.short_description}
                 </p>
 
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
+
+                <span className="text-3xl font-black text-[var(--gsm-blue)]">
+                  EGP {course.price}
+                </span>
 
                 {course.old_price && (
                   <span className="text-xl text-gray-400 line-through">
@@ -65,19 +69,15 @@ export default async function CoursesPage() {
                   </span>
                 )}
 
-                <span className="text-3xl font-black text-[var(--gsm-blue)]">
-                  EGP {course.price}
-                </span>
-
               </div>
 
-              <div className="flex items-center justify-between pt-2">
+              <div className="flex items-center justify-between gap-4 pt-2">
 
-                <span className="text-lg font-semibold text-gray-500">
+                <span className="text-base font-semibold text-gray-500 sm:text-lg">
                   ⏱ {course.duration}
                 </span>
 
-                <div className="rounded-2xl bg-[var(--gsm-blue)] px-5 py-3 text-lg font-bold text-white transition group-hover:scale-105">
+                <div className="rounded-2xl bg-[var(--gsm-blue)] px-5 py-3 text-sm font-bold text-white transition group-hover:scale-105 sm:text-lg">
                   View Course
                 </div>
 
