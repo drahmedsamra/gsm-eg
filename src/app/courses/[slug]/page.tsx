@@ -1,3 +1,4 @@
+
 import { supabase } from "@/lib/supabase";
 
 type PageProps = {
@@ -6,7 +7,9 @@ type PageProps = {
   }>;
 };
 
-export default async function CoursePage({ params }: PageProps) {
+export default async function CoursePage({
+  params,
+}: PageProps) {
 
   const { slug } = await params;
 
@@ -25,57 +28,55 @@ export default async function CoursePage({ params }: PageProps) {
   }
 
   return (
-    <main className="mx-auto max-w-7xl px-4 pt-64 pb-16">
+    <main className="mx-auto max-w-7xl px-4 pb-16 pt-32">
 
-      <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+      <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
 
-        <div>
+        <div className="order-1">
 
           <img
             src={course.thumbnail}
             alt={course.title}
-            className="h-[500px] w-full rounded-3xl object-cover shadow-2xl"
+            className="h-[260px] w-full rounded-3xl object-cover shadow-2xl sm:h-[420px] lg:h-[520px]"
           />
 
         </div>
 
-        <div className="space-y-6">
+        <div className="order-2 space-y-5 text-center lg:text-right">
 
           <div className="inline-flex rounded-full bg-blue-100 px-5 py-2 text-sm font-bold text-[var(--gsm-blue)]">
             GSM International Academy
           </div>
 
-          <h1 className="text-5xl font-black leading-tight text-[var(--gsm-navy)]">
+          <h1 className="text-4xl font-black leading-tight text-[var(--gsm-navy)] sm:text-5xl lg:text-6xl">
             {course.title}
           </h1>
 
-          <p className="text-2xl text-gray-500">
+          <p className="text-xl text-gray-500 sm:text-2xl">
             {course.short_description}
           </p>
 
-          <p className="max-w-3xl text-xl leading-10 text-gray-700">
+          <p className="text-lg leading-9 text-gray-700 sm:text-xl sm:leading-10">
             {course.long_description}
           </p>
 
-          <div className="flex items-center gap-4 pt-4">
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2 lg:justify-start">
+
+            <span className="text-4xl font-black text-[var(--gsm-blue)] sm:text-5xl">
+              EGP {course.price}
+            </span>
 
             {course.old_price && (
-              <span className="text-3xl text-gray-400 line-through">
+              <span className="text-2xl text-gray-400 line-through">
                 EGP {course.old_price}
               </span>
             )}
 
-            <span className="text-5xl font-black text-[var(--gsm-blue)]">
-              EGP {course.price}
-            </span>
-
           </div>
 
-          <div className="flex items-center gap-3 text-xl font-semibold text-gray-700">
+          <div className="flex items-center justify-center gap-2 text-lg font-semibold text-gray-700 lg:justify-start">
 
-            <span>
-              ⏱
-            </span>
+            <span>⏱</span>
 
             <span>
               Duration: {course.duration}
@@ -83,12 +84,12 @@ export default async function CoursePage({ params }: PageProps) {
 
           </div>
 
-          <div className="flex flex-wrap gap-4 pt-6">
+          <div className="flex flex-col gap-4 pt-4 sm:flex-row sm:justify-center lg:justify-start">
 
             <a
               href="https://wa.me/201000000000"
               target="_blank"
-              className="rounded-2xl bg-green-500 px-8 py-4 text-lg font-bold text-white transition hover:scale-105"
+              className="rounded-2xl bg-green-500 px-8 py-4 text-center text-lg font-bold text-white transition hover:scale-105"
             >
               WhatsApp
             </a>
