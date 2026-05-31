@@ -1,3 +1,5 @@
+
+
 "use client";
 
 import Link from "next/link";
@@ -43,11 +45,13 @@ export function Navbar() {
 
   return (
     <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled ? "glass-nav py-2" : "bg-transparent py-3",
-      )}
-    >
+  className={cn(
+    "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+    scrolled
+      ? "glass-nav py-2"
+      : "bg-white/80 backdrop-blur-md py-3",
+  )}
+>
       <Container>
         <nav
           className="flex min-h-11 items-center justify-between gap-6"
@@ -55,7 +59,7 @@ export function Navbar() {
         >
           {/* Logo + Title */}
           <Link
-            href="#hero"
+            href="/#hero"
             className={cn(
               "group flex items-center gap-2 sm:gap-3 -ms-1 shrink-0 rounded-lg py-1 ps-1 pe-2",
               "transition-opacity duration-200 hover:opacity-[0.88]",
@@ -103,7 +107,11 @@ export function Navbar() {
             {navItems.map((link) => (
               <li key={link.href}>
                 <Link
-                  href={link.href}
+                  href={
+                    link.href.startsWith("#")
+                      ? `/${link.href}`
+                      : link.href
+                  }
                   className={cn(
                     "text-sm font-medium transition-colors hover:text-gsm-blue",
                     scrolled
@@ -202,7 +210,11 @@ export function Navbar() {
             {navItems.map((link) => (
               <li key={link.href}>
                 <Link
-                  href={link.href}
+                  href={
+                    link.href.startsWith("#")
+                      ? `/${link.href}`
+                      : link.href
+                  }
                   className="block py-2 text-lg font-medium text-gsm-navy hover:text-gsm-blue"
                   onClick={() => setMenuOpen(false)}
                 >

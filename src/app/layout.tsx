@@ -1,3 +1,5 @@
+
+
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 
@@ -8,6 +10,8 @@ import {
 } from "@next/third-parties/google";
 
 import { Providers } from "@/components/Providers";
+import { Navbar } from "@/components/Navbar";
+
 import "./globals.css";
 import { siteConfig } from "@/data/site";
 
@@ -182,7 +186,13 @@ export default function RootLayout({
           />
         </noscript>
 
-        <Providers>{children}</Providers>
+        <Providers>
+
+          <Navbar />
+
+          {children}
+
+        </Providers>
 
         <GoogleAnalytics gaId="G-1PMX146HX4" />
         <GoogleTagManager gtmId="GTM-W8RC98QR" />

@@ -10,7 +10,7 @@ export function AdminCertificateUpload() {
 
   const handleUpload = async () => {
     if (!file) {
-      setMessage("اختر ملف PDF");
+      setMessage("اختر ملف الشهادة");
       return;
     }
 
@@ -44,14 +44,14 @@ export function AdminCertificateUpload() {
         </h2>
 
         <p className="mt-4 text-center text-gray-500">
-          اختر ملف PDF وسيتم رفعه مباشرة
+          اختر ملف PDF أو صورة وسيتم رفعها مباشرة
         </p>
 
         <div className="mt-10 space-y-4">
 
           <input
             type="file"
-            accept="application/pdf"
+            accept=".pdf,image/*"
             onChange={(e) => {
               if (e.target.files?.[0]) {
                 setFile(e.target.files[0]);

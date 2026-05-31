@@ -386,6 +386,7 @@ export const navItems = [
     href: "#contact",
   },
 ];
+``
 
 export const navLabels: Record<
   (typeof navItems)[number]["key"],

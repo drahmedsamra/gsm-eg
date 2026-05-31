@@ -4,7 +4,7 @@ import { FAQ } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
 import { Gallery } from "@/components/Gallery";
 import { Hero } from "@/components/Hero";
-import { Navbar } from "@/components/Navbar";
+// import { Navbar } from "@/components/Navbar";
 import { Stats } from "@/components/Stats";
 import { StudentProjects } from "@/components/StudentProjects";
 import { Testimonials } from "@/components/Testimonials";
@@ -21,7 +21,7 @@ import { CertificateVerification } from "@/components/CertificateVerification";
 export default function Home() {
   return (
     <>
-      <Navbar />
+      {/*<Navbar />*/}
       <main>
         <Hero />
         <Courses />
