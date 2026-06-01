@@ -154,6 +154,7 @@ export function Gallery() {
             <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 items-center gap-3 md:flex">
 
               <NavButton
+                label="Previous gallery images"
                 onClick={() =>
                   scrollByCards("prev")
                 }
@@ -162,6 +163,7 @@ export function Gallery() {
               </NavButton>
 
               <NavButton
+                label="Next gallery images"
                 onClick={() =>
                   scrollByCards("next")
                 }
@@ -265,6 +267,7 @@ export function Gallery() {
 
           <button
             type="button"
+            aria-label="Close gallery image"
             className="absolute top-5 end-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-xl transition hover:bg-white/15"
             onClick={closeLightbox}
           >
@@ -314,15 +317,19 @@ export function Gallery() {
     </section>
   );
 }
+
 function NavButton({
   children,
   onClick,
+  label,
 }: {
   children: React.ReactNode;
   onClick: () => void;
+  label: string;
 }) {
   return (
     <button
+      aria-label={label}
       onClick={onClick}
       className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white shadow-lg shadow-gsm-navy/5 ring-1 ring-gsm-navy/10 backdrop-blur-xl transition duration-300 hover:scale-105 hover:bg-white"
     >

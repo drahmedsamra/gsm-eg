@@ -36,7 +36,7 @@ export function SectionTitle({
         >
           {eyebrow && <span>{eyebrow}</span>}
           {eyebrowEn && (
-            <span className="font-en text-xs opacity-70">{eyebrowEn}</span>
+            <span className="font-en text-xs text-gsm-navy/80">{eyebrowEn}</span>
           )}
         </p>
       )}
