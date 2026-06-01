@@ -14,7 +14,7 @@ import { courses } from "@/data/courses";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 export function Courses() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
 
   return (
     <section
@@ -45,6 +45,8 @@ export function Courses() {
         {/* Mobile Slider */}
         <div className="mt-14 sm:hidden">
           <Swiper
+            key={locale}
+            dir={locale === "ar" ? "rtl" : "ltr"}
             spaceBetween={20}
             slidesPerView={1.2}
           >
