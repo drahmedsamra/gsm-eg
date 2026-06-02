@@ -23,7 +23,7 @@ export function HeroVisual({ locale }: HeroVisualProps) {
           width={900}
           height={650}
           priority
-          quality={75}
+          quality={65}
           sizes="(max-width: 768px) 100vw, 50vw"
           className="h-full w-full object-cover"
         />
@@ -31,9 +31,7 @@ export function HeroVisual({ locale }: HeroVisualProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-gsm-navy/20 via-transparent to-transparent" />
       </div>
 
-      {/* Temporarily disable to test performance */}
-      {/* <FloatingCards locale={locale} /> */}
-
+      {/* Floating Cards */}
       <FloatingCards locale={locale} />
     </div>
   );
