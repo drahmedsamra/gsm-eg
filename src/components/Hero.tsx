@@ -7,7 +7,7 @@ import { siteConfig } from "@/data/site";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
 export function Hero() {
-  const { locale, t, tags } = useLocale();
+  const { locale, tags, t } = useLocale();
 
   return (
     <section
@@ -34,19 +34,60 @@ export function Hero() {
 
           <div className="text-center lg:text-start">
 
-            {/* 
+            {/*
             <p className="mb-4 inline-flex items-center rounded-full border border-gsm-navy/10 bg-white px-4 py-1.5 text-xs font-semibold text-gsm-blue shadow-sm sm:text-sm">
               <span className="me-2 h-2 w-2 rounded-full bg-gsm-red animate-pulse" />
               {t("heroBadge")}
-            </p> 
+            </p>
             */}
 
             <h1 className="text-balance text-[1.9rem] font-bold leading-[1.02] tracking-tight text-gsm-navy sm:text-5xl lg:text-[3.25rem]">
-              {t("heroTitle")}
+              {locale === "ar" ? (
+                <>
+                  التدريب على{" "}
+                  <span className="text-gsm-blue">الإلكترونيات</span>
+                  <br />
+                  والصيانة والبرمجيات
+                </>
+              ) : (
+                <>
+                  Training in{" "}
+                  <span className="text-gsm-blue">Electronics</span>
+                  <br />
+                  Maintenance & Software
+                </>
+              )}
             </h1>
 
             <p className="mx-auto mt-5 max-w-xl text-pretty text-base leading-relaxed text-gsm-muted sm:text-lg lg:mx-0">
-              {t("heroSubtitle")}
+              {locale === "ar" ? (
+                <>
+                  نقدم برامج تدريبية{" "}
+                  <span className="font-semibold text-gsm-blue">
+                    عملية ومتخصصة
+                  </span>{" "}
+                  في الإلكترونيات والبرمجيات وصيانة الموبايل، بالإضافة إلى قسم
+                  مخصص للأطفال لتعلم{" "}
+                  <span className="font-semibold text-gsm-red">
+                    البرمجة والروبوتات والذكاء الاصطناعي
+                  </span>{" "}
+                  بأسلوب تفاعلي حديث يعتمد على التطبيق العملي والمشاريع
+                  الحقيقية.
+                </>
+              ) : (
+                <>
+                  We provide{" "}
+                  <span className="font-semibold text-gsm-blue">
+                    practical and specialized
+                  </span>{" "}
+                  training programs in electronics, software, and mobile
+                  maintenance, along with a dedicated section for kids to learn{" "}
+                  <span className="font-semibold text-gsm-red">
+                    programming, robotics & AI
+                  </span>{" "}
+                  through modern interactive hands-on projects.
+                </>
+              )}
             </p>
 
             <ul className="mx-auto mt-6 flex max-w-lg flex-wrap justify-center gap-2 lg:mx-0 lg:justify-start">
