@@ -12,23 +12,22 @@ export function HeroVisual({ locale }: HeroVisualProps) {
       className="relative mx-auto w-full max-w-2xl"
       aria-hidden
     >
-      {/* Soft Glow */}
-      <div className="absolute inset-0 rounded-[32px] bg-gradient-to-br from-gsm-blue/10 to-gsm-red/5 blur-lg" />
+      {/* Ultra Lightweight Glow */}
+      <div className="absolute inset-0 rounded-3xl bg-gsm-blue/5" />
 
       {/* Main Image */}
-      <div className="relative overflow-hidden rounded-[28px] border border-white/40 bg-white shadow-lg shadow-gsm-navy/10 sm:rounded-[32px]">
+      <div className="relative overflow-hidden rounded-3xl bg-white">
         <Image
           src="/assets/images/hero/gsm-hero.webp"
           alt="GSM Egypt Academy"
           width={900}
           height={650}
           priority
-          quality={65}
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="h-full w-full object-cover"
+          fetchPriority="high"
+          quality={50}
+          sizes="(max-width: 768px) 100vw, 900px"
+          className="block h-auto w-full object-cover"
         />
-
-        <div className="absolute inset-0 bg-gradient-to-t from-gsm-navy/20 via-transparent to-transparent" />
       </div>
 
       {/* Floating Cards */}
