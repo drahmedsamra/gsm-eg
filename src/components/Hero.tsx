@@ -68,7 +68,7 @@ export function Hero() {
                   </span>{" "}
                   في الإلكترونيات والبرمجيات وصيانة الموبايل، بالإضافة إلى قسم
                   مخصص للأطفال لتعلم{" "}
-                  <span className="font-semibold text-gsm-red">
+                  <span className="font-bold text-gsm-blue">
                     البرمجة والروبوتات والذكاء الاصطناعي
                   </span>{" "}
                   بأسلوب تفاعلي حديث يعتمد على التطبيق العملي والمشاريع
@@ -82,7 +82,7 @@ export function Hero() {
                   </span>{" "}
                   training programs in electronics, software, and mobile
                   maintenance, along with a dedicated section for kids to learn{" "}
-                  <span className="font-semibold text-gsm-red">
+                  <span className="font-bold text-gsm-blue">
                     programming, robotics & AI
                   </span>{" "}
                   through modern interactive hands-on projects.
