@@ -4,8 +4,6 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["192.168.1.3"],
 
   images: {
-    unoptimized: true,
-
     qualities: [65, 75],
 
     formats: ["image/avif", "image/webp"],
