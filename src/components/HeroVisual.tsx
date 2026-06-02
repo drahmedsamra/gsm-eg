@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { FloatingCards } from "./FloatingCards";
+// import { FloatingCards } from "./FloatingCards";
 
 type HeroVisualProps = {
   locale: "ar" | "en";
@@ -24,14 +24,14 @@ export function HeroVisual({ locale }: HeroVisualProps) {
           height={650}
           priority
           fetchPriority="high"
-          quality={50}
+          quality={65}
           sizes="(max-width: 768px) 100vw, 900px"
           className="block h-auto w-full object-cover"
         />
       </div>
 
       {/* Floating Cards */}
-      <FloatingCards locale={locale} />
+      {/* <FloatingCards locale={locale} /> */}
     </div>
   );
 }
