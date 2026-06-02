@@ -10,8 +10,6 @@ import Tracking from "@/components/analytics/Tracking";
 import "./globals.css";
 import { siteConfig } from "@/data/site";
 
-
-
 /* ==========================================================================
    Fonts
    ========================================================================== */
@@ -24,17 +22,13 @@ const cairo = Cairo({
   preload: true,
 });
 
-
-
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600", "700"],
   display: "swap",
-  preload: true,
+  preload: false,
 });
-
-
 
 /* ==========================================================================
    SEO Metadata
@@ -49,19 +43,13 @@ export const metadata: Metadata = {
     apple: "/favicon.webp",
   },
 
-
-
   title: {
     default: "جي اس ام مصر لهندسة الإلكترونيات والصيانة والبرمجة",
     template: "%s | جي اس ام مصر",
   },
 
-
-
   description:
     "تعلم صيانة الموبايل والإلكترونيات والبرمجة والذكاء الاصطناعي مع متخصصين وخبراء في المجال.",
-
-
 
   keywords: [
     "جي اس ام مصر",
@@ -76,8 +64,6 @@ export const metadata: Metadata = {
     "Electronics Engineering",
     "Mobile Maintenance",
   ],
-
-
 
   openGraph: {
     title: "جي اس ام مصر لهندسة الإلكترونيات والصيانة والبرمجة",
@@ -101,8 +87,6 @@ export const metadata: Metadata = {
     ],
   },
 
-
-
   twitter: {
     card: "summary_large_image",
 
@@ -114,21 +98,15 @@ export const metadata: Metadata = {
     images: ["/og-image.webp"],
   },
 
-
-
   robots: {
     index: true,
     follow: true,
   },
 
-
-
   alternates: {
     canonical: "/",
   },
 };
-
-
 
 /* ==========================================================================
    Viewport
@@ -139,8 +117,6 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
 };
-
-
 
 /* ==========================================================================
    Root Layout
