@@ -41,7 +41,7 @@ export function Hero() {
             </p> 
             */}
 
-            <h1 className="text-balance text-[2.2rem] font-bold leading-[1.1] tracking-tight text-gsm-navy sm:text-5xl lg:text-[3.25rem]">
+            <h1 className="text-balance text-[1.9rem] font-bold leading-[1.02] tracking-tight text-gsm-navy sm:text-5xl lg:text-[3.25rem]">
               {t("heroTitle")}
             </h1>
 
