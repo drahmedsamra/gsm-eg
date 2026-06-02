@@ -18,7 +18,7 @@ export function HeroVisual({ locale }: HeroVisualProps) {
       {/* Main Image */}
       <div className="relative overflow-hidden rounded-3xl bg-white">
         <Image
-          src="/assets/images/hero/gsm-hero.webp"
+          src="/assets/images/hero/gsm-herov3.webp"
           alt="GSM Egypt Academy"
           width={900}
           height={650}
