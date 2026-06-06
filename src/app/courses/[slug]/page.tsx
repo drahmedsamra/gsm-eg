@@ -78,7 +78,7 @@ export default async function CoursePage({
 
           <div className="flex flex-col gap-4 pt-4 sm:flex-row sm:justify-center lg:justify-end">
             <a
-              href="https://wa.me/2010007031009"
+              href="https://wa.me/201011822931"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-2xl bg-green-500 px-8 py-4 text-center text-lg font-bold text-white transition hover:scale-105"
