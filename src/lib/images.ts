@@ -47,6 +47,20 @@ export const defaultImages = {
     "graduation-6": "/assets/images/gallery/graduation6.webp",
     "graduation-7": "/assets/images/gallery/graduation7.webp",
     "graduation-8": "/assets/images/gallery/graduation8.webp",
+    "graduation-9": "/assets/images/gallery/graduation9.webp",
+    "graduation-10": "/assets/images/gallery/graduation10.webp",
+    "graduation-11": "/assets/images/gallery/graduation11.webp",
+    "graduation-12": "/assets/images/gallery/graduation12.webp",
+    "graduation-13": "/assets/images/gallery/graduation13.webp",
+    "lab-1": "/assets/images/gallery/lab1.webp",
+    "lab-2": "/assets/images/gallery/lab2.webp",
+
+
+
+
+
+
+
   },
 
   avatars: {
