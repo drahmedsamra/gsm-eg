@@ -23,7 +23,7 @@ export function AdminCertificateUpload() {
     const { error } = await supabase.storage
       .from("certificates")
       .upload(fileName, file, {
-        upsert: true,
+        upsert: false,
       });
 
     if (error) {
