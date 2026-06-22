@@ -27,9 +27,9 @@ export function AdminCertificateUpload() {
       });
 
     if (error) {
-      setMessage("حدث خطأ أثناء الرفع");
-      console.log(error);
-    } else {
+  console.error("UPLOAD ERROR:", error);
+  setMessage(error.message);
+} else {
       setMessage("تم رفع الشهادة بنجاح");
     }
 
