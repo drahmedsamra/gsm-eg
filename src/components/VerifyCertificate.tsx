@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 
-export function CertificateVerification() {
+export function VerifyCertificate() {
   const { locale } = useLocale();
 
   const isAr = locale === "ar";
@@ -67,7 +67,7 @@ export function CertificateVerification() {
   };
 
   return (
-    <section className="px-4 py-20">
+    <section id="verify-certificate" className="px-4 py-20">
       <div className="mx-auto max-w-3xl rounded-3xl border border-gray-200 bg-white p-6 shadow-2xl sm:p-10">
 
         <h2 className="text-center text-4xl font-bold text-[var(--gsm-navy)] sm:text-5xl">

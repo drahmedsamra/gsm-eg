@@ -13,7 +13,7 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { WhyGSM } from "@/components/WhyGSM";
 import { FloatingActions } from "@/components/FloatingActions";
-import { CertificateVerification } from "@/components/CertificateVerification";
+import { VerifyCertificate } from "@/components/VerifyCertificate";
 // import { AdminCertificateUpload } from "@/components/AdminCertificateUpload";
 
 
@@ -34,7 +34,7 @@ export default function Home() {
         <FAQ />
         <ContactForm />
         <WhatsAppCTA /> 
-        <CertificateVerification />
+        <VerifyCertificate />
         {/* <AdminCertificateUpload /> */}
       </main>
       <Footer />
