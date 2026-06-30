@@ -1,3 +1,4 @@
+import HomeSchema from "@/components/HomeSchema";
 import { ContactForm } from "@/components/ContactForm";
 import { Courses } from "@/components/Courses";
 import { FAQ } from "@/components/FAQ";
@@ -16,12 +17,11 @@ import { FloatingActions } from "@/components/FloatingActions";
 import { VerifyCertificate } from "@/components/VerifyCertificate";
 // import { AdminCertificateUpload } from "@/components/AdminCertificateUpload";
 
-
-
 export default function Home() {
   return (
     <>
-      {/*<Navbar />*/}
+      {/* <Navbar /> */}
+
       <main>
         <Hero />
         <Courses />
@@ -33,29 +33,15 @@ export default function Home() {
         <Gallery />
         <FAQ />
         <ContactForm />
-        <WhatsAppCTA /> 
+        <WhatsAppCTA />
         <VerifyCertificate />
         {/* <AdminCertificateUpload /> */}
       </main>
+
       <Footer />
       <FloatingActions />
+      <WhatsAppButton />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            name: "GSM Egypt Academy",
-            alternateName: "أكاديمية GSM",
-            description:
-              "أكاديمية تقنية للبرمجة والإلكترونيات والذكاء الاصطناعي للأطفال والشباب",
-            url: "https://gsm-academy.com",
-            areaServed: "EG",
-            inLanguage: "ar",
-          }),
-        }}
-      />
+      <HomeSchema />
     </>
   );
-}
