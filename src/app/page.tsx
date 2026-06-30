@@ -40,9 +40,9 @@ export default function Home() {
 
       <Footer />
       <FloatingActions />
-      <WhatsAppButton />
+      {/* <WhatsAppButton /> */}
 
       <HomeSchema />
     </>
-    
   );
+}

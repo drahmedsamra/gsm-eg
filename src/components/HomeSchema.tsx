@@ -21,8 +21,6 @@ export default function HomeSchema() {
 
       email: "gsm.academy@gmail.com",
 
-      inLanguage: "ar-EG",
-
       founder: {
         "@type": "Person",
         name: "أحمد سمرة",
@@ -116,21 +114,25 @@ export default function HomeSchema() {
           "@type": "ListItem",
           position: 1,
           name: "كورس صيانة الموبايل",
+          url: "https://gsm-eg.com/mobile",
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "كورسات الإلكترونيات",
+          url: "https://gsm-eg.com/electronics",
         },
         {
           "@type": "ListItem",
           position: 3,
           name: "برنامج المخترع الصغير",
+          url: "https://gsm-eg.com/kids",
         },
         {
           "@type": "ListItem",
           position: 4,
           name: "كورسات البرمجة للأطفال",
+          url: "https://gsm-eg.com/programming",
         },
       ],
     },
