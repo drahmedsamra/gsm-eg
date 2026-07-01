@@ -21,10 +21,10 @@ export function AdminCertificateUpload() {
     const fileName = file.name.toLowerCase();
 
     const { error } = await supabase.storage
-      .from("certificates")
-      .upload(fileName, file, {
-        upsert: false,
-      });
+  .from("certificates")
+  .upload(fileName, file, {
+    upsert: true,
+  });
 
     if (error) {
   console.error("UPLOAD ERROR:", error);
