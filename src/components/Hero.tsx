@@ -12,7 +12,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-gsm-light pt-24 pb-14 sm:pt-28 sm:pb-20 lg:pt-36 lg:pb-24"
+      className="relative overflow-hidden bg-gsm-light pt-24 pb-8 sm:pt-28 sm:pb-12 lg:pt-32 lg:pb-14"
     >
       {/* Lightweight Background */}
       <div
