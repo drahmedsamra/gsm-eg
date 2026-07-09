@@ -90,8 +90,8 @@ export function VerifyCertificate() {
             onChange={(e) => setCode(e.target.value)}
             placeholder={
               isAr
-                ? "مثال: nabilagsm"
-                : "Example: nabilagsm"
+                ? "مثال: GSM-2026-00123"
+                : "Example: GSM-2026-00123"
             }
             className="flex-1 rounded-2xl border border-gray-300 px-6 py-5 text-lg outline-none transition focus:border-[var(--gsm-blue)]"
           />
