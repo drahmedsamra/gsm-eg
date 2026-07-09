@@ -26,7 +26,7 @@ export function Hero() {
           {/* Content */}
           <div className="text-center lg:text-start">
 
-            <h1 className="text-balance text-[2rem] font-bold leading-[1.05] tracking-tight text-gsm-navy sm:text-5xl lg:text-[3.2rem]">
+            <h1 className="text-balance text-[2rem] font-bold leading-[1.2] tracking-tight text-gsm-navy sm:text-5xl lg:text-[3.2rem]">
               {locale === "ar" ? (
                 <>
                   التدريب على{" "}
