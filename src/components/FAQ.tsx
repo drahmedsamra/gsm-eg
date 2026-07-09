@@ -12,16 +12,13 @@ import { cn } from "@/lib/utils";
 export function FAQ() {
   const { locale, t } = useLocale();
 
-  const [openId, setOpenId] = useState<string | null>(
-    faqItems[0]?.id ?? null,
-  );
+  const [openId, setOpenId] = useState<string | null>(null);
 
   return (
     <section
       id="faq"
-      className="relative overflow-hidden bg-gradient-to-b from-[#f7f8ff] via-white to-[#f8f9ff] py-20 sm:py-24"
+      className="relative overflow-hidden bg-gradient-to-b from-[#f7f8ff] via-white to-[#f8f9ff] py-16 sm:py-20"
     >
-      
       <div
         aria-hidden
         className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.08),transparent_40%)]"
@@ -31,13 +28,12 @@ export function FAQ() {
         <FadeIn>
           <SectionTitle
             eyebrow={t("faqEyebrow")}
-            // eyebrowEn="FAQ"
             title={t("faqTitle")}
             description={t("faqDesc")}
           />
         </FadeIn>
 
-        <div className="mx-auto mt-14 max-w-4xl space-y-5">
+        <div className="mx-auto mt-12 max-w-4xl space-y-4">
           {faqItems.map((item, i) => {
             const isOpen = openId === item.id;
 
@@ -45,12 +41,12 @@ export function FAQ() {
               <FadeIn key={item.id} delay={i * 60}>
                 <div
                   className={cn(
-                    "group overflow-hidden rounded-[30px] border border-white/60 bg-white/80 backdrop-blur-xl",
-                    "shadow-[0_10px_40px_rgba(15,23,42,0.05)]",
-                    "transition-all duration-500",
-                    "hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(37,99,235,0.10)]",
+                    "group overflow-hidden rounded-[24px] border border-white/60 bg-white/80 backdrop-blur-xl",
+                    "shadow-lg",
+                    "transition-all duration-300",
+                    "hover:-translate-y-1 hover:shadow-xl",
                     isOpen &&
-                      "border-gsm-blue/20 shadow-[0_20px_60px_rgba(37,99,235,0.12)]",
+                      "border-gsm-blue/20 shadow-xl",
                   )}
                 >
                   <h3>
@@ -67,7 +63,7 @@ export function FAQ() {
                       <span
                         className={cn(
                           "text-lg font-bold leading-relaxed tracking-tight text-gsm-navy transition-colors duration-300 sm:text-[1.45rem]",
-                          "group-hover:text-gsm-blue",
+                          "group-hover:text-gsm-navy",
                           isOpen && "text-gsm-blue",
                         )}
                       >
@@ -79,26 +75,16 @@ export function FAQ() {
                           "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl",
                           "bg-gradient-to-br from-[#f4f7ff] to-[#edf2ff]",
                           "text-gsm-blue shadow-sm",
-                          "transition-all duration-500",
-                          "group-hover:scale-110 group-hover:shadow-md",
+                          "transition-all duration-300",
+                          "group-hover:scale-105",
                           isOpen &&
-                            "rotate-180 bg-gsm-blue text-white shadow-lg shadow-gsm-blue/25",
+                            "bg-gsm-blue text-white shadow-md",
                         )}
                         aria-hidden
                       >
-                        <svg
-                          className="h-5 w-5"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2.5}
-                            d="M19 9l-7 7-7-7"
-                          />
-                        </svg>
+                        <span className="text-3xl font-light leading-none">
+                          {isOpen ? "−" : "+"}
+                        </span>
                       </span>
                     </button>
                   </h3>
@@ -108,7 +94,7 @@ export function FAQ() {
                     role="region"
                     aria-labelledby={`faq-trigger-${item.id}`}
                     className={cn(
-                      "grid transition-all duration-500 ease-out",
+                      "grid transition-all duration-300 ease-out",
                       isOpen
                         ? "grid-rows-[1fr] opacity-100"
                         : "grid-rows-[0fr] opacity-0",
