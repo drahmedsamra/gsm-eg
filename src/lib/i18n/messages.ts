@@ -89,8 +89,8 @@ const ui = {
   },
 
   coursesDesc: {
-    ar: "كورسات عملية تناسب مختلف الأعمار بأقوى شهادة مصرية على الإطلاق معتمدة من AQS Agency الدولية.",
-    en: "Practical courses for all age groups with one of the strongest Egyptian certifications accredited by AQS International Agency.",
+    ar: "كورسات عملية تناسب مختلف الأعمار .",
+    en: "Practical courses for all age groups with one of the strongest Egyptian .",
   },
 
   whyEyebrow: {
@@ -323,14 +323,14 @@ const heroTags = {
   ar: [
     "التدريب عملي",
     "مختبرات حديثة",
-    "شهادة معتمدة",
+    "أقوي المحاضرين",
     "لجميع الأعمار",
   ],
 
   en: [
     "Hands-on learning",
     "Modern labs",
-    "Certified",
+    "Best instructors",
     "Kids & youth",
   ],
 } as const;
