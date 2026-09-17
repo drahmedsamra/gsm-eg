@@ -67,17 +67,7 @@ export const faqItems: FaqItem[] = [
     },
   },
 
-  {
-    id: "certificate",
-    question: {
-      ar: "هل أحصل على شهادة معتمدة بعد انتهاء الكورس؟",
-      en: "Will I receive an accredited certificate after completing the course?",
-    },
-    answer: {
-      ar: "نعم، يحصل المتدرب بعد اجتياز الكورس على شهادة معتمدة من أكاديمية GSM مصر بالتعاون مع AQS Agency، كما يمكن التحقق من صحة الشهادة إلكترونيًا من خلال موقع الأكاديمية باستخدام كود الشهادة.",
-      en: "Yes. Students receive an accredited certificate issued by GSM Egypt Academy in cooperation with AQS Agency. The certificate can also be verified online using its unique verification code.",
-    },
-  },
+
 
   {
     id: "tools",
@@ -91,17 +81,7 @@ export const faqItems: FaqItem[] = [
     },
   },
 
-  {
-    id: "career",
-    question: {
-      ar: "هل تؤهلني الكورسات للعمل أو بدء مشروع خاص؟",
-      en: "Can these courses help me get a job or start my own business?",
-    },
-    answer: {
-      ar: "تم تصميم البرامج التدريبية لتمنحك خبرة عملية حقيقية تساعدك على العمل في الشركات أو مراكز الصيانة، أو بدء مشروعك الخاص بثقة بعد اكتساب المهارات المطلوبة.",
-      en: "Our training programs are designed to provide real-world skills that help you work in companies, repair centers, or confidently start your own business.",
-    },
-  },
+
 
   {
     id: "difference",
