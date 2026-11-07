@@ -49,13 +49,13 @@ export const courses: Course[] = [
     accent: "navy",
 
     price: {
-      ar: "0 جنيه",
-      en: "EGP 0",
+      ar: "6950 جنيه",
+      en: "EGP 6950",
     },
 
     oldPrice: {
-      ar: "0 جنيه",
-      en: "EGP 0",
+      ar: "12000 جنيه",
+      en: "EGP 12000",
     },
   },
 
@@ -93,8 +93,8 @@ export const courses: Course[] = [
     accent: "navy",
 
     price: {
-      ar: "0 جنيه",
-      en: "EGP 0",
+      ar: "9950 جنيه",
+      en: "EGP 9950",
     },
   },
 
@@ -117,8 +117,8 @@ export const courses: Course[] = [
     },
   
     duration: {
-      ar: "8 اسابيع ",
-        en: "8 Weeks",
+      ar: "6 اسابيع ",
+        en: "6 Weeks",
     },
 
     level: {
@@ -131,13 +131,13 @@ export const courses: Course[] = [
     accent: "blue",
 
     price: {
-      ar: "0 جنيه",
-      en: "EGP 0",
+      ar: "2950 جنيه",
+      en: "EGP 2950",
     },
 
     oldPrice: {
-      ar: "0 جنيه",
-      en: "EGP 0",
+      ar: "4000 جنيه",
+      en: "EGP 4000",
     },
   },
 ];
