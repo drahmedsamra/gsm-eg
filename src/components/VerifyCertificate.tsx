@@ -141,61 +141,64 @@ export function VerifyCertificate() {
   )}`;
 
   return (
-    <section id="verify-certificate" className="px-4 py-16" dir={isAr ? "rtl" : "ltr"}>
-      <div className="mx-auto max-w-4xl rounded-3xl border border-gray-200 bg-white p-6 shadow-2xl sm:p-10">
-        <div className="text-center">
-          <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-[var(--gsm-blue)]">
-            <FileText className="h-8 w-8" />
+    <section id="verify-certificate" className="px-4 py-16 print:p-0 print:m-0" dir={isAr ? "rtl" : "ltr"}>
+      <div className="mx-auto max-w-4xl rounded-3xl border border-gray-200 bg-white p-6 shadow-2xl sm:p-10 print:border-none print:shadow-none print:p-0 print:m-0 print:bg-transparent">
+        {/* Search Box - Hidden during printing */}
+        <div className="no-print">
+          <div className="text-center">
+            <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-[var(--gsm-blue)]">
+              <FileText className="h-8 w-8" />
+            </div>
+
+            <h1 className="text-3xl font-extrabold text-[var(--gsm-navy)] sm:text-4xl">
+              {isAr ? "التحقق من صحة الشهادات" : "Certificate Verification"}
+            </h1>
+
+            <p className="mt-3 text-base text-gray-500 sm:text-lg">
+              {isAr
+                ? "أدخل كود الشهادة للتحقق من صحتها واستعراض الشهادة المعتمدة فورياً"
+                : "Enter the certificate code to verify its authenticity and view the certificate instantly"}
+            </p>
           </div>
 
-          <h1 className="text-3xl font-extrabold text-[var(--gsm-navy)] sm:text-4xl">
-            {isAr ? "التحقق من صحة الشهادات" : "Certificate Verification"}
-          </h1>
+          {/* Search Input Form */}
+          <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <input
+              type="text"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              placeholder={
+                isAr
+                  ? "أدخل كود الشهادة (مثال: 20263435227)"
+                  : "Enter certificate code (e.g. 20263435227)"
+              }
+              className="flex-1 rounded-2xl border border-gray-300 px-6 py-4 text-lg outline-none transition focus:border-[var(--gsm-blue)] focus:ring-4 focus:ring-blue-100"
+              disabled={loading}
+            />
 
-          <p className="mt-3 text-base text-gray-500 sm:text-lg">
-            {isAr
-              ? "أدخل كود الشهادة للتحقق من صحتها واستعراض الشهادة المعتمدة فورياً"
-              : "Enter the certificate code to verify its authenticity and view the certificate instantly"}
-          </p>
+            <button
+              type="submit"
+              disabled={loading}
+              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[var(--gsm-blue)] px-8 py-4 text-lg font-bold text-white transition hover:opacity-90 disabled:opacity-60 cursor-pointer"
+            >
+              {loading ? (
+                <span>{isAr ? "جارٍ الفحص..." : "Verifying..."}</span>
+              ) : (
+                <>
+                  <Search className="h-5 w-5" />
+                  <span>{isAr ? "تحقق الآن" : "Verify"}</span>
+                </>
+              )}
+            </button>
+          </form>
+
+          {error && (
+            <div className="mt-6 flex items-center justify-center gap-2 rounded-2xl bg-red-50 p-4 text-center text-base font-semibold text-red-600 border border-red-200">
+              <AlertCircle className="h-5 w-5 shrink-0" />
+              <span>{error}</span>
+            </div>
+          )}
         </div>
-
-        {/* Search Input Form */}
-        <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <input
-            type="text"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            placeholder={
-              isAr
-                ? "أدخل كود الشهادة (مثال: 20263435227)"
-                : "Enter certificate code (e.g. 20263435227)"
-            }
-            className="flex-1 rounded-2xl border border-gray-300 px-6 py-4 text-lg outline-none transition focus:border-[var(--gsm-blue)] focus:ring-4 focus:ring-blue-100"
-            disabled={loading}
-          />
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[var(--gsm-blue)] px-8 py-4 text-lg font-bold text-white transition hover:opacity-90 disabled:opacity-60 cursor-pointer"
-          >
-            {loading ? (
-              <span>{isAr ? "جارٍ الفحص..." : "Verifying..."}</span>
-            ) : (
-              <>
-                <Search className="h-5 w-5" />
-                <span>{isAr ? "تحقق الآن" : "Verify"}</span>
-              </>
-            )}
-          </button>
-        </form>
-
-        {error && (
-          <div className="mt-6 flex items-center justify-center gap-2 rounded-2xl bg-red-50 p-4 text-center text-base font-semibold text-red-600 border border-red-200">
-            <AlertCircle className="h-5 w-5 shrink-0" />
-            <span>{error}</span>
-          </div>
-        )}
 
         {/* Verification Result */}
         {success && (

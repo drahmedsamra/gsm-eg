@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Download, Printer, ExternalLink, Share2, Copy, Check, CheckCircle2 } from "lucide-react";
+import { jsPDF } from "jspdf";
+import { Download, FileDown, Printer, ExternalLink, Share2, Copy, Check, CheckCircle2 } from "lucide-react";
 
 export type CertificateProps = {
   code: string;
@@ -30,6 +31,7 @@ function formatDateDisplay(d?: string): string {
 
 export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
   const [downloading, setDownloading] = useState(false);
+  const [downloadingPdf, setDownloadingPdf] = useState(false);
   const [copied, setCopied] = useState(false);
   const certUrl = typeof window !== "undefined"
     ? `${window.location.origin}/verify?code=${cert.code}`
@@ -49,87 +51,117 @@ export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
     }
   };
 
-  // High-Resolution 1-Click Image Download
+  // High-Resolution Canvas Renderer (scale = 2 for ultra-sharp 300 DPI export)
+  const renderCanvas = async (scale = 2): Promise<HTMLCanvasElement> => {
+    const img = new window.Image();
+    img.crossOrigin = "anonymous";
+    img.src = "/certificates/gsm-template.png";
+
+    await new Promise((resolve, reject) => {
+      img.onload = resolve;
+      img.onerror = reject;
+    });
+
+    const canvas = document.createElement("canvas");
+    canvas.width = (img.width || 731) * scale;
+    canvas.height = (img.height || 1024) * scale;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) throw new Error("Could not get canvas context");
+
+    // Draw background
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    const w = canvas.width;
+    const h = canvas.height;
+    const fontFamily = "Cairo, 'Segoe UI', Tahoma, Arial, sans-serif";
+
+    // 1. Student Name
+    ctx.font = `bold ${36 * scale}px ${fontFamily}`;
+    ctx.fillStyle = "#0b1a30";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(cert.student_name, w * 0.513, h * 0.389);
+
+    // 2. Arabic Course Title
+    const arabicCourse = cert.course_name || "دورة صيانة الهاتف المحمول الشامله";
+    ctx.font = `bold ${20 * scale}px ${fontFamily}`;
+    ctx.fillStyle = "#721a19";
+    ctx.textAlign = "center";
+    ctx.fillText(arabicCourse, w * 0.50, h * 0.470);
+
+    // 3. English Course Description
+    const englishDesc = cert.course_description || "COMPREHENSIVE MOBILE PHONE MAINTENANCE COURSE";
+    ctx.font = `bold ${11 * scale}px ${fontFamily}`;
+    ctx.fillStyle = "#0b1a30";
+    ctx.textAlign = "center";
+    ctx.fillText(englishDesc, w * 0.50, h * 0.495);
+
+    // 4. Duration
+    ctx.font = `bold ${13 * scale}px ${fontFamily}`;
+    ctx.fillStyle = "#0b1a30";
+    const hoursText = cert.hours ? `${cert.hours} HOURS` : "36 HOURS";
+    ctx.fillText(hoursText, w * 0.184, h * 0.588);
+
+    // 5. From Date
+    ctx.fillText(formatDateDisplay(cert.start_date) || "14/01/2026", w * 0.403, h * 0.588);
+
+    // 6. To Date
+    ctx.fillText(formatDateDisplay(cert.end_date) || "14/06/2026", w * 0.626, h * 0.588);
+
+    // 7. Grade
+    ctx.fillText(cert.grade || "VERY GOOD", w * 0.838, h * 0.588);
+
+    // 8. Certificate ID
+    const displayCode = cert.code.replace(/^GSM[- ]*/i, "");
+    ctx.font = `bold ${14 * scale}px monospace, ${fontFamily}`;
+    ctx.fillStyle = "#721a19";
+    ctx.textAlign = "left";
+    ctx.fillText(displayCode, 143 * scale, h * 0.733);
+
+    // 9. Academic Director Name
+    const director = cert.director_name || "MR. AHMED El Sayed";
+    ctx.font = `bold ${11 * scale}px ${fontFamily}`;
+    ctx.fillStyle = "#0b1a30";
+    ctx.textAlign = "center";
+    ctx.fillText(director, w * 0.292, h * 0.909);
+
+    // 10. Instructor Name
+    const instructor = cert.instructor_name || "ENG. KHALED Mohamed";
+    ctx.fillText(instructor, w * 0.720, h * 0.909);
+
+    return canvas;
+  };
+
+  // 1-Click Direct A4 PDF Download
+  const handleDownloadPdf = async () => {
+    setDownloadingPdf(true);
+    try {
+      const canvas = await renderCanvas(2);
+      const imgData = canvas.toDataURL("image/jpeg", 0.96);
+
+      const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "mm",
+        format: "a4",
+      });
+
+      // A4 is 210 x 297 mm. Template is 731 x 1024 (aspect ratio 0.7138)
+      // 210 * (1024 / 731) = 294.2 mm height, centered vertically
+      doc.addImage(imgData, "JPEG", 0, 1.4, 210, 294.2, undefined, "FAST");
+      doc.save(`شهادة_${cert.student_name.replace(/\s+/g, "_")}_GSM.pdf`);
+    } catch (err) {
+      console.error("PDF generation failed:", err);
+      handlePrint();
+    } finally {
+      setDownloadingPdf(false);
+    }
+  };
+
+  // High-Resolution 1-Click Image Download (PNG)
   const handleDownloadImage = async () => {
     setDownloading(true);
     try {
-      const img = new window.Image();
-      img.crossOrigin = "anonymous";
-      img.src = "/certificates/gsm-template.png";
-
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = reject;
-      });
-
-      const canvas = document.createElement("canvas");
-      canvas.width = img.width || 731;
-      canvas.height = img.height || 1024;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) throw new Error("Could not get canvas context");
-
-      // Draw background
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-      const w = canvas.width;
-      const h = canvas.height;
-      const fontFamily = "Cairo, 'Segoe UI', Tahoma, Arial, sans-serif";
-
-      // 1. Student Name
-      ctx.font = `bold 36px ${fontFamily}`;
-      ctx.fillStyle = "#0b1a30";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(cert.student_name, w * 0.513, h * 0.389);
-
-      // 2. Arabic Course Title
-      const arabicCourse = cert.course_name || "دورة صيانة الهاتف المحمول الشامله";
-      ctx.font = `bold 20px ${fontFamily}`;
-      ctx.fillStyle = "#721a19";
-      ctx.textAlign = "center";
-      ctx.fillText(arabicCourse, w * 0.50, h * 0.470);
-
-      // 3. English Course Description
-      const englishDesc = cert.course_description || "COMPREHENSIVE MOBILE PHONE MAINTENANCE COURSE";
-      ctx.font = `bold 11px ${fontFamily}`;
-      ctx.fillStyle = "#0b1a30";
-      ctx.textAlign = "center";
-      ctx.fillText(englishDesc, w * 0.50, h * 0.495);
-
-      // 4. Duration
-      ctx.font = `bold 13px ${fontFamily}`;
-      ctx.fillStyle = "#0b1a30";
-      const hoursText = cert.hours ? `${cert.hours} HOURS` : "36 HOURS";
-      ctx.fillText(hoursText, w * 0.184, h * 0.588);
-
-      // 5. From Date
-      ctx.fillText(formatDateDisplay(cert.start_date) || "14/01/2026", w * 0.403, h * 0.588);
-
-      // 6. To Date
-      ctx.fillText(formatDateDisplay(cert.end_date) || "14/06/2026", w * 0.626, h * 0.588);
-
-      // 7. Grade
-      ctx.fillText(cert.grade || "VERY GOOD", w * 0.838, h * 0.588);
-
-      // 8. Certificate ID (aligned under CERTIFICATE ID at x = 143)
-      const displayCode = cert.code.replace(/^GSM[- ]*/i, "");
-      ctx.font = `bold 14px monospace, ${fontFamily}`;
-      ctx.fillStyle = "#721a19";
-      ctx.textAlign = "left";
-      ctx.fillText(displayCode, 143, h * 0.733);
-
-      // 9. Academic Director Name
-      const director = cert.director_name || "MR. AHMED El Sayed";
-      ctx.font = `bold 11px ${fontFamily}`;
-      ctx.fillStyle = "#0b1a30";
-      ctx.textAlign = "center";
-      ctx.fillText(director, w * 0.292, h * 0.909);
-
-      // 10. Instructor Name
-      const instructor = cert.instructor_name || "ENG. KHALED Mohamed";
-      ctx.fillText(instructor, w * 0.720, h * 0.909);
-
-      // Download PNG
+      const canvas = await renderCanvas(2);
       const blob = await new Promise<Blob | null>((resolve) =>
         canvas.toBlob(resolve, "image/png", 1.0)
       );
@@ -166,27 +198,75 @@ export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
     <div className="w-full">
       <style jsx global>{`
         @media print {
+          @page {
+            size: A4 portrait !important;
+            margin: 0mm !important;
+          }
+          html,
           body {
             background: white !important;
             margin: 0 !important;
             padding: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            overflow: hidden !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
           }
           header,
           footer,
           nav,
+          aside,
           .no-print {
             display: none !important;
           }
-          .print-certificate-area {
+          #verify-certificate {
             padding: 0 !important;
             margin: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+          }
+          #verify-certificate > div {
+            padding: 0 !important;
+            margin: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
             max-width: 100% !important;
+            background: transparent !important;
+          }
+          .print-certificate-area {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: 100vw !important;
+            max-height: 100vh !important;
+            margin: 0 !important;
+            padding: 0 !important;
             box-shadow: none !important;
             border: none !important;
+            border-radius: 0 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            page-break-inside: avoid !important;
+            page-break-before: avoid !important;
+            page-break-after: avoid !important;
+            break-inside: avoid !important;
+            z-index: 999999 !important;
           }
-          @page {
-            size: portrait;
-            margin: 0;
+          .print-certificate-area > div {
+            height: 98vh !important;
+            max-height: 98vh !important;
+            width: auto !important;
+            aspect-ratio: 731 / 1024 !important;
+            margin: auto !important;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
           }
         }
       `}</style>
@@ -217,21 +297,31 @@ export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
       <div className="no-print my-6 flex flex-wrap items-center justify-center gap-3">
         <button
           type="button"
+          onClick={handleDownloadPdf}
+          disabled={downloadingPdf}
+          className="inline-flex items-center gap-2 rounded-xl bg-[var(--gsm-navy)] px-5 py-3 text-sm font-bold text-white transition hover:opacity-90 shadow-md cursor-pointer disabled:opacity-50"
+        >
+          <FileDown className="h-4 w-4 text-red-400" />
+          <span>{downloadingPdf ? "جارٍ تجهيز ملف الـ PDF..." : "تحميل PDF الشهادة (A4 جاهز)"}</span>
+        </button>
+
+        <button
+          type="button"
           onClick={handleDownloadImage}
           disabled={downloading}
-          className="inline-flex items-center gap-2 rounded-xl bg-[var(--gsm-navy)] px-5 py-3 text-sm font-bold text-white transition hover:opacity-90 shadow-sm cursor-pointer disabled:opacity-50"
+          className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-bold text-gray-800 transition hover:bg-gray-50 shadow-xs cursor-pointer disabled:opacity-50"
         >
           <Download className="h-4 w-4" />
-          <span>{downloading ? "جارٍ تجهيز الشهادة..." : "تحميل الشهادة (PNG عالية الدقة)"}</span>
+          <span>{downloading ? "جارٍ تجهيز الصورة..." : "تحميل صورة (PNG عالية الدقة)"}</span>
         </button>
 
         <button
           type="button"
           onClick={handlePrint}
-          className="inline-flex items-center gap-2 rounded-xl bg-gray-800 px-5 py-3 text-sm font-bold text-white transition hover:opacity-90 shadow-sm cursor-pointer"
+          className="inline-flex items-center gap-2 rounded-xl bg-gray-800 px-4 py-3 text-sm font-bold text-white transition hover:opacity-90 shadow-xs cursor-pointer"
         >
           <Printer className="h-4 w-4" />
-          <span>طباعة / حفظ كـ PDF</span>
+          <span>طباعة فورية</span>
         </button>
 
         <a
@@ -266,7 +356,7 @@ export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
           href={waShareUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-xl border border-green-300 bg-green-50 px-4 py-3 text-sm font-semibold text-green-700 transition hover:bg-green-100"
+          className="inline-flex items-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-900 transition hover:bg-blue-100"
         >
           <Share2 className="h-4 w-4" />
           <span>واتساب</span>
