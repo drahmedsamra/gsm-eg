@@ -46,7 +46,6 @@ export function AdminCertificateUpload() {
   const [autoLoading, setAutoLoading] = useState(false);
   const [autoSuccessCode, setAutoSuccessCode] = useState<string | null>(null);
   const [autoError, setAutoError] = useState<string | null>(null);
-  const [sqlNotice, setSqlNotice] = useState<string | null>(null);
 
   // Tab 2: Manual PDF Upload State
   const [file, setFile] = useState<File | null>(null);
@@ -96,38 +95,9 @@ export function AdminCertificateUpload() {
 
       if (error) {
         console.error("DB Error:", error);
-        // If columns don't exist yet in Supabase schema (PGRST204)
-        if (error.code === "PGRST204" || error.message?.includes("column")) {
-          // Fallback insert without the new columns so creation is not blocked
-          const basicPayload = {
-            code: payload.code,
-            student_name: payload.student_name,
-            course_name: payload.course_name,
-            hours: payload.hours,
-            start_date: payload.start_date,
-            end_date: payload.end_date,
-            grade: payload.grade,
-          };
-          const { error: fallbackErr } = await supabase.from("certificates").insert([basicPayload]);
-          if (fallbackErr) {
-            setAutoError(fallbackErr.message);
-          } else {
-            setAutoSuccessCode(payload.code);
-            setSqlNotice(
-              "تم حفظ الشهادة بنجاح! لتخزين الحقول الجديدة (وصف الكورس، اسم المدير، اسم المحاضر) في قاعدة البيانات بدلاً من القيم الافتراضية، يرجى تشغيل كود SQL الموضح بالأسفل في لوحة Supabase."
-            );
-            setAutoForm((prev) => ({
-              ...prev,
-              student_name: "",
-              code: "",
-            }));
-          }
-        } else {
-          setAutoError(error.message);
-        }
+        setAutoError(error.message);
       } else {
         setAutoSuccessCode(payload.code);
-        setSqlNotice(null);
         setAutoForm((prev) => ({
           ...prev,
           student_name: "",
@@ -257,12 +227,6 @@ export function AdminCertificateUpload() {
                     {autoSuccessCode}
                   </span>
                 </p>
-
-                {sqlNotice && (
-                  <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900 leading-relaxed">
-                    ⚠️ {sqlNotice}
-                  </div>
-                )}
 
                 <div className="flex flex-wrap gap-3">
                   <Link
@@ -602,38 +566,6 @@ export function AdminCertificateUpload() {
             </form>
           </div>
         )}
-
-        {/* SQL Schema Helper */}
-        <div className="mt-8 rounded-2xl border border-blue-200 bg-blue-50/50 p-5 text-sm">
-          <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
-            <span className="font-bold text-blue-950 flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-[var(--gsm-blue)]" />
-              كود تفعيل الحقول الجديدة في سوبابيز (SQL Migration)
-            </span>
-            <button
-              type="button"
-              onClick={() => {
-                navigator.clipboard.writeText(`ALTER TABLE certificates 
-ADD COLUMN IF NOT EXISTS course_description TEXT DEFAULT 'COMPREHENSIVE MOBILE PHONE MAINTENANCE COURSE',
-ADD COLUMN IF NOT EXISTS director_name TEXT DEFAULT 'MR. AHMED El Sayed',
-ADD COLUMN IF NOT EXISTS instructor_name TEXT DEFAULT 'ENG. KHALED Mohamed';`);
-                alert("تم نسخ كود SQL! الصقه في Supabase SQL Editor ثم اضغط RUN.");
-              }}
-              className="text-xs bg-white border border-blue-300 text-blue-800 px-3 py-1.5 rounded-lg hover:bg-blue-100 font-bold cursor-pointer"
-            >
-              نسخ كود SQL
-            </button>
-          </div>
-          <p className="text-gray-600 text-xs mb-2 leading-relaxed">
-            شغّل هذا الاستعلام لمرة واحدة فقط في لوحة تحكم سوبابيز (<span className="font-mono text-gray-800 font-semibold">SQL Editor</span>) لإضافة أعمدة (وصف الكورس، اسم المدير، اسم المحاضر) إلى جدول الشهادات.
-          </p>
-          <pre className="p-3 bg-gray-900 text-emerald-400 rounded-xl text-xs overflow-x-auto font-mono text-left" dir="ltr">
-{`ALTER TABLE certificates 
-ADD COLUMN IF NOT EXISTS course_description TEXT DEFAULT 'COMPREHENSIVE MOBILE PHONE MAINTENANCE COURSE',
-ADD COLUMN IF NOT EXISTS director_name TEXT DEFAULT 'MR. AHMED El Sayed',
-ADD COLUMN IF NOT EXISTS instructor_name TEXT DEFAULT 'ENG. KHALED Mohamed';`}
-          </pre>
-        </div>
 
         <div className="mt-8 text-center pt-6 border-t border-gray-100">
           <Link
