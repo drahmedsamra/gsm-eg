@@ -107,7 +107,11 @@ export function CourseCard({ course }: CourseCardProps) {
         </dl>
 
         <Button
-          href={siteConfig.whatsapp.href(locale)}
+          href={`https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent(
+            locale === "ar"
+              ? `مرحبًا، أريد الحجز والاستفسار عن كورس: ${title}`
+              : `Hello, I would like to inquire about the course: ${title}`
+          )}`}
           variant="ghost"
           size="sm"
           className="mt-5 w-full sm:w-auto"

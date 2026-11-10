@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import { supabase } from "@/lib/supabase";
 
 type PageProps = {
@@ -5,6 +7,34 @@ type PageProps = {
     slug: string;
   }>;
 };
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const { data: course } = await supabase
+    .from("courses")
+    .select("title, short_description, thumbnail")
+    .eq("slug", slug)
+    .single();
+
+  if (!course) {
+    return {
+      title: "دورة تدريبية | جي اس ام مصر",
+    };
+  }
+
+  return {
+    title: `${course.title} | جي اس ام مصر`,
+    description: course.short_description,
+    openGraph: {
+      title: `${course.title} | جي اس ام مصر`,
+      description: course.short_description,
+      images: course.thumbnail ? [{ url: course.thumbnail }] : [],
+    },
+  };
+}
 
 export default async function CoursePage({
   params,
@@ -25,13 +55,21 @@ export default async function CoursePage({
     );
   }
 
+  const waMessage = encodeURIComponent(
+    `مرحبًا، أريد الاستفسار والحجز في دورة: ${course.title}`
+  );
+  const waUrl = `https://wa.me/201011822931?text=${waMessage}`;
+
   return (
     <main className="mx-auto max-w-7xl px-4 pb-16 pt-32">
       <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
-          <img
+          <Image
             src={course.thumbnail}
             alt={course.title}
+            width={900}
+            height={600}
+            priority
             className="h-[260px] w-full rounded-3xl object-cover shadow-2xl sm:h-[420px] lg:h-[520px]"
           />
         </div>
@@ -77,7 +115,7 @@ export default async function CoursePage({
 
           <div className="flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-end">
             <a
-              href="https://wa.me/201011822931"
+              href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-2xl bg-green-500 px-8 py-4 text-center text-lg font-bold text-white transition hover:scale-105"
@@ -85,9 +123,14 @@ export default async function CoursePage({
               تواصل واتساب
             </a>
 
-            <button className="rounded-2xl bg-[var(--gsm-blue)] px-8 py-4 text-lg font-bold text-white transition hover:scale-105">
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-2xl bg-[var(--gsm-blue)] px-8 py-4 text-center text-lg font-bold text-white transition hover:scale-105"
+            >
               احجز الآن
-            </button>
+            </a>
           </div>
         </div>
       </div>

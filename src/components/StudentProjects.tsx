@@ -1,7 +1,6 @@
 "use client";
 
 import { FadeIn } from "@/components/FadeIn";
-import { SectionTitle } from "@/components/SectionTitle";
 import { Container } from "@/components/ui/Container";
 import { MediaImage } from "@/components/ui/MediaImage";
 import { studentProjects } from "@/data/projects";

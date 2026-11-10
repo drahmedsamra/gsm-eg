@@ -2,10 +2,37 @@
 
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { supabase } from "@/lib/supabase";
+
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = rateLimitMap.get(ip);
+
+  if (!record || now > record.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + 60 * 1000 });
+    return true;
+  }
+
+  if (record.count >= 5) {
+    return false;
+  }
+
+  record.count += 1;
+  return true;
+}
 
 export async function POST(req: Request) {
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+
+    if (!checkRateLimit(ip)) {
+      return NextResponse.json(
+        { success: false, error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
 
     const body = await req.json();
 
@@ -17,6 +44,27 @@ export async function POST(req: Request) {
       message,
       locale,
     } = body;
+
+    if (!name?.trim() || !phone?.trim()) {
+      return NextResponse.json(
+        { success: false, error: "Name and phone are required" },
+        { status: 400 }
+      );
+    }
+
+    // Save backup lead directly into Supabase database
+    try {
+      await supabase.from("leads").insert([
+        {
+          full_name: name.trim(),
+          phone: phone.trim(),
+        },
+      ]);
+    } catch (dbErr) {
+      console.error("LEADS DB BACKUP ERROR:", dbErr);
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const courseName =
       course ||

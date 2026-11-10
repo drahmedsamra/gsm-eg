@@ -3,10 +3,11 @@ import Image from "next/image";
 // import { FloatingCards } from "./FloatingCards";
 
 type HeroVisualProps = {
-  locale: "ar" | "en";
+  locale?: "ar" | "en";
 };
 
 export function HeroVisual({ locale }: HeroVisualProps) {
+  void locale;
   return (
     <div
       className="relative mx-auto w-full max-w-2xl"

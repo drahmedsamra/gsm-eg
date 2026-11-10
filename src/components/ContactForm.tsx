@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 
 declare global {
   interface Window {
-    fbq?: (...args: any[]) => void;
+    fbq?: (...args: unknown[]) => void;
   }
 }
 

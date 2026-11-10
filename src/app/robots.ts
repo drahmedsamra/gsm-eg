@@ -9,6 +9,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/admin/", "/ziad/"],
     },
 
     sitemap: "https://gsm-eg.com/sitemap.xml",

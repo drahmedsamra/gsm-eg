@@ -1,5 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { supabase } from "@/lib/supabase";
+
+export const metadata: Metadata = {
+  title: "جميع الدورات التدريبية | جي اس ام مصر",
+  description:
+    "استكشف دورات جي اس ام مصر في هندسة الإلكترونيات، صيانة الموبايل، البرمجة، والذكاء الاصطناعي مع تدريب عملي وشهادات معتمدة.",
+};
 
 export default async function CoursesPage() {
   const { data: courses } = await supabase
@@ -34,9 +42,11 @@ export default async function CoursesPage() {
                 </div>
               )}
 
-              <img
+              <Image
                 src={course.thumbnail}
                 alt={course.title}
+                width={600}
+                height={350}
                 className="h-56 w-full object-cover transition duration-500 group-hover:scale-110"
               />
             </div>

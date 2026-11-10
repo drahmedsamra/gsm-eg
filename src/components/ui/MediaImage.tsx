@@ -6,7 +6,6 @@ import {
   getDefaultImageSrc,
   type ImageCategory,
 } from "@/lib/images";
-import { cn } from "@/lib/utils";
 import { MediaGrade } from "./MediaGrade";
 import { PlaceholderImage } from "./PlaceholderImage";
 
