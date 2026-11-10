@@ -94,13 +94,13 @@ export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
       ctx.fillStyle = "#0b1a30";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText(cert.student_name, w * 0.51, h * 0.39);
+      ctx.fillText(cert.student_name, w * 0.513, h * 0.389);
 
       // 2. Duration
       ctx.font = `bold 13px ${fontFamily}`;
       ctx.fillStyle = "#0b1a30";
       const hoursText = cert.hours ? `${cert.hours} HOURS` : "36 HOURS";
-      ctx.fillText(hoursText, w * 0.185, h * 0.588);
+      ctx.fillText(hoursText, w * 0.184, h * 0.588);
 
       // 3. From Date
       ctx.fillText(formatDateDisplay(cert.start_date) || "14/01/2026", w * 0.403, h * 0.588);
@@ -119,14 +119,15 @@ export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
           qrImg.onload = res;
         });
         const qrSize = w * 0.103;
-        ctx.drawImage(qrImg, w * 0.125 - qrSize / 2, h * 0.737 - qrSize / 2, qrSize, qrSize);
+        ctx.drawImage(qrImg, w * 0.1254 - qrSize / 2, h * 0.74 - qrSize / 2, qrSize, qrSize);
       }
 
-      // 7. Certificate ID
-      ctx.font = `bold 15px ${fontFamily}`;
-      ctx.fillStyle = "#c91c1c";
+      // 7. Certificate ID (strips duplicate leading GSM if already in template)
+      const displayCode = cert.code.replace(/^GSM[- ]*/i, "");
+      ctx.font = `bold 14px ${fontFamily}`;
+      ctx.fillStyle = "#721a19";
       ctx.textAlign = "left";
-      ctx.fillText(cert.code, w * 0.222, h * 0.732);
+      ctx.fillText(displayCode, w * 0.241, h * 0.733);
 
       // Download PNG
       const blob = await new Promise<Blob | null>((resolve) =>
@@ -295,7 +296,7 @@ export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
             className="absolute font-black text-[#0b1a30] text-center pointer-events-none"
             style={{
               top: "38.9%",
-              left: "51%",
+              left: "51.3%",
               transform: "translate(-50%, -50%)",
               width: "70%",
               fontSize: "4.8cqw",
@@ -310,7 +311,7 @@ export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
             className="absolute font-bold text-[#0b1a30] text-center pointer-events-none"
             style={{
               top: "58.8%",
-              left: "18.5%",
+              left: "18.4%",
               transform: "translate(-50%, -50%)",
               fontSize: "1.8cqw",
             }}
@@ -362,10 +363,10 @@ export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
             <div
               className="absolute pointer-events-none"
               style={{
-                top: "73.7%",
+                top: "74.0%",
                 left: "12.5%",
                 transform: "translate(-50%, -50%)",
-                width: "10.2%",
+                width: "10.3%",
                 aspectRatio: "1/1",
               }}
             >
@@ -380,16 +381,16 @@ export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
 
           {/* Certificate Code */}
           <div
-            className="absolute font-bold text-[#c91c1c] pointer-events-none text-left font-mono"
+            className="absolute font-bold text-[#721a19] pointer-events-none text-left font-mono"
             style={{
-              top: "73.2%",
-              left: "22.2%",
+              top: "73.3%",
+              left: "24.1%",
               transform: "translate(0, -50%)",
-              fontSize: "2cqw",
+              fontSize: "1.9cqw",
               letterSpacing: "0.5px",
             }}
           >
-            {cert.code}
+            {cert.code.replace(/^GSM[- ]*/i, "")}
           </div>
         </div>
       </div>
