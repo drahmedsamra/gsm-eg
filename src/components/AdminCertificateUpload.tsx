@@ -35,14 +35,18 @@ export function AdminCertificateUpload() {
     code: "",
     student_name: "",
     course_name: "دورة صيانة الهاتف المحمول الشامله",
+    course_description: "COMPREHENSIVE MOBILE PHONE MAINTENANCE COURSE",
     hours: "36",
     start_date: "2026-01-14",
     end_date: "2026-06-14",
     grade: "VERY GOOD",
+    director_name: "MR. AHMED El Sayed",
+    instructor_name: "ENG. KHALED Mohamed",
   });
   const [autoLoading, setAutoLoading] = useState(false);
   const [autoSuccessCode, setAutoSuccessCode] = useState<string | null>(null);
   const [autoError, setAutoError] = useState<string | null>(null);
+  const [sqlNotice, setSqlNotice] = useState<string | null>(null);
 
   // Tab 2: Manual PDF Upload State
   const [file, setFile] = useState<File | null>(null);
@@ -78,10 +82,13 @@ export function AdminCertificateUpload() {
       code: autoForm.code.trim(),
       student_name: autoForm.student_name.trim(),
       course_name: autoForm.course_name.trim(),
+      course_description: autoForm.course_description.trim(),
       hours: Number(autoForm.hours) || 36,
       start_date: parseDateForDb(autoForm.start_date),
       end_date: parseDateForDb(autoForm.end_date),
       grade: autoForm.grade.trim(),
+      director_name: autoForm.director_name.trim(),
+      instructor_name: autoForm.instructor_name.trim(),
     };
 
     try {
@@ -89,9 +96,38 @@ export function AdminCertificateUpload() {
 
       if (error) {
         console.error("DB Error:", error);
-        setAutoError(error.message);
+        // If columns don't exist yet in Supabase schema (PGRST204)
+        if (error.code === "PGRST204" || error.message?.includes("column")) {
+          // Fallback insert without the new columns so creation is not blocked
+          const basicPayload = {
+            code: payload.code,
+            student_name: payload.student_name,
+            course_name: payload.course_name,
+            hours: payload.hours,
+            start_date: payload.start_date,
+            end_date: payload.end_date,
+            grade: payload.grade,
+          };
+          const { error: fallbackErr } = await supabase.from("certificates").insert([basicPayload]);
+          if (fallbackErr) {
+            setAutoError(fallbackErr.message);
+          } else {
+            setAutoSuccessCode(payload.code);
+            setSqlNotice(
+              "تم حفظ الشهادة بنجاح! لتخزين الحقول الجديدة (وصف الكورس، اسم المدير، اسم المحاضر) في قاعدة البيانات بدلاً من القيم الافتراضية، يرجى تشغيل كود SQL الموضح بالأسفل في لوحة Supabase."
+            );
+            setAutoForm((prev) => ({
+              ...prev,
+              student_name: "",
+              code: "",
+            }));
+          }
+        } else {
+          setAutoError(error.message);
+        }
       } else {
         setAutoSuccessCode(payload.code);
+        setSqlNotice(null);
         setAutoForm((prev) => ({
           ...prev,
           student_name: "",
@@ -221,6 +257,13 @@ export function AdminCertificateUpload() {
                     {autoSuccessCode}
                   </span>
                 </p>
+
+                {sqlNotice && (
+                  <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900 leading-relaxed">
+                    ⚠️ {sqlNotice}
+                  </div>
+                )}
+
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href={`/verify?code=${autoSuccessCode}`}
@@ -300,7 +343,7 @@ export function AdminCertificateUpload() {
 
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-1">
-                  اسم الدورة التدريبية
+                  اسم الدورة التدريبية (بالعربية)
                 </label>
                 <input
                   type="text"
@@ -309,6 +352,50 @@ export function AdminCertificateUpload() {
                   placeholder="دورة صيانة الهاتف المحمول الشامله"
                   className="w-full rounded-xl border border-gray-300 p-3.5 text-base outline-none transition focus:border-[var(--gsm-blue)] focus:ring-2 focus:ring-blue-100"
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-1">
+                  وصف الدورة (بالإنجليزية - COMPREHENSIVE COURSE)
+                </label>
+                <input
+                  type="text"
+                  value={autoForm.course_description}
+                  onChange={(e) => setAutoForm({ ...autoForm, course_description: e.target.value })}
+                  placeholder="COMPREHENSIVE MOBILE PHONE MAINTENANCE COURSE"
+                  dir="ltr"
+                  className="w-full rounded-xl border border-gray-300 p-3.5 text-base outline-none transition focus:border-[var(--gsm-blue)] focus:ring-2 focus:ring-blue-100 font-medium"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">
+                    اسم مدير الأكاديمية (ACADEMIC DIRECTOR)
+                  </label>
+                  <input
+                    type="text"
+                    value={autoForm.director_name}
+                    onChange={(e) => setAutoForm({ ...autoForm, director_name: e.target.value })}
+                    placeholder="MR. AHMED El Sayed"
+                    dir="ltr"
+                    className="w-full rounded-xl border border-gray-300 p-3.5 text-base outline-none transition focus:border-[var(--gsm-blue)] focus:ring-2 focus:ring-blue-100 font-medium"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-1">
+                    اسم المحاضر (INSTRUCTOR)
+                  </label>
+                  <input
+                    type="text"
+                    value={autoForm.instructor_name}
+                    onChange={(e) => setAutoForm({ ...autoForm, instructor_name: e.target.value })}
+                    placeholder="ENG. KHALED Mohamed"
+                    dir="ltr"
+                    className="w-full rounded-xl border border-gray-300 p-3.5 text-base outline-none transition focus:border-[var(--gsm-blue)] focus:ring-2 focus:ring-blue-100 font-medium"
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -515,6 +602,38 @@ export function AdminCertificateUpload() {
             </form>
           </div>
         )}
+
+        {/* SQL Schema Helper */}
+        <div className="mt-8 rounded-2xl border border-blue-200 bg-blue-50/50 p-5 text-sm">
+          <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
+            <span className="font-bold text-blue-950 flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-[var(--gsm-blue)]" />
+              كود تفعيل الحقول الجديدة في سوبابيز (SQL Migration)
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                navigator.clipboard.writeText(`ALTER TABLE certificates 
+ADD COLUMN IF NOT EXISTS course_description TEXT DEFAULT 'COMPREHENSIVE MOBILE PHONE MAINTENANCE COURSE',
+ADD COLUMN IF NOT EXISTS director_name TEXT DEFAULT 'MR. AHMED El Sayed',
+ADD COLUMN IF NOT EXISTS instructor_name TEXT DEFAULT 'ENG. KHALED Mohamed';`);
+                alert("تم نسخ كود SQL! الصقه في Supabase SQL Editor ثم اضغط RUN.");
+              }}
+              className="text-xs bg-white border border-blue-300 text-blue-800 px-3 py-1.5 rounded-lg hover:bg-blue-100 font-bold cursor-pointer"
+            >
+              نسخ كود SQL
+            </button>
+          </div>
+          <p className="text-gray-600 text-xs mb-2 leading-relaxed">
+            شغّل هذا الاستعلام لمرة واحدة فقط في لوحة تحكم سوبابيز (<span className="font-mono text-gray-800 font-semibold">SQL Editor</span>) لإضافة أعمدة (وصف الكورس، اسم المدير، اسم المحاضر) إلى جدول الشهادات.
+          </p>
+          <pre className="p-3 bg-gray-900 text-emerald-400 rounded-xl text-xs overflow-x-auto font-mono text-left" dir="ltr">
+{`ALTER TABLE certificates 
+ADD COLUMN IF NOT EXISTS course_description TEXT DEFAULT 'COMPREHENSIVE MOBILE PHONE MAINTENANCE COURSE',
+ADD COLUMN IF NOT EXISTS director_name TEXT DEFAULT 'MR. AHMED El Sayed',
+ADD COLUMN IF NOT EXISTS instructor_name TEXT DEFAULT 'ENG. KHALED Mohamed';`}
+          </pre>
+        </div>
 
         <div className="mt-8 text-center pt-6 border-t border-gray-100">
           <Link

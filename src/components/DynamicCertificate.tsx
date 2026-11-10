@@ -1,18 +1,20 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import QRCode from "qrcode";
 import { Download, Printer, ExternalLink, Share2, Copy, Check, CheckCircle2 } from "lucide-react";
 
 export type CertificateProps = {
   code: string;
   student_name: string;
   course_name?: string;
+  course_description?: string;
   hours?: number | string;
   start_date?: string;
   end_date?: string;
   grade?: string;
+  director_name?: string;
+  instructor_name?: string;
 };
 
 function formatDateDisplay(d?: string): string {
@@ -29,25 +31,9 @@ function formatDateDisplay(d?: string): string {
 export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
   const [downloading, setDownloading] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [qrCodeDataUrl, setQrCodeDataUrl] = useState<string>("");
-
   const certUrl = typeof window !== "undefined"
     ? `${window.location.origin}/verify?code=${cert.code}`
     : `https://gsm-eg.com/verify?code=${cert.code}`;
-
-  // Generate QR Code dynamically
-  useEffect(() => {
-    QRCode.toDataURL(certUrl, {
-      margin: 0,
-      width: 250,
-      color: {
-        dark: "#000000",
-        light: "#ffffff",
-      },
-    })
-      .then((url) => setQrCodeDataUrl(url))
-      .catch((err) => console.error("QR Code Error:", err));
-  }, [certUrl]);
 
   const handleCopyLink = async () => {
     try {
@@ -96,38 +82,52 @@ export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
       ctx.textBaseline = "middle";
       ctx.fillText(cert.student_name, w * 0.513, h * 0.389);
 
-      // 2. Duration
+      // 2. Arabic Course Title
+      const arabicCourse = cert.course_name || "دورة صيانة الهاتف المحمول الشامله";
+      ctx.font = `bold 20px ${fontFamily}`;
+      ctx.fillStyle = "#721a19";
+      ctx.textAlign = "center";
+      ctx.fillText(arabicCourse, w * 0.50, h * 0.470);
+
+      // 3. English Course Description
+      const englishDesc = cert.course_description || "COMPREHENSIVE MOBILE PHONE MAINTENANCE COURSE";
+      ctx.font = `bold 11px ${fontFamily}`;
+      ctx.fillStyle = "#0b1a30";
+      ctx.textAlign = "center";
+      ctx.fillText(englishDesc, w * 0.50, h * 0.495);
+
+      // 4. Duration
       ctx.font = `bold 13px ${fontFamily}`;
       ctx.fillStyle = "#0b1a30";
       const hoursText = cert.hours ? `${cert.hours} HOURS` : "36 HOURS";
       ctx.fillText(hoursText, w * 0.184, h * 0.588);
 
-      // 3. From Date
+      // 5. From Date
       ctx.fillText(formatDateDisplay(cert.start_date) || "14/01/2026", w * 0.403, h * 0.588);
 
-      // 4. To Date
+      // 6. To Date
       ctx.fillText(formatDateDisplay(cert.end_date) || "14/06/2026", w * 0.626, h * 0.588);
 
-      // 5. Grade
+      // 7. Grade
       ctx.fillText(cert.grade || "VERY GOOD", w * 0.838, h * 0.588);
 
-      // 6. QR Code
-      if (qrCodeDataUrl) {
-        const qrImg = new window.Image();
-        qrImg.src = qrCodeDataUrl;
-        await new Promise((res) => {
-          qrImg.onload = res;
-        });
-        const qrSize = w * 0.103;
-        ctx.drawImage(qrImg, w * 0.1254 - qrSize / 2, h * 0.74 - qrSize / 2, qrSize, qrSize);
-      }
-
-      // 7. Certificate ID (strips duplicate leading GSM if already in template)
+      // 8. Certificate ID (aligned under CERTIFICATE ID at x = 143)
       const displayCode = cert.code.replace(/^GSM[- ]*/i, "");
-      ctx.font = `bold 14px ${fontFamily}`;
+      ctx.font = `bold 14px monospace, ${fontFamily}`;
       ctx.fillStyle = "#721a19";
       ctx.textAlign = "left";
-      ctx.fillText(displayCode, w * 0.241, h * 0.733);
+      ctx.fillText(displayCode, 143, h * 0.733);
+
+      // 9. Academic Director Name
+      const director = cert.director_name || "MR. AHMED El Sayed";
+      ctx.font = `bold 11px ${fontFamily}`;
+      ctx.fillStyle = "#0b1a30";
+      ctx.textAlign = "center";
+      ctx.fillText(director, w * 0.292, h * 0.909);
+
+      // 10. Instructor Name
+      const instructor = cert.instructor_name || "ENG. KHALED Mohamed";
+      ctx.fillText(instructor, w * 0.720, h * 0.909);
 
       // Download PNG
       const blob = await new Promise<Blob | null>((resolve) =>
@@ -306,6 +306,36 @@ export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
             {cert.student_name}
           </div>
 
+          {/* Course Name (Arabic) */}
+          <div
+            className="absolute font-black text-[#721a19] text-center pointer-events-none"
+            style={{
+              top: "47.0%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "80%",
+              fontSize: "2.7cqw",
+              lineHeight: "1.2",
+            }}
+          >
+            {cert.course_name || "دورة صيانة الهاتف المحمول الشامله"}
+          </div>
+
+          {/* Course Description (English) */}
+          <div
+            className="absolute font-extrabold text-[#0b1a30] text-center pointer-events-none uppercase tracking-wide"
+            style={{
+              top: "49.5%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "85%",
+              fontSize: "1.5cqw",
+              lineHeight: "1.2",
+            }}
+          >
+            {cert.course_description || "COMPREHENSIVE MOBILE PHONE MAINTENANCE COURSE"}
+          </div>
+
           {/* Duration */}
           <div
             className="absolute font-bold text-[#0b1a30] text-center pointer-events-none"
@@ -358,39 +388,46 @@ export function DynamicCertificate({ cert }: { cert: CertificateProps }) {
             {cert.grade || "VERY GOOD"}
           </div>
 
-          {/* QR Code */}
-          {qrCodeDataUrl && (
-            <div
-              className="absolute pointer-events-none"
-              style={{
-                top: "74.0%",
-                left: "12.5%",
-                transform: "translate(-50%, -50%)",
-                width: "10.3%",
-                aspectRatio: "1/1",
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={qrCodeDataUrl}
-                alt="QR Code"
-                className="w-full h-full object-contain"
-              />
-            </div>
-          )}
-
-          {/* Certificate Code */}
+          {/* Certificate Code (Left-aligned under CERTIFICATE ID at 19.6%) */}
           <div
             className="absolute font-bold text-[#721a19] pointer-events-none text-left font-mono"
             style={{
               top: "73.3%",
-              left: "24.1%",
+              left: "19.6%",
               transform: "translate(0, -50%)",
               fontSize: "1.9cqw",
               letterSpacing: "0.5px",
             }}
           >
             {cert.code.replace(/^GSM[- ]*/i, "")}
+          </div>
+
+          {/* Academic Director Name */}
+          <div
+            className="absolute font-bold text-[#0b1a30] text-center pointer-events-none uppercase tracking-tight"
+            style={{
+              top: "90.9%",
+              left: "29.2%",
+              transform: "translate(-50%, -50%)",
+              fontSize: "1.5cqw",
+              width: "35%",
+            }}
+          >
+            {cert.director_name || "MR. AHMED El Sayed"}
+          </div>
+
+          {/* Instructor Name */}
+          <div
+            className="absolute font-bold text-[#0b1a30] text-center pointer-events-none uppercase tracking-tight"
+            style={{
+              top: "90.9%",
+              left: "72.0%",
+              transform: "translate(-50%, -50%)",
+              fontSize: "1.5cqw",
+              width: "35%",
+            }}
+          >
+            {cert.instructor_name || "ENG. KHALED Mohamed"}
           </div>
         </div>
       </div>
