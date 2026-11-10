@@ -31,3 +31,4 @@ export function UrgencyBadge({ seatsLeft = 3, className = "" }: UrgencyBadgeProp
     </div>
   );
 }
+

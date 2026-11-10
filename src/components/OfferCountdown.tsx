@@ -118,3 +118,4 @@ export function OfferCountdown({ compact = false, className = "" }: OfferCountdo
     </div>
   );
 }
+

@@ -172,13 +172,13 @@ export default async function CoursePage({ params }: PageProps) {
 
           {/* Value Props / Guarantees */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div className="flex items-center gap-2 rounded-2xl border border-emerald-100 bg-emerald-50/60 p-3.5 text-xs font-bold text-emerald-900">
-              <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
+            <div className="flex items-center gap-2 rounded-2xl border border-blue-100 bg-blue-50/70 p-3.5 text-xs font-bold text-blue-950">
+              <CheckCircle2 className="h-4 w-4 text-[var(--gsm-blue)] shrink-0" />
               <span>تدريب عملي على أجهزة حقيقية</span>
             </div>
 
-            <div className="flex items-center gap-2 rounded-2xl border border-blue-100 bg-blue-50/60 p-3.5 text-xs font-bold text-blue-900">
-              <ShieldCheck className="h-4 w-4 text-[var(--gsm-blue)] shrink-0" />
+            <div className="flex items-center gap-2 rounded-2xl border border-indigo-100 bg-indigo-50/60 p-3.5 text-xs font-bold text-indigo-950">
+              <ShieldCheck className="h-4 w-4 text-[var(--gsm-navy)] shrink-0" />
               <span>شهادة تخرج معتمدة من GSM</span>
             </div>
 
@@ -206,7 +206,7 @@ export default async function CoursePage({ params }: PageProps) {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-emerald-600 p-4 text-center text-lg font-bold text-white shadow-md transition hover:bg-emerald-700 hover:scale-[1.02] cursor-pointer"
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl bg-[var(--gsm-blue)] p-4 text-center text-lg font-bold text-white shadow-lg shadow-blue-500/25 transition hover:bg-[var(--gsm-navy)] hover:scale-[1.02] cursor-pointer"
             >
               <MessageCircle className="h-5 w-5" />
               <span>احجز مقعدك بالخصم عبر الواتساب</span>
@@ -216,7 +216,7 @@ export default async function CoursePage({ params }: PageProps) {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[var(--gsm-navy)] px-8 py-4 text-center text-lg font-bold text-white shadow-md transition hover:opacity-90 hover:scale-[1.02] cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border-2 border-[var(--gsm-navy)] bg-white px-8 py-4 text-center text-lg font-bold text-[var(--gsm-navy)] shadow-xs transition hover:bg-[var(--gsm-navy)] hover:text-white hover:scale-[1.02] cursor-pointer"
             >
               <span>استفسار عن المواعيد</span>
             </a>

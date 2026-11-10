@@ -97,7 +97,7 @@ export function CourseCard({ course }: CourseCardProps) {
 
         {/* Savings Tag */}
         {savings && savings > 0 && (
-          <span className="absolute top-3 end-3 rounded-full bg-emerald-600/90 backdrop-blur-xs px-2.5 py-1 text-[11px] font-black text-white shadow-xs">
+          <span className="absolute top-3 end-3 rounded-full bg-[var(--gsm-navy)]/90 backdrop-blur-xs px-2.5 py-1 text-[11px] font-black text-white shadow-xs border border-white/20">
             {isAr ? `وفر ${savings} جنيه` : `Save EGP ${savings}`}
           </span>
         )}
@@ -163,7 +163,7 @@ export function CourseCard({ course }: CourseCardProps) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleWhatsAppClick}
-            className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-3 py-2.5 text-xs font-bold text-white shadow-xs transition hover:bg-emerald-700 hover:scale-[1.02] cursor-pointer"
+            className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[var(--gsm-blue)] px-3 py-2.5 text-xs font-bold text-white shadow-xs transition hover:bg-[var(--gsm-navy)] hover:scale-[1.02] cursor-pointer"
           >
             <MessageCircle className="h-4 w-4" />
             <span>{isAr ? "احجز بالخصم" : "Book Offer"}</span>
