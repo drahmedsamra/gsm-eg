@@ -31,7 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const courseRoutes: MetadataRoute.Sitemap = courses.map((course) => ({
-    url: `${baseUrl}/courses/${course.id}`,
+    url: `${baseUrl}/courses/${course.slug}`,
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.85,

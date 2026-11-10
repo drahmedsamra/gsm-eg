@@ -12,13 +12,16 @@ import { VideoCarousel } from "@/components/VideoCarousel";
 import { WhatsAppCTA } from "@/components/WhatsAppCTA";
 import { WhyGSM } from "@/components/WhyGSM";
 import { FloatingActions } from "@/components/FloatingActions";
+import { getCourses } from "@/data/courses";
 
-export default function Home() {
+export default async function Home() {
+  const courses = await getCourses();
+
   return (
     <>
       <main>
         <Hero />
-        <Courses />
+        <Courses initialCourses={courses} />
         <WhyGSM />
         <StudentProjects />
         <Stats />
