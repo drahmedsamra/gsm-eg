@@ -20,6 +20,11 @@ import {
   RefreshCw,
   X,
   ListFilter,
+  Lock,
+  EyeOff,
+  LogOut,
+  KeyRound,
+  ShieldCheck,
 } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
@@ -61,6 +66,15 @@ function formatDateDisplay(d?: string | null): string {
 }
 
 export function AdminCertificateUpload() {
+  // Authentication State
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [pinInput, setPinInput] = useState("");
+  const [showPin, setShowPin] = useState(false);
+  const [pinLoading, setPinLoading] = useState(false);
+  const [pinError, setPinError] = useState<string | null>(null);
+  const [rememberMe, setRememberMe] = useState(true);
+
+  // Tabs State
   const [activeTab, setActiveTab] = useState<"auto" | "manage" | "pdf">("manage");
 
   // Tab 1: Auto Certificate Generator Form State
@@ -114,6 +128,45 @@ export function AdminCertificateUpload() {
 
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
+  // Verify stored token on initial load
+  useEffect(() => {
+    let active = true;
+    const checkAuth = async () => {
+      try {
+        const token =
+          (typeof window !== "undefined" && localStorage.getItem("gsm_admin_token")) ||
+          (typeof window !== "undefined" && sessionStorage.getItem("gsm_admin_token"));
+
+        if (!token) {
+          if (active) setIsAuthenticated(false);
+          return;
+        }
+
+        const res = await fetch("/api/admin/auth", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (active) {
+          if (res.ok) {
+            setIsAuthenticated(true);
+          } else {
+            localStorage.removeItem("gsm_admin_token");
+            sessionStorage.removeItem("gsm_admin_token");
+            setIsAuthenticated(false);
+          }
+        }
+      } catch {
+        if (active) setIsAuthenticated(false);
+      }
+    };
+
+    checkAuth();
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
   // Fetch Certificates List from Supabase (Manual / Reload)
   const fetchCertificates = useCallback(async () => {
     setListLoading(true);
@@ -137,8 +190,10 @@ export function AdminCertificateUpload() {
     }
   }, []);
 
-  // Initial load
+  // Fetch certificates when authenticated
   useEffect(() => {
+    if (!isAuthenticated) return;
+
     let active = true;
     const load = async () => {
       try {
@@ -170,7 +225,53 @@ export function AdminCertificateUpload() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [isAuthenticated]);
+
+  // Handle PIN Submission
+  const handlePinSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPinError(null);
+
+    if (!pinInput.trim()) {
+      setPinError("يرجى إدخال رمز الدخول السري (PIN)");
+      return;
+    }
+
+    setPinLoading(true);
+    try {
+      const res = await fetch("/api/admin/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pin: pinInput.trim() }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success && data.token) {
+        if (rememberMe) {
+          localStorage.setItem("gsm_admin_token", data.token);
+        } else {
+          sessionStorage.setItem("gsm_admin_token", data.token);
+        }
+        setIsAuthenticated(true);
+        setPinInput("");
+      } else {
+        setPinError(data.error || "رمز الدخول السري غير صحيح");
+      }
+    } catch {
+      setPinError("تعذر الاتصال بالخادم، يرجى التحقق من اتصالك والمحاولة مجدداً");
+    } finally {
+      setPinLoading(false);
+    }
+  };
+
+  // Handle Logout
+  const handleLogout = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("gsm_admin_token");
+      sessionStorage.removeItem("gsm_admin_token");
+    }
+    setIsAuthenticated(false);
+  };
 
   // Auto Generate random code (e.g. 2026 + 7 random digits)
   const generateRandomCode = () => {
@@ -374,9 +475,10 @@ export function AdminCertificateUpload() {
   };
 
   const copyUrl = (code: string) => {
-    const url = typeof window !== "undefined"
-      ? `${window.location.origin}/verify?code=${code}`
-      : `https://gsm-eg.com/verify?code=${code}`;
+    const url =
+      typeof window !== "undefined"
+        ? `${window.location.origin}/verify?code=${code}`
+        : `https://gsm-eg.com/verify?code=${code}`;
 
     navigator.clipboard.writeText(url);
     setCopiedCode(code);
@@ -393,13 +495,140 @@ export function AdminCertificateUpload() {
     return name.includes(q) || code.includes(q) || course.includes(q);
   });
 
+  // 1. LOADING SCREEN WHILE CHECKING TOKEN
+  if (isAuthenticated === null) {
+    return (
+      <section className="min-h-[60vh] flex items-center justify-center px-4" dir="rtl">
+        <div className="text-center">
+          <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-[var(--gsm-blue)] animate-pulse">
+            <ShieldCheck className="h-8 w-8" />
+          </div>
+          <p className="text-base font-bold text-gray-700">جارٍ التحقق من صلاحيات الدخول...</p>
+          <p className="text-xs text-gray-400 mt-1">لوحة إدارة شهادات جي اس ام مصر</p>
+        </div>
+      </section>
+    );
+  }
+
+  // 2. PIN LOCK SCREEN IF NOT AUTHENTICATED
+  if (isAuthenticated === false) {
+    return (
+      <section className="min-h-[75vh] flex items-center justify-center px-4 py-12" dir="rtl">
+        <div className="w-full max-w-md rounded-3xl border border-gray-200 bg-white p-7 sm:p-9 shadow-2xl animate-fadeIn">
+          <div className="text-center mb-6">
+            <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-[var(--gsm-blue)] shadow-inner">
+              <Lock className="h-8 w-8" />
+            </div>
+
+            <h1 className="text-2xl font-black text-[var(--gsm-navy)]">
+              لوحة تحكم الأكاديمية
+            </h1>
+            <p className="mt-2 text-xs text-gray-500 leading-relaxed">
+              هذه الصفحة مخصصة لإدارة وإصدار الشهادات الرسمية ومحمية برمز دخول سري (PIN)
+            </p>
+          </div>
+
+          {pinError && (
+            <div className="mb-5 flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 p-3.5 text-xs font-bold text-red-600 animate-fadeIn">
+              <AlertCircle className="h-4 w-4 shrink-0" />
+              <span>{pinError}</span>
+            </div>
+          )}
+
+          <form onSubmit={handlePinSubmit} className="space-y-4">
+            <div>
+              <label className="block text-xs font-bold text-gray-700 mb-1.5">
+                الرمز السري (PIN Code) *
+              </label>
+              <div className="relative">
+                <input
+                  type={showPin ? "text" : "password"}
+                  autoFocus
+                  required
+                  value={pinInput}
+                  onChange={(e) => setPinInput(e.target.value)}
+                  placeholder="أدخل الرمز السري هنا..."
+                  className="w-full rounded-xl border border-gray-300 py-3.5 pr-4 pl-12 text-center text-lg font-mono font-bold tracking-widest outline-none transition focus:border-[var(--gsm-blue)] focus:ring-2 focus:ring-blue-100"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPin(!showPin)}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 p-1.5 cursor-pointer"
+                  title={showPin ? "إخفاء الرمز" : "إظهار الرمز"}
+                >
+                  {showPin ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
+            </div>
+
+            <label className="flex items-center gap-2 text-xs font-semibold text-gray-600 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                className="h-4 w-4 rounded border-gray-300 text-[var(--gsm-blue)] focus:ring-[var(--gsm-blue)] cursor-pointer"
+              />
+              <span>تذكر تسجيل الدخول على هذا الجهاز لمدة 30 يوماً</span>
+            </label>
+
+            <button
+              type="submit"
+              disabled={pinLoading}
+              className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[var(--gsm-blue)] py-3.5 text-base font-bold text-white transition hover:opacity-90 disabled:opacity-50 shadow-md cursor-pointer mt-2"
+            >
+              {pinLoading ? (
+                <span>جارٍ التحقق...</span>
+              ) : (
+                <>
+                  <KeyRound className="h-4 w-4" />
+                  <span>دخول إلى لوحة التحكم</span>
+                </>
+              )}
+            </button>
+          </form>
+
+          <div className="mt-6 pt-5 border-t border-gray-100 text-center">
+            <Link
+              href="/"
+              className="text-xs font-semibold text-gray-500 hover:text-[var(--gsm-blue)] transition"
+            >
+              العودة إلى الصفحة الرئيسية للأكاديمية
+            </Link>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // 3. AUTHENTICATED DASHBOARD
   return (
-    <section className="px-4 py-12" dir="rtl">
+    <section className="px-4 py-10" dir="rtl">
       <div
         className={`mx-auto rounded-3xl border border-gray-200 bg-white p-6 shadow-2xl sm:p-10 transition-all duration-300 ${
           activeTab === "manage" ? "max-w-5xl" : "max-w-2xl"
         }`}
       >
+        {/* Admin Session Status Top Bar */}
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-slate-50 border border-slate-200/80 px-4 py-2.5 text-xs">
+          <div className="flex items-center gap-2 text-slate-700 font-bold">
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            <span>جلسة الإدارة نشطة ومحمية</span>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-red-200 bg-white px-3 py-1.5 font-bold text-red-600 hover:bg-red-50 transition cursor-pointer shadow-2xs"
+            title="تسجيل الخروج وقفل اللوحة"
+          >
+            <LogOut className="h-3.5 w-3.5" />
+            <span>قفل اللوحة / خروج</span>
+          </button>
+        </div>
+
         <div className="text-center mb-8">
           <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-50 text-[var(--gsm-blue)]">
             <Award className="h-8 w-8" />
